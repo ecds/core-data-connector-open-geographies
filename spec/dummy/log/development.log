@@ -1,0 +1,1330 @@
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[35mSQL (0.3ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (28.3ms)[0m  [1m[35mCREATE DATABASE "open_geographies" ENCODING = 'utf8' /*application='Dummy'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (10.6ms)[0m  [1m[35mCREATE DATABASE "open_geographies" ENCODING = 'utf8' /*application='Dummy'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7217877278427378150) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.9ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = 'development', "updated_at" = '2025-12-22 20:22:31.147486' WHERE "ar_internal_metadata"."key" = 'environment' /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7217877278427378150) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[35mSQL (0.3ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7217877278427378150) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(7217877278427378150) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7217877278427378150) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(7217877278427378150) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (5172.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "open_geographies" /*application='Dummy'*/[0m
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (5204.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "open_geographies" /*application='Dummy'*/[0m
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[35mSQL (0.3ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (5196.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "open_geographies" /*application='Dummy'*/[0m
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (187.4ms)[0m  [1m[35mCREATE DATABASE "open_geographies" ENCODING = 'utf8' /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (8.8ms)[0m  [1m[35mCREATE DATABASE "open_geographies" ENCODING = 'utf8' /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog /*application='Dummy'*/[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (0) /*application='Dummy'*/[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-12-22 20:41:25.386750', '2025-12-22 20:41:25.386752') RETURNING "key" /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'a71d23a9d8025196df4aad6f0cbff1ce3af537cf', '2025-12-22 20:41:25.389083', '2025-12-22 20:41:25.389083') RETURNING "key" /*application='Dummy'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7217877278427378150) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(7217877278427378150) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[35mSQL (0.3ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (31.8ms)[0m  [1m[35mCREATE DATABASE "open_geographies" ENCODING = 'utf8' /*application='Dummy'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (14.4ms)[0m  [1m[35mCREATE DATABASE "open_geographies" ENCODING = 'utf8' /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7217877278427378150) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7217877278427378150) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[35mSQL (0.3ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (30.3ms)[0m  [1m[35mCREATE DATABASE "open_geographies" ENCODING = 'utf8' /*application='Dummy'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (15.4ms)[0m  [1m[35mCREATE DATABASE "open_geographies" ENCODING = 'utf8' /*application='Dummy'*/[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7217877278427378150) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorUsers (20251222204833)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (10.9ms)[0m  [1m[35mCREATE TABLE "core_data_connector_users" ("id" bigserial primary key, "name" character varying, "email" character varying, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204833') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorPlaces (20251222204834)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "core_data_connector_places" ("id" bigserial primary key, "uid" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204834') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorPlaceNames (20251222204835)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "core_data_connector_place_names" ("id" bigserial primary key, "place_id" bigint NOT NULL, "name" character varying, "primary" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_place_names_on_place_id" ON "core_data_connector_place_names" ("place_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204835') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorLocations (20251222204836)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "core_data_connector_locations" ("id" bigserial primary key, "place_id" bigint NOT NULL, "locateable_type" character varying NOT NULL, "locateable_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_locations_on_place_id" ON "core_data_connector_locations" ("place_id") /*application='Dummy'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_locations_on_locateable" ON "core_data_connector_locations" ("locateable_type", "locateable_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204836') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddAdminToUsers (20251222204837)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_users" ADD "admin" boolean DEFAULT FALSE /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204837') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjects (20251222204838)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "core_data_connector_projects" ("id" bigserial primary key, "name" character varying, "description" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204838') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorUserProjects (20251222204839)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "core_data_connector_user_projects" ("id" bigserial primary key, "user_id" bigint NOT NULL, "project_id" bigint NOT NULL, "role" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_user_projects_on_user_id" ON "core_data_connector_user_projects" ("user_id") /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_user_projects_on_project_id" ON "core_data_connector_user_projects" ("project_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204839') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjectItems (20251222204840)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE TABLE "core_data_connector_project_items" ("id" bigserial primary key, "project_id" bigint, "ownable_type" character varying, "ownable_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_project_items_on_project_id" ON "core_data_connector_project_items" ("project_id") /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_project_items_on_ownable" ON "core_data_connector_project_items" ("ownable_type", "ownable_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204840') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorPeople (20251222204841)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "core_data_connector_people" ("id" bigserial primary key, "biography" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204841') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorPersonNames (20251222204842)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "core_data_connector_person_names" ("id" bigserial primary key, "person_id" bigint, "first_name" character varying, "middle_name" character varying, "last_name" character varying, "primary" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_person_names_on_person_id" ON "core_data_connector_person_names" ("person_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204842') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorOrganizations (20251222204843)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "core_data_connector_organizations" ("id" bigserial primary key, "description" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204843') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorOrganizationNames (20251222204844)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "core_data_connector_organization_names" ("id" bigserial primary key, "organization_id" bigint, "name" character varying, "primary" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_organization_names_on_organization_id" ON "core_data_connector_organization_names" ("organization_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204844') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjectModels (20251222204845)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "core_data_connector_project_models" ("id" bigserial primary key, "project_id" bigint, "name" character varying, "model_class" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_project_models_on_project_id" ON "core_data_connector_project_models" ("project_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204845') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjectModelRelationships (20251222204846)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE TABLE "core_data_connector_project_model_relationships" ("id" bigserial primary key, "primary_model_id" bigint NOT NULL, "related_model_id" bigint NOT NULL, "name" character varying, "multiple" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_relationships_on_primary_model_id" ON "core_data_connector_project_model_relationships" ("primary_model_id") /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_relationships_on_related_model_id" ON "core_data_connector_project_model_relationships" ("related_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204846') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddSlugToProjectModels (20251222204847)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.5ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_models" ADD "slug" character varying /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204847') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddSlugToProjectModelRelationships (20251222204848)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_model_relationships" ADD "slug" character varying /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204848') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to RemoveProjectItems (20251222204849)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.2ms)[0m  [1m[35mDROP TABLE "core_data_connector_project_items" /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204849') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddProjectModelReferences (20251222204850)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "core_data_connector_organizations" ADD "project_model_id" bigint /*application='Dummy'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_organizations_on_project_model_id" ON "core_data_connector_organizations" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_people" ADD "project_model_id" bigint /*application='Dummy'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_people_on_project_model_id" ON "core_data_connector_people" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_places" ADD "project_model_id" bigint /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_places_on_project_model_id" ON "core_data_connector_places" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204850') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorRelationships (20251222204851)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE TABLE "core_data_connector_relationships" ("id" bigserial primary key, "project_model_relationship_id" bigint, "primary_record_type" character varying, "primary_record_id" bigint, "related_record_type" character varying, "related_record_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_cdc_relationships_on_project_model_relationship_id" ON "core_data_connector_relationships" ("project_model_relationship_id") /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_relationships_on_primary_record" ON "core_data_connector_relationships" ("primary_record_type", "primary_record_id") /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_relationships_on_related_record" ON "core_data_connector_relationships" ("related_record_type", "related_record_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204851') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorOrganizations (20251222204852)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_organizations" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_organizations_on_user_defined" ON "core_data_connector_organizations" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204852') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorPeople (20251222204853)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_people" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_people_on_user_defined" ON "core_data_connector_people" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204853') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorPlaces (20251222204854)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_places" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_places_on_user_defined" ON "core_data_connector_places" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204854') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorRelationships (20251222204855)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_relationships" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_relationships_on_user_defined" ON "core_data_connector_relationships" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204855') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorMediaContents (20251222204856)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "core_data_connector_media_contents" ("id" bigserial primary key, "project_model_id" bigint, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_media_contents_on_project_model_id" ON "core_data_connector_media_contents" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204856') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorMediaContents (20251222204857)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_media_contents" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_media_contents_on_user_defined" ON "core_data_connector_media_contents" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204857') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddInverseFieldsToProjectModelRelationships (20251222204858)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_model_relationships" ADD "allow_inverse" boolean DEFAULT FALSE NOT NULL /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_model_relationships" ADD "inverse_name" character varying /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_model_relationships" ADD "inverse_multiple" boolean DEFAULT FALSE /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204858') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddDiscoverableToProjects (20251222204859)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "core_data_connector_projects" ADD "discoverable" boolean DEFAULT FALSE NOT NULL /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204859') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjectModelAccesses (20251222204860)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "core_data_connector_project_model_accesses" ("id" bigserial primary key, "project_model_id" bigint, "project_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_accesses_on_project_model_id" ON "core_data_connector_project_model_accesses" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_accesses_on_project_id" ON "core_data_connector_project_model_accesses" ("project_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204860') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjectModelShares (20251222204861)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "core_data_connector_project_model_shares" ("id" bigserial primary key, "project_model_access_id" bigint, "project_model_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_shares_on_project_model_access_id" ON "core_data_connector_project_model_shares" ("project_model_access_id") /*application='Dummy'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_shares_on_project_model_id" ON "core_data_connector_project_model_shares" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204861') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to EnablePostgisExtension (20251222204862)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35mSQL (3.7ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "postgis" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7217877278427378150) /*application='Dummy'*/[0m
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (163.8ms)[0m  [1m[35mCREATE DATABASE "open_geographies" ENCODING = 'utf8' /*application='Dummy'*/[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (9.6ms)[0m  [1m[35mCREATE DATABASE "open_geographies" ENCODING = 'utf8' /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog /*application='Dummy'*/[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (0) /*application='Dummy'*/[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-12-22 20:49:36.434000', '2025-12-22 20:49:36.434001') RETURNING "key" /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'a71d23a9d8025196df4aad6f0cbff1ce3af537cf', '2025-12-22 20:49:36.435781', '2025-12-22 20:49:36.435781') RETURNING "key" /*application='Dummy'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7217877278427378150) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorUsers (20251222204833)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE TABLE "core_data_connector_users" ("id" bigserial primary key, "name" character varying, "email" character varying, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204833') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorPlaces (20251222204834)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE TABLE "core_data_connector_places" ("id" bigserial primary key, "uid" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204834') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorPlaceNames (20251222204835)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "core_data_connector_place_names" ("id" bigserial primary key, "place_id" bigint NOT NULL, "name" character varying, "primary" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_place_names_on_place_id" ON "core_data_connector_place_names" ("place_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204835') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorLocations (20251222204836)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "core_data_connector_locations" ("id" bigserial primary key, "place_id" bigint NOT NULL, "locateable_type" character varying NOT NULL, "locateable_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_locations_on_place_id" ON "core_data_connector_locations" ("place_id") /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_locations_on_locateable" ON "core_data_connector_locations" ("locateable_type", "locateable_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204836') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddAdminToUsers (20251222204837)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_users" ADD "admin" boolean DEFAULT FALSE /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204837') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjects (20251222204838)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "core_data_connector_projects" ("id" bigserial primary key, "name" character varying, "description" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204838') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorUserProjects (20251222204839)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "core_data_connector_user_projects" ("id" bigserial primary key, "user_id" bigint NOT NULL, "project_id" bigint NOT NULL, "role" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_user_projects_on_user_id" ON "core_data_connector_user_projects" ("user_id") /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_user_projects_on_project_id" ON "core_data_connector_user_projects" ("project_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204839') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjectItems (20251222204840)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "core_data_connector_project_items" ("id" bigserial primary key, "project_id" bigint, "ownable_type" character varying, "ownable_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_project_items_on_project_id" ON "core_data_connector_project_items" ("project_id") /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_project_items_on_ownable" ON "core_data_connector_project_items" ("ownable_type", "ownable_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204840') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorPeople (20251222204841)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "core_data_connector_people" ("id" bigserial primary key, "biography" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204841') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorPersonNames (20251222204842)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "core_data_connector_person_names" ("id" bigserial primary key, "person_id" bigint, "first_name" character varying, "middle_name" character varying, "last_name" character varying, "primary" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_person_names_on_person_id" ON "core_data_connector_person_names" ("person_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204842') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorOrganizations (20251222204843)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "core_data_connector_organizations" ("id" bigserial primary key, "description" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204843') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorOrganizationNames (20251222204844)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "core_data_connector_organization_names" ("id" bigserial primary key, "organization_id" bigint, "name" character varying, "primary" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_organization_names_on_organization_id" ON "core_data_connector_organization_names" ("organization_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204844') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjectModels (20251222204845)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "core_data_connector_project_models" ("id" bigserial primary key, "project_id" bigint, "name" character varying, "model_class" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_project_models_on_project_id" ON "core_data_connector_project_models" ("project_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204845') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjectModelRelationships (20251222204846)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "core_data_connector_project_model_relationships" ("id" bigserial primary key, "primary_model_id" bigint NOT NULL, "related_model_id" bigint NOT NULL, "name" character varying, "multiple" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_relationships_on_primary_model_id" ON "core_data_connector_project_model_relationships" ("primary_model_id") /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_relationships_on_related_model_id" ON "core_data_connector_project_model_relationships" ("related_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204846') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddSlugToProjectModels (20251222204847)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_models" ADD "slug" character varying /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204847') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddSlugToProjectModelRelationships (20251222204848)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_model_relationships" ADD "slug" character varying /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204848') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to RemoveProjectItems (20251222204849)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mDROP TABLE "core_data_connector_project_items" /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204849') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddProjectModelReferences (20251222204850)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "core_data_connector_organizations" ADD "project_model_id" bigint /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_organizations_on_project_model_id" ON "core_data_connector_organizations" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "core_data_connector_people" ADD "project_model_id" bigint /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_people_on_project_model_id" ON "core_data_connector_people" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "core_data_connector_places" ADD "project_model_id" bigint /*application='Dummy'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_places_on_project_model_id" ON "core_data_connector_places" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204850') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorRelationships (20251222204851)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "core_data_connector_relationships" ("id" bigserial primary key, "project_model_relationship_id" bigint, "primary_record_type" character varying, "primary_record_id" bigint, "related_record_type" character varying, "related_record_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_cdc_relationships_on_project_model_relationship_id" ON "core_data_connector_relationships" ("project_model_relationship_id") /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_relationships_on_primary_record" ON "core_data_connector_relationships" ("primary_record_type", "primary_record_id") /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_relationships_on_related_record" ON "core_data_connector_relationships" ("related_record_type", "related_record_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204851') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorOrganizations (20251222204852)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_organizations" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_organizations_on_user_defined" ON "core_data_connector_organizations" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204852') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorPeople (20251222204853)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_people" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_people_on_user_defined" ON "core_data_connector_people" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204853') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorPlaces (20251222204854)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_places" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_places_on_user_defined" ON "core_data_connector_places" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204854') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorRelationships (20251222204855)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_relationships" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_relationships_on_user_defined" ON "core_data_connector_relationships" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204855') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorMediaContents (20251222204856)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "core_data_connector_media_contents" ("id" bigserial primary key, "project_model_id" bigint, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_media_contents_on_project_model_id" ON "core_data_connector_media_contents" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204856') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorMediaContents (20251222204857)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_media_contents" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_media_contents_on_user_defined" ON "core_data_connector_media_contents" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204857') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddInverseFieldsToProjectModelRelationships (20251222204858)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_model_relationships" ADD "allow_inverse" boolean DEFAULT FALSE NOT NULL /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_model_relationships" ADD "inverse_name" character varying /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_model_relationships" ADD "inverse_multiple" boolean DEFAULT FALSE /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204858') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddDiscoverableToProjects (20251222204859)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_projects" ADD "discoverable" boolean DEFAULT FALSE NOT NULL /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204859') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjectModelAccesses (20251222204860)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE TABLE "core_data_connector_project_model_accesses" ("id" bigserial primary key, "project_model_id" bigint, "project_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_accesses_on_project_model_id" ON "core_data_connector_project_model_accesses" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_accesses_on_project_id" ON "core_data_connector_project_model_accesses" ("project_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204860') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjectModelShares (20251222204861)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "core_data_connector_project_model_shares" ("id" bigserial primary key, "project_model_access_id" bigint, "project_model_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_shares_on_project_model_access_id" ON "core_data_connector_project_model_shares" ("project_model_access_id") /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_shares_on_project_model_id" ON "core_data_connector_project_model_shares" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204861') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to EnablePostgisExtension (20251222204862)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35mSQL (1.5ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "postgis" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7217877278427378150) /*application='Dummy'*/[0m
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[35mSQL (0.3ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (75.7ms)[0m  [1m[35mCREATE DATABASE "open_geographies" ENCODING = 'utf8' /*application='Dummy'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (55.3ms)[0m  [1m[35mCREATE DATABASE "open_geographies" ENCODING = 'utf8' /*application='Dummy'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7217877278427378150) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (3.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+Migrating to EnablePostgisExtension (20251222204862)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35mSQL (396.6ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "postgis" /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204862') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (23.7ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorPlaceGeometries (20251222204863)
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(7217877278427378150) /*application='Dummy'*/[0m
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (242.3ms)[0m  [1m[35mCREATE DATABASE "open_geographies" ENCODING = 'utf8' /*application='Dummy'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (58.0ms)[0m  [1m[35mCREATE DATABASE "open_geographies" ENCODING = 'utf8' /*application='Dummy'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog /*application='Dummy'*/[0m
+  [1m[35m (19.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[35m (3.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (0) /*application='Dummy'*/[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (2.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-12-22 21:10:33.481035', '2025-12-22 21:10:33.481037') RETURNING "key" /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'a71d23a9d8025196df4aad6f0cbff1ce3af537cf', '2025-12-22 21:10:33.486222', '2025-12-22 21:10:33.486222') RETURNING "key" /*application='Dummy'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7217877278427378150) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorUsers (20251222204833)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (6.7ms)[0m  [1m[35mCREATE TABLE "core_data_connector_users" ("id" bigserial primary key, "name" character varying, "email" character varying, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204833') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorPlaces (20251222204834)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "core_data_connector_places" ("id" bigserial primary key, "uid" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204834') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorPlaceNames (20251222204835)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE TABLE "core_data_connector_place_names" ("id" bigserial primary key, "place_id" bigint NOT NULL, "name" character varying, "primary" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_place_names_on_place_id" ON "core_data_connector_place_names" ("place_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204835') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorLocations (20251222204836)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "core_data_connector_locations" ("id" bigserial primary key, "place_id" bigint NOT NULL, "locateable_type" character varying NOT NULL, "locateable_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_locations_on_place_id" ON "core_data_connector_locations" ("place_id") /*application='Dummy'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_locations_on_locateable" ON "core_data_connector_locations" ("locateable_type", "locateable_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204836') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddAdminToUsers (20251222204837)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_users" ADD "admin" boolean DEFAULT FALSE /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204837') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjects (20251222204838)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE TABLE "core_data_connector_projects" ("id" bigserial primary key, "name" character varying, "description" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204838') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorUserProjects (20251222204839)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "core_data_connector_user_projects" ("id" bigserial primary key, "user_id" bigint NOT NULL, "project_id" bigint NOT NULL, "role" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_user_projects_on_user_id" ON "core_data_connector_user_projects" ("user_id") /*application='Dummy'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_user_projects_on_project_id" ON "core_data_connector_user_projects" ("project_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204839') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjectItems (20251222204840)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "core_data_connector_project_items" ("id" bigserial primary key, "project_id" bigint, "ownable_type" character varying, "ownable_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_project_items_on_project_id" ON "core_data_connector_project_items" ("project_id") /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_project_items_on_ownable" ON "core_data_connector_project_items" ("ownable_type", "ownable_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204840') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorPeople (20251222204841)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "core_data_connector_people" ("id" bigserial primary key, "biography" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204841') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorPersonNames (20251222204842)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "core_data_connector_person_names" ("id" bigserial primary key, "person_id" bigint, "first_name" character varying, "middle_name" character varying, "last_name" character varying, "primary" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_person_names_on_person_id" ON "core_data_connector_person_names" ("person_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204842') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorOrganizations (20251222204843)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "core_data_connector_organizations" ("id" bigserial primary key, "description" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204843') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorOrganizationNames (20251222204844)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "core_data_connector_organization_names" ("id" bigserial primary key, "organization_id" bigint, "name" character varying, "primary" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_organization_names_on_organization_id" ON "core_data_connector_organization_names" ("organization_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204844') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjectModels (20251222204845)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "core_data_connector_project_models" ("id" bigserial primary key, "project_id" bigint, "name" character varying, "model_class" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_project_models_on_project_id" ON "core_data_connector_project_models" ("project_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204845') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjectModelRelationships (20251222204846)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "core_data_connector_project_model_relationships" ("id" bigserial primary key, "primary_model_id" bigint NOT NULL, "related_model_id" bigint NOT NULL, "name" character varying, "multiple" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_relationships_on_primary_model_id" ON "core_data_connector_project_model_relationships" ("primary_model_id") /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_relationships_on_related_model_id" ON "core_data_connector_project_model_relationships" ("related_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204846') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddSlugToProjectModels (20251222204847)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_models" ADD "slug" character varying /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204847') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddSlugToProjectModelRelationships (20251222204848)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_model_relationships" ADD "slug" character varying /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204848') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to RemoveProjectItems (20251222204849)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.9ms)[0m  [1m[35mDROP TABLE "core_data_connector_project_items" /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204849') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddProjectModelReferences (20251222204850)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "core_data_connector_organizations" ADD "project_model_id" bigint /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_organizations_on_project_model_id" ON "core_data_connector_organizations" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_people" ADD "project_model_id" bigint /*application='Dummy'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_people_on_project_model_id" ON "core_data_connector_people" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "core_data_connector_places" ADD "project_model_id" bigint /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_places_on_project_model_id" ON "core_data_connector_places" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204850') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorRelationships (20251222204851)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "core_data_connector_relationships" ("id" bigserial primary key, "project_model_relationship_id" bigint, "primary_record_type" character varying, "primary_record_id" bigint, "related_record_type" character varying, "related_record_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE INDEX "index_cdc_relationships_on_project_model_relationship_id" ON "core_data_connector_relationships" ("project_model_relationship_id") /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_relationships_on_primary_record" ON "core_data_connector_relationships" ("primary_record_type", "primary_record_id") /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_relationships_on_related_record" ON "core_data_connector_relationships" ("related_record_type", "related_record_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204851') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorOrganizations (20251222204852)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "core_data_connector_organizations" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_organizations_on_user_defined" ON "core_data_connector_organizations" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204852') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorPeople (20251222204853)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "core_data_connector_people" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_people_on_user_defined" ON "core_data_connector_people" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204853') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorPlaces (20251222204854)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_places" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_places_on_user_defined" ON "core_data_connector_places" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204854') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorRelationships (20251222204855)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_relationships" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_relationships_on_user_defined" ON "core_data_connector_relationships" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204855') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorMediaContents (20251222204856)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "core_data_connector_media_contents" ("id" bigserial primary key, "project_model_id" bigint, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_media_contents_on_project_model_id" ON "core_data_connector_media_contents" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204856') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorMediaContents (20251222204857)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_media_contents" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_media_contents_on_user_defined" ON "core_data_connector_media_contents" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204857') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddInverseFieldsToProjectModelRelationships (20251222204858)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_model_relationships" ADD "allow_inverse" boolean DEFAULT FALSE NOT NULL /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_model_relationships" ADD "inverse_name" character varying /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_model_relationships" ADD "inverse_multiple" boolean DEFAULT FALSE /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204858') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddDiscoverableToProjects (20251222204859)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_projects" ADD "discoverable" boolean DEFAULT FALSE NOT NULL /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204859') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjectModelAccesses (20251222204860)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE TABLE "core_data_connector_project_model_accesses" ("id" bigserial primary key, "project_model_id" bigint, "project_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_accesses_on_project_model_id" ON "core_data_connector_project_model_accesses" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_accesses_on_project_id" ON "core_data_connector_project_model_accesses" ("project_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204860') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjectModelShares (20251222204861)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "core_data_connector_project_model_shares" ("id" bigserial primary key, "project_model_access_id" bigint, "project_model_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_shares_on_project_model_access_id" ON "core_data_connector_project_model_shares" ("project_model_access_id") /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_shares_on_project_model_id" ON "core_data_connector_project_model_shares" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204861') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to EnablePostgisExtension (20251222204862)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35mSQL (328.8ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "postgis" /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204862') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (16.8ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorPlaceGeometries (20251222204863)
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_advisory_unlock(7217877278427378150) /*application='Dummy'*/[0m
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (219.8ms)[0m  [1m[35mCREATE DATABASE "open_geographies" ENCODING = 'utf8' /*application='Dummy'*/[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (61.6ms)[0m  [1m[35mCREATE DATABASE "open_geographies" ENCODING = 'utf8' /*application='Dummy'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql" SCHEMA pg_catalog /*application='Dummy'*/[0m
+  [1m[35m (24.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[35m (3.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (0) /*application='Dummy'*/[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (2.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-12-22 21:12:50.857475', '2025-12-22 21:12:50.857477') RETURNING "key" /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'schema_sha1' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', 'a71d23a9d8025196df4aad6f0cbff1ce3af537cf', '2025-12-22 21:12:50.862315', '2025-12-22 21:12:50.862316') RETURNING "key" /*application='Dummy'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7217877278427378150) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorUsers (20251222204833)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "core_data_connector_users" ("id" bigserial primary key, "name" character varying, "email" character varying, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204833') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorPlaces (20251222204834)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "core_data_connector_places" ("id" bigserial primary key, "uid" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204834') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorPlaceNames (20251222204835)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (7.6ms)[0m  [1m[35mCREATE TABLE "core_data_connector_place_names" ("id" bigserial primary key, "place_id" bigint NOT NULL, "name" character varying, "primary" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_place_names_on_place_id" ON "core_data_connector_place_names" ("place_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204835') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorLocations (20251222204836)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "core_data_connector_locations" ("id" bigserial primary key, "place_id" bigint NOT NULL, "locateable_type" character varying NOT NULL, "locateable_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_locations_on_place_id" ON "core_data_connector_locations" ("place_id") /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_locations_on_locateable" ON "core_data_connector_locations" ("locateable_type", "locateable_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204836') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddAdminToUsers (20251222204837)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.0ms)[0m  [1m[35mALTER TABLE "core_data_connector_users" ADD "admin" boolean DEFAULT FALSE /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204837') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjects (20251222204838)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE TABLE "core_data_connector_projects" ("id" bigserial primary key, "name" character varying, "description" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204838') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorUserProjects (20251222204839)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "core_data_connector_user_projects" ("id" bigserial primary key, "user_id" bigint NOT NULL, "project_id" bigint NOT NULL, "role" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_user_projects_on_user_id" ON "core_data_connector_user_projects" ("user_id") /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_user_projects_on_project_id" ON "core_data_connector_user_projects" ("project_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204839') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjectItems (20251222204840)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE TABLE "core_data_connector_project_items" ("id" bigserial primary key, "project_id" bigint, "ownable_type" character varying, "ownable_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_project_items_on_project_id" ON "core_data_connector_project_items" ("project_id") /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_project_items_on_ownable" ON "core_data_connector_project_items" ("ownable_type", "ownable_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204840') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorPeople (20251222204841)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "core_data_connector_people" ("id" bigserial primary key, "biography" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204841') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorPersonNames (20251222204842)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE TABLE "core_data_connector_person_names" ("id" bigserial primary key, "person_id" bigint, "first_name" character varying, "middle_name" character varying, "last_name" character varying, "primary" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_person_names_on_person_id" ON "core_data_connector_person_names" ("person_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204842') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorOrganizations (20251222204843)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "core_data_connector_organizations" ("id" bigserial primary key, "description" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204843') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorOrganizationNames (20251222204844)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "core_data_connector_organization_names" ("id" bigserial primary key, "organization_id" bigint, "name" character varying, "primary" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_organization_names_on_organization_id" ON "core_data_connector_organization_names" ("organization_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204844') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjectModels (20251222204845)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "core_data_connector_project_models" ("id" bigserial primary key, "project_id" bigint, "name" character varying, "model_class" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_project_models_on_project_id" ON "core_data_connector_project_models" ("project_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204845') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjectModelRelationships (20251222204846)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE TABLE "core_data_connector_project_model_relationships" ("id" bigserial primary key, "primary_model_id" bigint NOT NULL, "related_model_id" bigint NOT NULL, "name" character varying, "multiple" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_relationships_on_primary_model_id" ON "core_data_connector_project_model_relationships" ("primary_model_id") /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_relationships_on_related_model_id" ON "core_data_connector_project_model_relationships" ("related_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204846') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddSlugToProjectModels (20251222204847)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_models" ADD "slug" character varying /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204847') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddSlugToProjectModelRelationships (20251222204848)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_model_relationships" ADD "slug" character varying /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204848') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to RemoveProjectItems (20251222204849)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.4ms)[0m  [1m[35mDROP TABLE "core_data_connector_project_items" /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204849') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddProjectModelReferences (20251222204850)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "core_data_connector_organizations" ADD "project_model_id" bigint /*application='Dummy'*/[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_organizations_on_project_model_id" ON "core_data_connector_organizations" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_people" ADD "project_model_id" bigint /*application='Dummy'*/[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_people_on_project_model_id" ON "core_data_connector_people" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "core_data_connector_places" ADD "project_model_id" bigint /*application='Dummy'*/[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_places_on_project_model_id" ON "core_data_connector_places" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204850') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorRelationships (20251222204851)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "core_data_connector_relationships" ("id" bigserial primary key, "project_model_relationship_id" bigint, "primary_record_type" character varying, "primary_record_id" bigint, "related_record_type" character varying, "related_record_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_cdc_relationships_on_project_model_relationship_id" ON "core_data_connector_relationships" ("project_model_relationship_id") /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_relationships_on_primary_record" ON "core_data_connector_relationships" ("primary_record_type", "primary_record_id") /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_relationships_on_related_record" ON "core_data_connector_relationships" ("related_record_type", "related_record_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204851') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorOrganizations (20251222204852)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "core_data_connector_organizations" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_organizations_on_user_defined" ON "core_data_connector_organizations" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204852') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorPeople (20251222204853)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_people" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_people_on_user_defined" ON "core_data_connector_people" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204853') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorPlaces (20251222204854)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_places" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_places_on_user_defined" ON "core_data_connector_places" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204854') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorRelationships (20251222204855)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_relationships" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_relationships_on_user_defined" ON "core_data_connector_relationships" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204855') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorMediaContents (20251222204856)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE "core_data_connector_media_contents" ("id" bigserial primary key, "project_model_id" bigint, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_media_contents_on_project_model_id" ON "core_data_connector_media_contents" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204856') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorMediaContents (20251222204857)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_media_contents" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_media_contents_on_user_defined" ON "core_data_connector_media_contents" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204857') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddInverseFieldsToProjectModelRelationships (20251222204858)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_model_relationships" ADD "allow_inverse" boolean DEFAULT FALSE NOT NULL /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_model_relationships" ADD "inverse_name" character varying /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_model_relationships" ADD "inverse_multiple" boolean DEFAULT FALSE /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204858') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddDiscoverableToProjects (20251222204859)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "core_data_connector_projects" ADD "discoverable" boolean DEFAULT FALSE NOT NULL /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204859') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjectModelAccesses (20251222204860)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "core_data_connector_project_model_accesses" ("id" bigserial primary key, "project_model_id" bigint, "project_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_accesses_on_project_model_id" ON "core_data_connector_project_model_accesses" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_accesses_on_project_id" ON "core_data_connector_project_model_accesses" ("project_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204860') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorProjectModelShares (20251222204861)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "core_data_connector_project_model_shares" ("id" bigserial primary key, "project_model_access_id" bigint, "project_model_id" bigint, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_shares_on_project_model_access_id" ON "core_data_connector_project_model_shares" ("project_model_access_id") /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_cdc_project_model_shares_on_project_model_id" ON "core_data_connector_project_model_shares" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204861') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to EnablePostgisExtension (20251222204862)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35mSQL (328.0ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "postgis" /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204862') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorPlaceGeometries (20251222204863)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE "core_data_connector_place_geometries" ("id" bigserial primary key, "place_id" bigint NOT NULL, "geometry" geometry(GEOMETRY,0), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_place_geometries_on_place_id" ON "core_data_connector_place_geometries" ("place_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204863') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddZPlaceIdToCoreDataConnectorPlaces (20251222204864)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "core_data_connector_places" ADD "z_place_id" integer /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204864') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorWorks (20251222204865)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "core_data_connector_works" ("id" bigserial primary key, "project_model_id" bigint, "uuid" uuid DEFAULT gen_random_uuid() NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_works_on_project_model_id" ON "core_data_connector_works" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204865') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorInstances (20251222204866)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE TABLE "core_data_connector_instances" ("id" bigserial primary key, "project_model_id" bigint, "uuid" uuid DEFAULT gen_random_uuid() NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_instances_on_project_model_id" ON "core_data_connector_instances" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204866') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorItems (20251222204867)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "core_data_connector_items" ("id" bigserial primary key, "project_model_id" bigint, "uuid" uuid DEFAULT gen_random_uuid() NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_items_on_project_model_id" ON "core_data_connector_items" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204867') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorTaxonomies (20251222204868)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "core_data_connector_taxonomies" ("id" bigserial primary key, "project_model_id" bigint, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_taxonomies_on_project_model_id" ON "core_data_connector_taxonomies" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204868') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddZPersonIdToCoreDataConnectorPeople (20251222204869)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "core_data_connector_people" ADD "z_person_id" integer /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204869') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddZOrganizationIdToCoreDataConnectorOrganizations (20251222204870)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "core_data_connector_organizations" ADD "z_organization_id" integer /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204870') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to EnablePgcrypto (20251222204871)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35mSQL (4.1ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "pgcrypto" /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204871') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to RemoveUidFromCoreDataConnectorPlaces (20251222204872)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "core_data_connector_places" DROP COLUMN "uid" /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204872') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to RemoveCoreDataConnectorLocations (20251222204873)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.5ms)[0m  [1m[35mDROP TABLE "core_data_connector_locations" /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204873') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUuidToOwnable (20251222204874)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (5.8ms)[0m  [1m[35mALTER TABLE "core_data_connector_media_contents" ADD "uuid" uuid DEFAULT gen_random_uuid() NOT NULL /*application='Dummy'*/[0m
+  [1m[35m (4.0ms)[0m  [1m[35mALTER TABLE "core_data_connector_organizations" ADD "uuid" uuid DEFAULT gen_random_uuid() NOT NULL /*application='Dummy'*/[0m
+  [1m[35m (3.8ms)[0m  [1m[35mALTER TABLE "core_data_connector_people" ADD "uuid" uuid DEFAULT gen_random_uuid() NOT NULL /*application='Dummy'*/[0m
+  [1m[35m (4.4ms)[0m  [1m[35mALTER TABLE "core_data_connector_places" ADD "uuid" uuid DEFAULT gen_random_uuid() NOT NULL /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204874') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (6.6ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddZRelationshipIdToCoreDataConnectorRelationships (20251222204875)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "core_data_connector_relationships" ADD "z_relationship_id" integer /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204875') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorNames (20251222204876)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE TABLE "core_data_connector_names" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204876') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorSourceTitles (20251222204877)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE TABLE "core_data_connector_source_titles" ("id" bigserial primary key, "nameable_type" character varying, "nameable_id" bigint, "name_id" bigint, "primary" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_source_titles_on_nameable" ON "core_data_connector_source_titles" ("nameable_type", "nameable_id") /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_source_titles_on_name_id" ON "core_data_connector_source_titles" ("name_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204877') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUuidToTaxonomies (20251222204878)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_taxonomies" ADD "uuid" uuid DEFAULT gen_random_uuid() NOT NULL /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204878') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorInstances (20251222204879)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.5ms)[0m  [1m[35mALTER TABLE "core_data_connector_instances" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_instances_on_user_defined" ON "core_data_connector_instances" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204879') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorItems (20251222204880)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "core_data_connector_items" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_items_on_user_defined" ON "core_data_connector_items" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204880') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorWorks (20251222204881)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.6ms)[0m  [1m[35mALTER TABLE "core_data_connector_works" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_works_on_user_defined" ON "core_data_connector_works" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204881') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddZInstanceIdToCoreDataConnectorInstances (20251222204882)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_instances" ADD "z_instance_id" integer /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204882') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddZItemIdToCoreDataConnectorItems (20251222204883)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.1ms)[0m  [1m[35mALTER TABLE "core_data_connector_items" ADD "z_item_id" integer /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204883') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddZWorkIdToCoreDataConnectorWorks (20251222204884)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.9ms)[0m  [1m[35mALTER TABLE "core_data_connector_works" ADD "z_work_id" integer /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204884') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddZSourceFieldsToNames (20251222204885)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.0ms)[0m  [1m[35mALTER TABLE "core_data_connector_names" ADD "z_source_id" integer /*application='Dummy'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "core_data_connector_names" ADD "z_source_type" character varying /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204885') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddAllowIdentifiersToProjectModels (20251222204886)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_models" ADD "allow_identifiers" boolean DEFAULT FALSE /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204886') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorWebAuthorities (20251222204887)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE TABLE "core_data_connector_web_authorities" ("id" bigserial primary key, "project_id" bigint, "source_type" character varying, "access" jsonb, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_web_authorities_on_project_id" ON "core_data_connector_web_authorities" ("project_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204887') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorWebIdentifiers (20251222204888)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE "core_data_connector_web_identifiers" ("id" bigserial primary key, "web_authority_id" bigint, "identifiable_type" character varying, "identifiable_id" bigint, "identifier" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_web_identifiers_on_web_authority_id" ON "core_data_connector_web_identifiers" ("web_authority_id") /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_web_identifiers_on_identifiable" ON "core_data_connector_web_identifiers" ("identifiable_type", "identifiable_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204888') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddZTaxonomyIdToTaxonomies (20251222204889)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_taxonomies" ADD "z_taxonomy_id" integer /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204889') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddExtraToCoreDataConnectorWebIdentifiers (20251222204890)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_web_identifiers" ADD "extra" jsonb /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204890') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorPlaceLayers (20251222204891)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.6ms)[0m  [1m[35mCREATE TABLE "core_data_connector_place_layers" ("id" bigserial primary key, "place_id" bigint, "name" character varying, "layer_type" character varying, "url" character varying, "geometry" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_place_layers_on_place_id" ON "core_data_connector_place_layers" ("place_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204891') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddWebIdentifierZIdToWebIdentifiers (20251222204892)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.6ms)[0m  [1m[35mALTER TABLE "core_data_connector_web_identifiers" ADD "z_web_identifier_id" integer /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204892') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUuidToProjectModels (20251222204893)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (4.6ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_models" ADD "uuid" uuid DEFAULT gen_random_uuid() NOT NULL /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204893') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUuidToProjectModelRelationships (20251222204894)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (6.9ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_model_relationships" ADD "uuid" uuid DEFAULT gen_random_uuid() NOT NULL /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204894') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorManifests (20251222204895)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE "core_data_connector_manifests" ("id" bigserial primary key, "manifestable_type" character varying, "manifestable_id" bigint, "project_model_relationship_id" bigint NOT NULL, "identifier" character varying, "label" character varying, "thumbnail" character varying, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_manifests_on_manifestable" ON "core_data_connector_manifests" ("manifestable_type", "manifestable_id") /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_cdc_manifests_on_project_model_relationship_id" ON "core_data_connector_manifests" ("project_model_relationship_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204895') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddItemCountToManifests (20251222204896)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "core_data_connector_manifests" ADD "item_count" integer DEFAULT 0 NOT NULL /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204896') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddFccFieldsToProjects (20251222204897)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mALTER TABLE "core_data_connector_projects" ADD "faircopy_cloud_url" character varying /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_projects" ADD "faircopy_cloud_project_model_id" integer /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204897') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddFccIdToItems (20251222204898)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "core_data_connector_items" ADD "faircopy_cloud_id" character varying /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204898') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorEvents (20251222204899)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "core_data_connector_events" ("id" bigserial primary key, "project_model_id" bigint, "uuid" uuid DEFAULT gen_random_uuid() NOT NULL, "name" character varying, "description" text, "z_event_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_events_on_project_model_id" ON "core_data_connector_events" ("project_model_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204899') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorEvents (20251222204900)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "core_data_connector_events" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_events_on_user_defined" ON "core_data_connector_events" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204900') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUuidToRelationships (20251222204901)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (6.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_relationships" ADD "uuid" uuid DEFAULT gen_random_uuid() NOT NULL /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204901') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorRecordMerges (20251222204902)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "core_data_connector_record_merges" ("id" bigserial primary key, "mergeable_type" character varying, "mergeable_id" bigint, "merged_uuid" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_record_merges_on_mergeable" ON "core_data_connector_record_merges" ("mergeable_type", "mergeable_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204902') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddOrderToProjectModels (20251222204903)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_models" ADD "order" integer DEFAULT 0 NOT NULL /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204903') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddOrderToProjectModelRelationships (20251222204904)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "core_data_connector_project_model_relationships" ADD "order" integer DEFAULT 0 NOT NULL /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204904') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to RenamePlaceLayersGeometryToContent (20251222204905)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_place_layers" RENAME COLUMN "geometry" TO "content" /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204905') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorSourceNames (20251222204906)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "core_data_connector_source_names" ("id" bigserial primary key, "nameable_type" character varying, "nameable_id" bigint, "name" character varying, "primary" boolean DEFAULT FALSE NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_source_names_on_nameable" ON "core_data_connector_source_names" ("nameable_type", "nameable_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204906') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to MigrateSourceTitlesToSourceNames (20251222204907)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (2.8ms)[0m  [1m[32mINSERT INTO core_data_connector_source_names ( nameable_id, nameable_type, name, "primary", created_at, updated_at ) SELECT source_titles.nameable_id, source_titles.nameable_type, names.name, source_titles.primary, source_titles.created_at, source_titles.updated_at FROM core_data_connector_source_titles source_titles JOIN core_data_connector_names names ON names.id = source_titles.name_id /*application='Dummy'*/[0m
+  [1m[35m (2.4ms)[0m  [1m[31mDELETE FROM core_data_connector_source_names WHERE nameable_type = 'CoreDataConnector::Instance' AND nameable_id NOT IN ( SELECT id FROM core_data_connector_instances ) /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[31mDELETE FROM core_data_connector_source_names WHERE nameable_type = 'CoreDataConnector::Item' AND nameable_id NOT IN ( SELECT id FROM core_data_connector_items ) /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[31mDELETE FROM core_data_connector_source_names WHERE nameable_type = 'CoreDataConnector::Work' AND nameable_id NOT IN ( SELECT id FROM core_data_connector_works ) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204907') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to RemoveSourceTitlesAndNames (20251222204908)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.3ms)[0m  [1m[35mDROP TABLE "core_data_connector_source_titles" /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE "core_data_connector_names" /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204908') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (3.1ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddImportIdToModels (20251222204909)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "core_data_connector_events" ADD "import_id" uuid /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_instances" ADD "import_id" uuid /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_items" ADD "import_id" uuid /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_organizations" ADD "import_id" uuid /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_people" ADD "import_id" uuid /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_places" ADD "import_id" uuid /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_relationships" ADD "import_id" uuid /*application='Dummy'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "core_data_connector_taxonomies" ADD "import_id" uuid /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_works" ADD "import_id" uuid /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204909') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddSsoIdToUsers (20251222204910)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "core_data_connector_users" ADD "sso_id" uuid /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204910') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddMapLibraryUrlToCoreDataConnectorProjects (20251222204911)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_projects" ADD "map_library_url" character varying /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204911') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddIndexToRelationships (20251222204912)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE INDEX "index_relationships_record_ids_and_types" ON "core_data_connector_relationships" ("primary_record_id", "related_record_id", "related_record_type", "primary_record_type") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204912') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUserDefinedFieldsToCoreDataConnectorTaxonomies (20251222204913)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_taxonomies" ADD "user_defined" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_taxonomies_on_user_defined" ON "core_data_connector_taxonomies" USING gin ("user_defined") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204913') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddOrderToRelationships (20251222204914)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "core_data_connector_relationships" ADD "order" integer /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204914') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddRoleToUsers (20251222204915)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "core_data_connector_users" ADD "role" character varying /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204915') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to SetRoleOnUsers (20251222204916)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.0ms)[0m  [1m[33mUPDATE core_data_connector_users users SET role = 'member' WHERE EXISTS ( SELECT 1 FROM core_data_connector_user_projects user_projects WHERE user_projects.user_id = users.id AND user_projects.role = 'owner' ) /*application='Dummy'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[33mUPDATE core_data_connector_users users SET role = 'guest' WHERE NOT EXISTS ( SELECT 1 FROM core_data_connector_user_projects user_projects WHERE user_projects.user_id = users.id AND user_projects.role = 'owner' ) /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[33mUPDATE core_data_connector_users SET role = 'admin' WHERE admin IS TRUE /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204916') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to SetDefaultRoleOnUserProjects (20251222204917)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "core_data_connector_user_projects" ALTER COLUMN "role" SET DEFAULT 'editor' /*application='Dummy'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "core_data_connector_user_projects" ALTER COLUMN "role" SET NOT NULL /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204917') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to RemoveAdminFromUsers (20251222204918)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "core_data_connector_users" DROP COLUMN "admin" /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204918') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddArchivedToProjects (20251222204919)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_projects" ADD "archived" boolean DEFAULT FALSE NOT NULL /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204919') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddRequirePasswordChangeToUsers (20251222204920)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_users" ADD "require_password_change" boolean DEFAULT FALSE NOT NULL /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204920') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddLastSignInToUsers (20251222204921)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "core_data_connector_users" ADD "last_sign_in_at" timestamp /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204921') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddLastInvitedAtToUsers (20251222204922)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "core_data_connector_users" ADD "last_invited_at" timestamp /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204922') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUuidToProjects (20251222204923)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.1ms)[0m  [1m[35mALTER TABLE "core_data_connector_projects" ADD "uuid" uuid DEFAULT gen_random_uuid() NOT NULL /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204923') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddUseStorageKeyToProjects (20251222204924)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "core_data_connector_projects" ADD "use_storage_key" boolean DEFAULT FALSE NOT NULL /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204924') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to UpdateProjectsUseStorageKeyDefault (20251222204925)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_projects" ALTER COLUMN "use_storage_key" SET DEFAULT TRUE /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204925') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to CreateCoreDataConnectorJobs (20251222204926)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "core_data_connector_jobs" ("id" bigserial primary key, "project_id" bigint NOT NULL, "user_id" bigint NOT NULL, "job_type" character varying, "status" character varying DEFAULT 'initializing', "extra" jsonb DEFAULT '{}', "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_jobs_on_project_id" ON "core_data_connector_jobs" ("project_id") /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE INDEX "index_core_data_connector_jobs_on_user_id" ON "core_data_connector_jobs" ("user_id") /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204926') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddZMediaContentIdToMediaContents (20251222204927)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "core_data_connector_media_contents" ADD "z_media_content_id" integer /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204927') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddImportIdToMediaContents (20251222204928)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "core_data_connector_media_contents" ADD "import_id" uuid /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204928') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddImportUrlToMediaContents (20251222204929)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "core_data_connector_media_contents" ADD "import_url" character varying /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "core_data_connector_media_contents" ADD "import_url_processed" boolean DEFAULT FALSE NOT NULL /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204929') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Migrating to AddReconciliationCredentialsToProjects (20251222204930)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "core_data_connector_projects" ADD "reconciliation_credentials" jsonb DEFAULT '{}' /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251222204930') RETURNING "version" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(7217877278427378150) /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (2.6ms)[0m  [1m[34mSELECT f_geometry_column,coord_dimension,srid,type FROM geometry_columns WHERE f_table_name='core_data_connector_place_geometries' /*application='Dummy'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[35mSQL (0.3ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[36mCoreDataConnector::ProjectModel Load (2.6ms)[0m  [1m[34mSELECT "core_data_connector_project_models".* FROM "core_data_connector_project_models" ORDER BY "core_data_connector_project_models"."id" DESC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN /*application='Dummy'*/[0m
+  [1m[36mCoreDataConnector::Project Create (14.3ms)[0m  [1m[32mINSERT INTO "core_data_connector_projects" ("name", "description", "created_at", "updated_at", "discoverable", "faircopy_cloud_url", "faircopy_cloud_project_model_id", "map_library_url", "archived", "use_storage_key", "reconciliation_credentials") VALUES ('new', NULL, '2025-12-22 22:07:03.775081', '2025-12-22 22:07:03.775081', FALSE, NULL, NULL, NULL, FALSE, TRUE, '{}') RETURNING "id", "uuid" /*application='Dummy'*/[0m
+  [1m[36mTRANSACTION (3.0ms)[0m  [1m[35mCOMMIT /*application='Dummy'*/[0m
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public, postgis /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Dummy'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Dummy'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (155.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "open_geographies" /*application='Dummy'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Dummy'*/[0m
+  [1m[35m (49.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS "open_geographies" /*application='Dummy'*/[0m
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
+Generating image variants require the image_processing gem. Please add `gem "image_processing", "~> 1.2"` to your Gemfile or set `config.active_storage.variant_processor = :disabled`.
