@@ -1,4 +1,6 @@
-require "searchkick"
+# frozen_string_literal: true
+
+require 'searchkick'
 
 module ::CoreDataConnector
   module OpenGeographies
@@ -7,158 +9,197 @@ module ::CoreDataConnector
 
       included do
         searchkick deep_paging: true,
-                   callbacks: false,
-                   index_name: -> { "#{name.pluralize.parameterize(separator: "_")}" }
+          callbacks: false,
+          index_name: -> { name.pluralize.parameterize(separator: '_') }
       end
 
-        def search_data
-          {
-            **base_search_data,
-            **user_defined_fields,
-            **extras,
-            **related,
-            **related_to
-          }
+      def search_data
+        {
+          **base_search_data,
+          **user_defined_fields,
+          **extras,
+          **related,
+          **related_to,
+        }
+      end
+
+      def base_search_data
+        {
+          id:,
+          uuid:,
+          name:,
+          slug:,
+          slugs:,
+          project: project.name.parameterize,
+          class_name: self.class.name,
+          featured: featured,
+        }
+      end
+
+      def related_search_data
+        {
+          **base_search_data,
+          **extras,
+          **related,
+        }
+      end
+
+      private
+
+      def part_of_rel_model
+        ::CoreDataConnector::ProjectModelRelationship.where(
+          related_model: project_model,
+          inverse_name: 'Part of',
+        )
+      end
+
+      def parent
+        ::CoreDataConnector::Relationship.find_by(
+          project_model_relationship: part_of_rel_model,
+          related_record: self,
+        ).primary_record
+      end
+
+      def slug
+        ud_slug = project_model.user_defined_fields.find do |ud|
+          ud.column_name.downcase.include?('slug')
         end
+        ud_slug.nil? ? name.parameterize : user_defined[ud_slug.uuid]
+      end
 
-        def base_search_data
-          {
-            id:,
-            uuid:,
-            name:,
-            slug:,
-            slugs:,
-            project: project.name.parameterize,
-            class_name: self.class.name
-          }
-        end
+      def slugs
+        ud_slugs = project_model.user_defined_fields.filter do |ud|
+          ud.column_name.downcase.include?('slug')
+        end.map { |ud| user_defined[ud.uuid] }
 
-        def related_search_data
-          {
-            **base_search_data,
-            **extras,
-            **related
-          }
-        end
-
-        private
-
-        def part_of_rel_model
-          ::CoreDataConnector::ProjectModelRelationship.where(
-            related_model: project_model,
-            inverse_name: "Part of"
-          )
-        end
-
-        def parent
-          ::CoreDataConnector::Relationship.find_by(
-            project_model_relationship: part_of_rel_model,
-            related_record: self
-          ).primary_record
-        end
-
-        def slug
-          name.parameterize
-        end
-
-        def slugs
-          case self.class.name
-          when "CoreDataConnector::OpenGeographies::Place"
-            place_names.map { |place_name| place_name.name.parameterize }
-          else
-            [ name.parameterize ]
+        comp_slugs = case self.class.name
+        when 'CoreDataConnector::OpenGeographies::Place'
+          place_names.map { |pn| pn.name.parameterize }
+        when 'CoreDataConnector::OpenGeographies::Person'
+          person_names.map do |pn|
+            [pn.first_name, pn.middle_name, pn.last_name].join(' ').parameterize
           end
+        else
+          [name.parameterize]
         end
 
-        def user_defined_fields(record = self)
-          return {} if record.user_defined.nil?
+        [*ud_slugs, *comp_slugs].compact.uniq
+      end
 
-          fields = case record.class.name
-          when "::CoreDataConnector::Relationship"
-            record.project_model_relationship.user_defined_fields
-          else
-            record.project_model.user_defined_fields
-          end
+      def user_defined_fields(record = self)
+        return {} if record.user_defined.nil?
 
-          attributes = {}
-          record.user_defined.each do |key, value|
-            user_defined_field = fields.find_by(uuid: key)
-            next if user_defined_field.nil?
-
-            label = user_defined_field.column_name
-            attributes[label.parameterize.underscore.to_sym] = { label:, value: }
-          end
-
-          attributes
+        fields = case record.class.name
+        when '::CoreDataConnector::Relationship'
+          record.project_model_relationship.user_defined_fields
+        else
+          record.project_model.user_defined_fields
         end
 
-        def related
-          related_records = {}
+        attributes = {}
+        record.user_defined.each do |key, value|
+          user_defined_field = fields.find_by(uuid: key)
+          next if user_defined_field.nil?
 
-          relations = ::CoreDataConnector::ProjectModelRelationship.where(primary_model: project_model)
+          label = user_defined_field.column_name
+          attributes[label.parameterize.underscore.to_sym] = { label:, value: }
+        end
 
-          relations.each_with_index do |rel, idx|
-            next if rel.name == "County"
+        attributes
+      end
 
-            if rel.multiple
-              records = ::CoreDataConnector::Relationship.where(project_model_relationship: rel, primary_record: self)
-              next if records.empty?
-              related_records[rel.name.parameterize.underscore.to_sym] = records.map do |relation|
-                related_class(relation.related_record_type).find(
-                  relation.related_record.id
-                ).related_search_data
-              end
-            else
-              relation = ::CoreDataConnector::Relationship.find_by(project_model_relationship: rel, primary_record: self)
-              next if relation.nil?
-              related_records[rel.name.parameterize.underscore.to_sym] = related_class(
-                relation.related_record_type
-              ).find(relation.related_record_id).related_search_data
+      def related
+        related_records = {}
+
+        relations = ::CoreDataConnector::ProjectModelRelationship.where(primary_model: project_model)
+
+        relations.each_with_index do |rel, _idx|
+          next if rel.name == 'County'
+
+          if rel.multiple
+            records = ::CoreDataConnector::Relationship.where(project_model_relationship: rel, primary_record: self)
+            next if records.empty?
+
+            related_records[rel.name.parameterize.underscore.to_sym] = records.map do |relation|
+              related_class(relation.related_record_type).find(
+                relation.related_record.id,
+              ).related_search_data
             end
-          end
+          else
+            relation = ::CoreDataConnector::Relationship.find_by(project_model_relationship: rel, primary_record: self)
+            next if relation.nil?
 
-          related_records
+            related_records[rel.name.parameterize.underscore.to_sym] = related_class(
+              relation.related_record_type,
+            ).find(relation.related_record_id).related_search_data
+          end
         end
 
-        def related_to
-          related_records = {}
+        related_records
+      end
 
-          return related_records if @related
+      def related_to
+        related_records = {}
 
-          relations = ::CoreDataConnector::ProjectModelRelationship.where(related_model: project_model)
+        return related_records if @related
 
-          relations.each do |rel|
-            next unless rel.allow_inverse
+        relations = ::CoreDataConnector::ProjectModelRelationship.where(related_model: project_model)
 
-            if rel.multiple
-              records = ::CoreDataConnector::Relationship.where(project_model_relationship: rel, related_record: self).map(&:primary_record)
-              next if records.empty?
+        relations.each do |rel|
+          next unless rel.allow_inverse
 
-              related_records[rel.inverse_name.parameterize.underscore.to_sym] = records.map do |relation|
-                related_class(relation.primary_record_type).find(
-                  relation.primary_record.id
-                ).base_search_data
-              end
+          if rel.multiple
+            records = ::CoreDataConnector::Relationship.where(project_model_relationship: rel, related_record: self)
+            next if records.empty?
 
-            else
-              relation = ::CoreDataConnector::Relationship.find_by(project_model_relationship: rel, related_record: self)
-              next if relation.nil?
-              related_records[rel.inverse_name.parameterize.underscore.to_sym] = related_class(
-                relation.primary_record_type
-              ).find(relation.primary_record_id).base_search_data
+            related_records[rel.inverse_name.parameterize.underscore.to_sym] = records.map do |relation|
+              related_class(relation.primary_record_type).find(
+                relation.primary_record.id,
+              ).base_search_data
             end
+
+          else
+            relation = ::CoreDataConnector::Relationship.find_by(project_model_relationship: rel, related_record: self)
+            next if relation.nil?
+
+            related_records[rel.inverse_name.parameterize.underscore.to_sym] = related_class(
+              relation.primary_record_type,
+            ).find(relation.primary_record_id).base_search_data
           end
-
-          related_records
         end
 
-        def extras
-          {}
+        related_records
+      end
+
+      def extras
+        {}
+      end
+
+      def related_class(related_record_type)
+        "::CoreDataConnector::OpenGeographies::#{related_record_type.split("::").last}".constantize
+      end
+
+      def featured
+        featured_recs = {}
+
+        relations = ::CoreDataConnector::ProjectModelRelationship.where(primary_model: project_model)
+
+        featureable_relations = relations.map do |prm|
+          prm.user_defined_fields.filter { |ud| ud.column_name.downcase.include?('featured') && ud.data_type == 'Boolean' }
+        end.flatten.compact
+
+        featureable_relations.each do |fr|
+          project_model_relationship = ::CoreDataConnector::ProjectModelRelationship.find(fr.defineable_id)
+          rels = ::CoreDataConnector::Relationship.where(project_model_relationship:, primary_record: self)
+          featured_rel = rels.find { |rel| rel.user_defined[fr.uuid] }
+          featured_rec = related_class(featured_rel.related_record_type).find(
+            featured_rel.related_record.id,
+          ).related_search_data
+          featured_recs[project_model_relationship.slug.singularize.to_sym] = featured_rec
         end
 
-        def related_class(related_record_type)
-          "::CoreDataConnector::OpenGeographies::#{related_record_type.split("::").last}".constantize
-        end
+        featured_recs
+      end
     end
   end
 end
