@@ -36,15 +36,16 @@ module ::CoreDataConnector
         }
       end
 
-      def related_search_data
+      def related_search_data(order = nil)
         {
+          order:,
           **base_search_data,
           **extras,
           **related,
         }
       end
 
-      private
+      # private
 
       def part_of_rel_model
         ::CoreDataConnector::ProjectModelRelationship.where(
@@ -123,7 +124,7 @@ module ::CoreDataConnector
             related_records[rel.name.parameterize.underscore.to_sym] = records.map do |relation|
               related_class(relation.related_record_type).find(
                 relation.related_record.id,
-              ).related_search_data
+              ).related_search_data(relation.order)
             end
           else
             relation = ::CoreDataConnector::Relationship.find_by(project_model_relationship: rel, primary_record: self)
@@ -192,11 +193,15 @@ module ::CoreDataConnector
           project_model_relationship = ::CoreDataConnector::ProjectModelRelationship.find(fr.defineable_id)
           rels = ::CoreDataConnector::Relationship.where(project_model_relationship:, primary_record: self)
           featured_rel = rels.find { |rel| rel.user_defined[fr.uuid] }
+          next if featured_rel.nil?
+
           featured_rec = related_class(featured_rel.related_record_type).find(
             featured_rel.related_record.id,
           ).related_search_data
           featured_recs[project_model_relationship.slug.singularize.to_sym] = featured_rec
         end
+
+        return if featured_recs.empty?
 
         featured_recs
       end
