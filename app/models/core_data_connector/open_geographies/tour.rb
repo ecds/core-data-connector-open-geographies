@@ -16,6 +16,7 @@ module CoreDataConnector
           slugs:,
           project: project.name.parameterize,
           stops: stops,
+          bounds:,
         }
       end
 
@@ -26,6 +27,8 @@ module CoreDataConnector
           place = Place.find(stop[:id])
           {
             title: place.name,
+            slugs: place.slugs,
+            slug: place.slug,
             position: idx + 1,
             next: neighbor(tour_stops[idx + 1]),
             previous: idx.zero? ? nil : neighbor(tour_stops[idx - 1]),
@@ -65,6 +68,23 @@ module CoreDataConnector
             },
           }
         end
+      end
+
+      def bounds
+        points = related[:stops].map do |stop|
+          place = Place.find(stop[:id])
+          place.place_geometry.geometry
+        end
+
+        factory = points.first&.factory
+        combined = factory.collection(points)
+        envelope = combined.envelope
+        {
+          east: envelope.exterior_ring.points.map(&:x).min,
+          west: envelope.exterior_ring.points.map(&:x).max,
+          south: envelope.exterior_ring.points.map(&:y).min,
+          north: envelope.exterior_ring.points.map(&:y).max,
+        }
       end
     end
   end
