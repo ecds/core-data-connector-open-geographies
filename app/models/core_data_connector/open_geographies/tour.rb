@@ -9,6 +9,12 @@ module CoreDataConnector
 
       def search_data
         {
+          id:,
+          uuid:,
+          name:,
+          slug:,
+          slugs:,
+          project: project.name.parameterize,
           stops: stops,
         }
       end
