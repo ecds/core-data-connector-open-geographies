@@ -80,8 +80,8 @@ module CoreDataConnector
         combined = factory.collection(points)
         envelope = combined.envelope
         {
-          east: envelope.exterior_ring.points.map(&:x).min,
-          west: envelope.exterior_ring.points.map(&:x).max,
+          west: envelope.exterior_ring.points.map(&:x).min,
+          east: envelope.exterior_ring.points.map(&:x).max,
           south: envelope.exterior_ring.points.map(&:y).min,
           north: envelope.exterior_ring.points.map(&:y).max,
         }
