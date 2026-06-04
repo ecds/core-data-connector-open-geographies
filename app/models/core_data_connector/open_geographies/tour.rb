@@ -29,6 +29,7 @@ module CoreDataConnector
             title: place.name,
             slugs: place.slugs,
             slug: place.slug,
+            id: place.id,
             position: idx + 1,
             next: neighbor(tour_stops[idx + 1]),
             previous: idx.zero? ? nil : neighbor(tour_stops[idx - 1]),
