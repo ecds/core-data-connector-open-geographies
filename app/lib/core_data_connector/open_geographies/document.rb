@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CoreDataConnector
   module OpenGeographies
     class Document
@@ -15,7 +17,7 @@ module CoreDataConnector
           **user_defined,
           **extras,
           **related,
-          **related_to
+          **related_to,
         }
       end
 
@@ -24,14 +26,13 @@ module CoreDataConnector
       def part_of_rel_model
         CoreDataConnector::ProjectModelRelationship.where(
           related_model: @record.project_model,
-          inverse_name: "Part of"
         )
       end
 
       def parent
         CoreDataConnector::Relationship.find_by(
           project_model_relationship: part_of_rel_model,
-          related_record: @record
+          related_record: @record,
         ).primary_record
       end
 
@@ -44,7 +45,7 @@ module CoreDataConnector
           CoreDataConnector::Relationship.where(
             project_model_relationship: part_of_rel_model,
             primary_record: parent,
-            related_record: pn.place
+            related_record: pn.place,
           ).count
         end
 
@@ -57,7 +58,7 @@ module CoreDataConnector
         attributes = {}
 
         user_defined_fields = case record.class.name
-        when "CoreDataConnector::Relationship"
+        when 'CoreDataConnector::Relationship'
           record.project_model_relationship.user_defined_fields
         else
           record.project_model.user_defined_fields
@@ -85,6 +86,7 @@ module CoreDataConnector
           if rel.multiple
             records = CoreDataConnector::Relationship.where(project_model_relationship: rel, primary_record: record)
             next if records.empty?
+
             related_records[rel.name.parameterize.underscore.to_sym] = records.map do |rel_record|
               rel_doc = CoreDataConnector::OpenGeographies::Document.new(rel_record.related_record, true)
               { **rel_doc.document, **user_defined(rel_record) }
@@ -92,6 +94,7 @@ module CoreDataConnector
           else
             rel_record = CoreDataConnector::Relationship.find_by(project_model_relationship: rel, primary_record: record)
             next if rel_record.nil?
+
             rel_record = rel_record.related_record
             rel_doc = CoreDataConnector::OpenGeographies::Document.new(rel_record, true)
             related_records[rel.name.parameterize.underscore.to_sym] = rel_doc.document
@@ -134,16 +137,16 @@ module CoreDataConnector
 
       def extras
         case @record.class.name
-        when "CoreDataConnector::Place"
+        when 'CoreDataConnector::Place'
           {
-            geometry: @record.place_geometry.to_geojson
+            geometry: @record.place_geometry.to_geojson,
           }
-        when "CoreDataConnector::MediaContent"
+        when 'CoreDataConnector::MediaContent'
           {
             preview: @record.resource_description.content_preview_url,
             thumbnail: @record.resource_description.content_thumbnail_url,
             full: @record.resource_description.content_iiif_url,
-            manifest: @record.manifest_url
+            manifest: @record.manifest_url,
           }
         end
       end
