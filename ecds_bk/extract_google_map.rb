@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require 'net/http'
 require 'uri'
@@ -28,34 +29,34 @@ module Ecds
     def self.extract_more_content(url)
       doc = fetch_page(url)
       links = []
-  
+
       # Find the "More Content" heading
       more_content_heading = doc.xpath("//h3[contains(text(), 'More Content')]").first
-      
+
       if more_content_heading
         # Get the next sibling elements after the heading
         # Look for links in the immediate following paragraph or div
         next_element = more_content_heading.next_element
-        
+
         while next_element && next_element.name != 'h2' && next_element.name != 'h3'
           # Find all links in this element
           next_element.css('a').each do |link|
             href = link['href']
             text = link.text.strip
-            
+
             # Skip empty links or anchor links
             if href && !href.empty? && !href.start_with?('#')
               links << { text: text, url: href }
             end
           end
-          
+
           next_element = next_element.next_element
-          
+
           # Stop if we've found links and moved past the links section
           break if links.any? && next_element && next_element.name =~ /^h[1-6]$/
         end
       end
-      
+
       links
     end
 
@@ -72,7 +73,7 @@ module Ecds
         if text =~ /Organized in/i
           # Extract the year after "Organized in"
           if text =~ /Organized in\s+(\d{4})/i
-            return $1
+            return ::Regexp.last_match(1)
           end
         end
       end
@@ -91,7 +92,7 @@ module Ecds
 
       # Check for "Photography by" or "Photograph by" (case insensitive)
       if text =~ /(Photography|Photograph)\s+by\s+(.+)/i
-        return $2.strip
+        return ::Regexp.last_match(2).strip
       end
 
       nil
@@ -104,12 +105,12 @@ module Ecds
         Nokogiri::HTML(response.body)
       else
         puts "Error fetching page: HTTP #{response.code}"
-        exit 1
+        exit(1)
       end
     end
 
     def self.parse_iframe(iframe)
-      uri = URI.parse iframe[:src]
+      uri = URI.parse(iframe[:src])
       query_params = CGI.parse(uri.query).deep_symbolize_keys
       query_params[:q].first
     end

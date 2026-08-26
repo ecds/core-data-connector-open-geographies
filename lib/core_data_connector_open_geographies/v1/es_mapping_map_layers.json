@@ -1,0 +1,106 @@
+{
+  "$comment": "Elasticsearch mapping for the separate open_geographies_v1_map_layers index. Map Layers get their own index (not the shared open_geographies_v1 one) because their primary query shape is spatial-extent search (bbox as geo_shape) rather than the point/text search the shared index is built around, and because a Place-class record playing the 'map_layer' role (see ProjectModelRole) has a materially different document shape than a real Place. Shares the same envelope fields, settings, and dynamic_templates as es_mapping.json by convention, not by reference - keep them in sync by hand for now.",
+
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "og_text": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": ["lowercase", "asciifolding"]
+        }
+      }
+    }
+  },
+
+  "mappings": {
+    "dynamic_templates": [
+      {
+        "facets_as_keyword": {
+          "match": "*_facet",
+          "mapping": { "type": "keyword", "ignore_above": 256 }
+        }
+      },
+      {
+        "related_records": {
+          "match_mapping_type": "object",
+          "match": "????????-????-????-????-????????????",
+          "mapping": {
+            "type": "object",
+            "properties": {
+              "uuid": { "type": "keyword" },
+              "record_id": { "type": "keyword" },
+              "name": { "type": "text", "analyzer": "og_text", "fields": { "keyword": { "type": "keyword", "ignore_above": 256 } } },
+              "name_facet": { "type": "keyword", "ignore_above": 256 },
+              "inverse": { "type": "boolean" }
+            }
+          }
+        }
+      },
+      {
+        "strings_as_text": {
+          "match_mapping_type": "string",
+          "mapping": { "type": "text", "analyzer": "og_text" }
+        }
+      }
+    ],
+
+    "properties": {
+      "uuid": { "type": "keyword" },
+      "slug": { "type": "keyword" },
+      "project_id": { "type": "keyword" },
+      "model_type": { "type": "keyword" },
+      "model_id": { "type": "keyword" },
+      "model_name": { "type": "keyword" },
+
+      "name": {
+        "type": "text",
+        "analyzer": "og_text",
+        "fields": { "keyword": { "type": "keyword", "ignore_above": 256 } }
+      },
+      "description": { "type": "text", "analyzer": "og_text" },
+
+      "visibility": { "type": "keyword" },
+      "date_modified": { "type": "date" },
+      "identifiers": {
+        "properties": {
+          "authority": { "type": "keyword" },
+          "identifier": { "type": "keyword" }
+        }
+      },
+
+      "bbox": { "type": "geo_shape" },
+      "date": { "type": "date" },
+      "bearing": { "type": "double" },
+      "source": {
+        "properties": {
+          "type": { "type": "keyword" },
+          "urls": { "type": "keyword", "index": false }
+        }
+      },
+
+      "preview": {
+        "properties": {
+          "uuid": { "type": "keyword" },
+          "slug": { "type": "keyword" },
+          "thumbnail_url": { "type": "keyword", "index": false }
+        }
+      },
+      "publisher": {
+        "properties": {
+          "uuid": { "type": "keyword" },
+          "slug": { "type": "keyword" },
+          "name": { "type": "text", "analyzer": "og_text", "fields": { "keyword": { "type": "keyword", "ignore_above": 256 } } }
+        }
+      },
+      "places": {
+        "properties": {
+          "uuid": { "type": "keyword" },
+          "slug": { "type": "keyword" },
+          "name": { "type": "text", "analyzer": "og_text", "fields": { "keyword": { "type": "keyword", "ignore_above": 256 } } },
+          "geo": { "properties": { "point": { "type": "geo_point" } } }
+        }
+      }
+    }
+  }
+}

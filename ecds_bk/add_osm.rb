@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rgeo'
 require 'rgeo/geo_json'
 
@@ -11,7 +13,7 @@ module Ecds
       @geometry = nil
       @osm_features = nil
       @factory = RGeo::Geos.factory
-      @point = Ecds::Helpers.find_point place.place_geometry.geometry
+      @point = Ecds::Helpers.find_point(place.place_geometry.geometry)
       @query = query
       @converter = Osmtogeojson.new(@query)
       core_data_geometries
@@ -27,27 +29,27 @@ module Ecds
       @osm_features[:features].each do |feature|
         type = feature[:properties][:id].split('/').first
         user_defined = {
-          "384cb567-6e57-4691-94a3-e196c198e9c6": type,
-          "8f35ead2-fa02-4273-8c21-90fea494f362": feature[:properties].to_json
+          '384cb567-6e57-4691-94a3-e196c198e9c6': type,
+          '8f35ead2-fa02-4273-8c21-90fea494f362': feature[:properties].to_json,
         }
         source_name = CoreDataConnector::SourceName.find_by(name: feature[:properties][:id], primary: true)
         if source_name.nil?
           item = CoreDataConnector::Item.new(
             project_model_id: 37,
-            user_defined:
+            user_defined:,
           )
           source_name = CoreDataConnector::SourceName.new(name: feature[:properties][:id], primary: true)
           item.source_names << source_name
           CoreDataConnector::Relationship.create(
             project_model_relationship_id: 57,
             primary_record: item,
-            related_record: @place
+            related_record: @place,
           )
         else
           CoreDataConnector::Relationship.create_or_find_by(
             project_model_relationship_id: 57,
             primary_record: source_name.nameable,
-            related_record: @place
+            related_record: @place,
           )
           source_name.nameable.update(user_defined:)
         end
@@ -68,21 +70,21 @@ module Ecds
       lines_to_polygon
 
       @geometry = if @collection.count > 1
-                    RGeo::Geos::CAPIGeometryCollectionImpl.create(@factory, [@collection].flatten)
-                  else
-                    @collection.first
-                  end
+        RGeo::Geos::CAPIGeometryCollectionImpl.create(@factory, [@collection].flatten)
+      else
+        @collection.first
+      end
     end
 
     def core_data_geometries
       place_geom = @place.place_geometry
 
-      return nil unless place_geom.present?
+      return unless place_geom.present?
 
       # geom = RGeo::GeoJSON.encode(place_geom.geometry)
       geom = place_geom.geometry
 
-      if geom.class.to_s.downcase.include? 'collection'
+      if geom.class.to_s.downcase.include?('collection')
         geom.each { |geo| @collection.push(geo) }
       else
         @collection.push(geom)
@@ -100,14 +102,14 @@ module Ecds
     end
 
     def lines_to_polygon
-      lines = @collection.filter { |geom| geom.class.to_s.downcase.include? 'line' }.uniq
+      lines = @collection.filter { |geom| geom.class.to_s.downcase.include?('line') }.uniq
       return if lines.empty?
 
-      points = @collection.filter { |geom| geom.class.to_s.downcase.include? 'point' }
+      points = @collection.filter { |geom| geom.class.to_s.downcase.include?('point') }
       polygon = RGeo::Geos::CAPIGeometryCollectionImpl.create(@factory, lines).polygonize
       @collection = [*points]
-      polygon.each { |poly| @collection.push poly } unless polygon.empty?
-      lines.each { |line| @collection.push line } if polygon.empty?
+      polygon.each { |poly| @collection.push(poly) } unless polygon.empty?
+      lines.each { |line| @collection.push(line) } if polygon.empty?
     end
 
     def query

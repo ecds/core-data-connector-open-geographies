@@ -11,18 +11,17 @@ module CoreDataConnector
       # the *same* index_name ('open_geographies_v1'), so Searchkick writes them
       # all into one shared physical index - the "one mapping serves every
       # atlas" design in og_schema/README.md - discriminated by model_type /
-      # model_name rather than by which index a document lives in. Querying
-      # across that shared index goes through Searchkick.search(index_name:) /
-      # any one participating class's .search with load: false, not per-class
-      # .search assuming an isolated index.
+      # model_name rather than by which index a document lives in.
       #
-      # search_data here only covers what's honestly derivable from today's
-      # schema (structural envelope fields + whatever a model's own `extras`
-      # adds, e.g. geometry). Relationship/UDF promotion (types, media,
-      # contained_in_place, description, ...) needs the og.promote/og.intent
-      # metadata proposed in og_schema/canonical_template.json to actually exist
-      # on ProjectModelRelationship and UserDefinedField in core-data-connector -
-      # that's a separate decision for that repo, not implemented here yet.
+      # Relationship/UDF *promotion* (types, media, contained_in_place, ...)
+      # works entirely by exact name match against PromotedRelationships,
+      # which is derived from og_schema/canonical_template.json rather than a
+      # database flag - see that module for why (short version: a flag would
+      # need new columns on ProjectModelRelationship/UserDefinedField in
+      # core-data-connector, a repo this engine doesn't own and can't diverge
+      # from indefinitely). Everything - promoted or not - still gets indexed
+      # under its own raw name-derived key too, same as v0 does today, so a
+      # bespoke per-atlas client isn't limited to only the promoted subset.
       module Searchable
         extend ActiveSupport::Concern
 
@@ -31,22 +30,62 @@ module CoreDataConnector
         )
         MAPPING = JSON.parse(File.read(MAPPING_PATH), symbolize_names: true).freeze
 
-        included do
-          searchkick index_name: -> { 'open_geographies_v1' },
-            callbacks: false,
-            deep_paging: true,
-            mappings: MAPPING[:mappings],
-            settings: MAPPING[:settings]
+        # How many levels deep a related record's own relationships get
+        # expanded when nested inside this record's document (a Place's
+        # media[] entries include their own creator/publisher, but *those*
+        # don't get their relationships expanded again). v0's equivalent
+        # (related_search_data) has no such limit - it recurses for as long
+        # as the relationship graph keeps producing new records, which only
+        # terminates today because nothing in the current schema happens to
+        # cycle back. That's fragile by accident, not by design; this makes
+        # the limit explicit instead of trusting the graph shape to stay
+        # accidentally acyclic.
+        DEFAULT_DEPTH = 1
+
+        # Explicit per-class call rather than a fixed `included do`: v0-style
+        # "everything shares one index" was true when this concern only had
+        # one caller, but Map Layers needs its own index (bbox geo_shape
+        # queries, a different document shape) - see V1::MapLayer. Every
+        # including class must call this once; there's no silent default,
+        # so it's always visible in the model file which index a class
+        # writes to.
+        class_methods do
+          def searchable_index(name, mapping: Searchable::MAPPING)
+            searchkick(
+              index_name: -> { name },
+              callbacks: false,
+              deep_paging: true,
+              mappings: mapping[:mappings],
+              settings: mapping[:settings],
+            )
+          end
         end
 
-        # Not marked `private`, matching v0's Searchable: related_search_data-style
-        # cross-instance calls (once relationship promotion exists here) need to
-        # invoke these on *other* records' instances, which requires them to stay
-        # callable with an explicit receiver.
+        # CoreDataConnector::WebIdentifier stores a bare code (VIAF "143125668",
+        # not "https://viaf.org/viaf/143125668/"), so `sameAs` needs the URL built
+        # per authority - CoreDataConnector::Authority::* (WebIdentifier's own
+        # reconciliation services) don't help here, they call each authority's API
+        # for lookup/search, not its public entity page. Only the authorities
+        # verified against a real canonical URL pattern are listed; anything else
+        # in WebAuthority::SOURCE_TYPES (atom, bnf, dpla, jisc) falls back to the
+        # raw stored value rather than risk emitting a fabricated wrong URL.
+        IDENTIFIER_URL_BUILDERS = {
+          'wikidata' => ->(id) { "https://www.wikidata.org/wiki/#{id}" },
+          'geonames' => ->(id) { "https://www.geonames.org/#{id}" },
+          'viaf' => ->(id) { "https://viaf.org/viaf/#{id}/" },
+        }.freeze
+
+        # Not marked `private`: cross-instance calls (related/summarize invoking
+        # these on *other* records' instances) need them callable with an
+        # explicit receiver, matching v0's Searchable for the same reason.
         def search_data
           {
-            **base_search_data,
+            **user_defined_fields,
             **extras,
+            **related(DEFAULT_DEPTH),
+            **related_to(DEFAULT_DEPTH),
+            **featured,
+            **base_search_data,
           }
         end
 
@@ -56,18 +95,184 @@ module CoreDataConnector
             slug:,
             slugs:,
             project_id: project_model.project_id.to_s,
-            model_type: self.class.name.demodulize.underscore,
+            model_type: PromotedRelationships.model_type_for(self),
+            model_id: project_model.id.to_s,
             model_name: project_model.name,
             name:,
             visibility: 'published', # no draft/suppress concept in CoreDataConnector today - placeholder until one exists
             date_modified: updated_at&.iso8601,
+            identifiers:,
           }
+        end
+
+        # {authority, identifier} per schema.org sameAs - derived from Identifiable's
+        # web_identifiers association, which several but not all OG-eligible models
+        # include, hence the respond_to? guard rather than assuming universality.
+        def identifiers
+          return [] unless respond_to?(:web_identifiers)
+
+          web_identifiers.map do |web_identifier|
+            authority = web_identifier.web_authority.source_type
+            builder = IDENTIFIER_URL_BUILDERS[authority]
+            {
+              authority:,
+              identifier: builder ? builder.call(web_identifier.identifier) : web_identifier.identifier,
+            }
+          end
+        end
+
+        # Every scalar UDF this record has a value for, keyed by its
+        # column_name (parameterized/underscored) as `{label:, value:}` -
+        # that part is ported unchanged from v0, and stays regardless of
+        # promotion status, same "index it under its own name too" rule
+        # `related` uses.
+        #
+        # Additionally, per PromotedRelationships.udfs_for: a UDF whose
+        # column_name exact-matches a canonical name gets ALSO written under
+        # its promoted path, as a bare value (no {label:,value:} wrapper) -
+        # a single-segment path like "date" writes a flat key; a dotted path
+        # like "source.type"/"source.urls" merges into one `source: {type:,
+        # urls:}` object. When a UDF's raw key and promoted path happen to
+        # be the same string (e.g. Map Layers' "Description" -> "description"),
+        # the promoted (bare-value) write simply overwrites the raw
+        # (label/value) write at that key - matching how `related` already
+        # collapses raw and promoted keys when a curator used the exact
+        # canonical relationship name.
+        def user_defined_fields(record = self)
+          return {} if record.user_defined.nil?
+
+          fields = record.project_model.user_defined_fields
+          promoted = PromotedRelationships.udfs_for(record)
+
+          attributes = {}
+          record.user_defined.each do |key, value|
+            user_defined_field = fields.find_by(uuid: key)
+            next if user_defined_field.nil?
+
+            label = user_defined_field.column_name
+            attributes[label.parameterize.underscore.to_sym] = { label:, value: }
+
+            promoted_path = promoted[label]
+            merge_promoted_udf!(attributes, promoted_path, value) if promoted_path
+          end
+
+          attributes
         end
 
         # Per-model override point for fields that don't need the promote
         # mechanism to be safely hand-written today (e.g. Place's geometry).
         def extras
           {}
+        end
+
+        # Walks every relationship *from* this record. Everything is indexed
+        # under its own name-derived key regardless of promotion status;
+        # promoted relationships (exact name match against
+        # PromotedRelationships.for(self)) *additionally* get written under
+        # their well-known canonical key, in one of two shapes: a bare array
+        # of names for relationships pointing at a Taxonomy (types, work_type
+        # - these exist purely for faceted filtering, not navigation, so a
+        # plain string is enough), or a depth-limited summary object for
+        # everything else (contained_in_place, media, creator, ... - these
+        # need uuid/slug so a client can link to the record itself).
+        def related(depth = DEFAULT_DEPTH)
+          related_records = {}
+          promoted = PromotedRelationships.for(self)
+
+          relations = ::CoreDataConnector::ProjectModelRelationship.where(primary_model: project_model)
+
+          relations.each do |rel|
+            promoted_key = promoted[rel.name]
+            raw_key = rel.name.parameterize.underscore.to_sym
+
+            if rel.multiple
+              records = ::CoreDataConnector::Relationship.where(project_model_relationship: rel, primary_record: self)
+              next if records.empty?
+
+              items = records.map { |relation| related_class(relation.related_record_type).find(relation.related_record_id) }
+
+              related_records[raw_key] = items.map { |item| summarize(item, depth) }
+              related_records[promoted_key] = promoted_value(items, rel, depth) if promoted_key
+            else
+              relation = ::CoreDataConnector::Relationship.find_by(project_model_relationship: rel, primary_record: self)
+              next if relation.nil?
+
+              item = related_class(relation.related_record_type).find(relation.related_record_id)
+
+              related_records[raw_key] = summarize(item, depth)
+              related_records[promoted_key] = promoted_value(item, rel, depth) if promoted_key
+            end
+          end
+
+          related_records
+        end
+
+        # The inverse direction - relationships where this record is the
+        # *target* - surfaced only when the relationship explicitly allows it
+        # (allow_inverse), same gate v0 uses. No promotion pass here: the
+        # canonical template only defines promoted names for the forward
+        # direction today (e.g. "Contained In" -> contained_in_place, but no
+        # promoted name for its "Contains" inverse). If that changes, this
+        # needs the same promoted-lookup treatment `related` has.
+        def related_to(depth = DEFAULT_DEPTH)
+          related_records = {}
+
+          relations = ::CoreDataConnector::ProjectModelRelationship.where(related_model: project_model)
+
+          relations.each do |rel|
+            next unless rel.allow_inverse
+
+            key = rel.inverse_name.parameterize.underscore.to_sym
+
+            if rel.multiple
+              records = ::CoreDataConnector::Relationship.where(project_model_relationship: rel, related_record: self)
+              next if records.empty?
+
+              related_records[key] = records.map do |relation|
+                summarize(related_class(relation.primary_record_type).find(relation.primary_record_id), depth)
+              end
+            else
+              relation = ::CoreDataConnector::Relationship.find_by(project_model_relationship: rel, related_record: self)
+              next if relation.nil?
+
+              related_records[key] = summarize(
+                related_class(relation.primary_record_type).find(relation.primary_record_id), depth
+              )
+            end
+          end
+
+          related_records
+        end
+
+        # Ported from v0 largely as-is: a relationship carrying a Boolean UDF
+        # whose column_name contains "featured" promotes whichever related
+        # record has that box checked to a singular `{relationship_name}:`
+        # key - e.g. Place's featured_media. Distinct from the name-based
+        # relationship promotion above: this is curator-defined (any
+        # relationship can carry a Featured UDF), not tied to the fixed
+        # canonical name list, so there's no compliance concept here, just
+        # "index it if it's there."
+        def featured
+          featured_recs = {}
+
+          relations = ::CoreDataConnector::ProjectModelRelationship.where(primary_model: project_model)
+
+          featureable_fields = relations.flat_map do |rel|
+            rel.user_defined_fields.select { |ud| ud.column_name.downcase.include?('featured') && ud.data_type == 'Boolean' }
+          end.compact
+
+          featureable_fields.each do |featured_field|
+            project_model_relationship = ::CoreDataConnector::ProjectModelRelationship.find(featured_field.defineable_id)
+            rels = ::CoreDataConnector::Relationship.where(project_model_relationship:, primary_record: self)
+            featured_rel = rels.find { |rel| rel.user_defined[featured_field.uuid] }
+            next if featured_rel.nil?
+
+            item = related_class(featured_rel.related_record_type).find(featured_rel.related_record_id)
+            key = project_model_relationship.name.parameterize.underscore.singularize.to_sym
+            featured_recs[key] = summarize(item, 0)
+          end
+
+          featured_recs
         end
 
         def slug
@@ -81,6 +286,53 @@ module CoreDataConnector
             .map { |ud| user_defined[ud.uuid] }
 
           [*ud_slugs, name.parameterize].compact.uniq
+        end
+
+        private
+
+        # Depth-limited summary of a related record: at depth 0, just the flat
+        # envelope plus its own extras, no further relationship expansion
+        # (this is what actually stops the recursion, unlike v0's equivalent).
+        # Above 0, one more layer of that record's own relationships.
+        def summarize(record, depth)
+          base = { **record.base_search_data, **record.extras }
+          return base if depth <= 0
+
+          { **base, **record.related(depth - 1), **record.related_to(depth - 1) }
+        end
+
+        # Bare name(s) for a promoted relationship pointing at a Taxonomy
+        # (facet-only, no navigation needed); a depth-limited summary
+        # otherwise (needs uuid/slug so a client can link to it).
+        def promoted_value(items_or_item, rel, depth)
+          if taxonomy_relationship?(rel)
+            if items_or_item.is_a?(Array)
+              items_or_item.map(&:name)
+            else
+              items_or_item.name
+            end
+          elsif items_or_item.is_a?(Array)
+            items_or_item.map { |item| summarize(item, depth) }
+          else
+            summarize(items_or_item, depth)
+          end
+        end
+
+        def taxonomy_relationship?(rel)
+          rel.related_model.model_class == 'CoreDataConnector::Taxonomy'
+        end
+
+        # Writes `value` into `attributes` at a dotted path, creating
+        # intermediate hashes as needed ("source.type" + "source.urls" both
+        # writing into the same `attributes[:source]` hash).
+        def merge_promoted_udf!(attributes, path, value)
+          segments = path.split('.').map(&:to_sym)
+          target = segments[0..-2].reduce(attributes) { |hash, segment| hash[segment] ||= {} }
+          target[segments.last] = value
+        end
+
+        def related_class(related_record_type)
+          "::CoreDataConnector::OpenGeographies::V1::#{related_record_type.split("::").last}".constantize
         end
       end
     end

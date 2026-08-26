@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 require 'factory_bot_rails'
 
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path("../dummy/config/environment.rb", __FILE__)
+require File.expand_path('../dummy/config/environment.rb', __FILE__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 # Uncomment the line below in case you have `--require rails_helper` in the `.rspec` file
 # that will avoid rails generators crashing because migrations haven't been run yet
 # return unless Rails.env.test?
@@ -34,30 +36,29 @@ require 'rspec/rails'
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
-  abort e.to_s.strip
+  abort(e.to_s.strip)
 end
 
 RSpec.configure do |config|
   def response_json
-    JSON.parse(response.body, symbolize_names: true)# .with_indifferent_access
+    JSON.parse(response.body, symbolize_names: true) # .with_indifferent_access
     # response.body
   end
 
-  config.include FactoryBot::Syntax::Methods
+  config.include(FactoryBot::Syntax::Methods)
 
-  FactoryBot.definition_file_paths = [ "spec/factories" ]
+  FactoryBot.definition_file_paths = ['spec/factories']
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
     FactoryBot.reload
-    load File.join("spec", "seeds.rb")
+    load File.join('spec', 'seeds.rb')
   end
 
   config.after(:suite) do
     DatabaseCleaner.clean_with(:truncation)
     Searchkick::Index.new(CoreDataConnector::OpenGeographies::Place.searchkick_index.name).delete
   end
-
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false

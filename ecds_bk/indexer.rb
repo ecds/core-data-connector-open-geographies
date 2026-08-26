@@ -7,15 +7,14 @@ require 'json'
 module Ecds
   # CRUD for Elasticsearch index
   class Indexer
-    # rubocop:disable Metrics/MethodLength
     def initialize(collection:, collect_all: true, mapping: nil)
       @client = Elasticsearch::Client.new(
         host: ENV['ELASTICSEARCH_HOST'],
         api_key: ENV['ELASTICSEARCH_API_KEY'],
         retry_on_failure: true,
         transport_options: {
-          request: { timeout: 20 }
-        }
+          request: { timeout: 20 },
+        },
       )
       @collection = collection
       collections = File.read(File.join(Rails.root, 'app', 'lib', 'ecds', 'mappings.json'))
@@ -36,7 +35,7 @@ module Ecds
       documents = @client.search(
         index: @collection_index, body: {
           size: [document_count, @records.count].max,
-          _source: false
+          _source: false,
         }
       )
       @hit_ids = documents['hits']['hits'].map { |h| h['_id'].to_s }
@@ -66,9 +65,9 @@ module Ecds
       return if @project_model_id == 25
       return if @collection.include?('counties')
 
-      @database_records.concat CoreDataConnector::Place.where(project_model_id: 25).map(&:id).map(&:to_s)
+      @database_records.concat(CoreDataConnector::Place.where(project_model_id: 25).map(&:id).map(&:to_s))
 
-      @hit_ids.reject! { |hit| @database_records.include? hit }
+      @hit_ids.reject! { |hit| @database_records.include?(hit) }
 
       @hit_ids.each do |hit|
         @requests.push({ delete: { _index: @collection_index, _id: hit } })
@@ -131,7 +130,7 @@ module Ecds
     end
 
     def enhance(document)
-      enhancer = @enhancer_class.new document
+      enhancer = @enhancer_class.new(document)
       enhancer.enhance
     end
   end

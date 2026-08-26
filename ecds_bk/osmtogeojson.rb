@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class Osmtogeojson
   def initialize(query, retries = 10)
     @query = query
-    @tmp_file = Tempfile.new([ "", ".json" ], binmode: true)
+    @tmp_file = Tempfile.new(['', '.json'], binmode: true)
     @attempts = 0
     @retries = retries
-    @binary = "osmtogeojson"
+    @binary = 'osmtogeojson'
     ensure_installed!
   end
 
@@ -31,7 +33,7 @@ class Osmtogeojson
   def overpass
     @attempts += 1
     begin
-      response = HTTParty.post("https://overpass-api.de/api/interpreter", body: @query)
+      response = HTTParty.post('https://overpass-api.de/api/interpreter', body: @query)
       if response.success?
         @tmp_file.write(response.body)
         @tmp_file.close

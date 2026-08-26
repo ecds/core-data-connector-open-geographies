@@ -15,11 +15,11 @@ module ::CoreDataConnector
 
       def search_data
         {
-          **base_search_data,
           **user_defined_fields,
           **extras,
           **related,
           **related_to,
+          **base_search_data,
         }
       end
 
@@ -39,9 +39,9 @@ module ::CoreDataConnector
       def related_search_data(order = nil)
         {
           order:,
-          **base_search_data,
           **extras,
           **related,
+          **base_search_data,
         }
       end
 
@@ -50,7 +50,6 @@ module ::CoreDataConnector
       def part_of_rel_model
         ::CoreDataConnector::ProjectModelRelationship.where(
           related_model: project_model,
-          inverse_name: 'Part of',
         )
       end
 

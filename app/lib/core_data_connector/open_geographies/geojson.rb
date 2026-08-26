@@ -1,34 +1,37 @@
+# frozen_string_literal: true
+
 module CoreDataConnector
   module OpenGeographies
     class Geojson
       attr_reader :records
+
       def initialize(records, type)
         @records = records
-        @type = type || "places"
+        @type = type || 'places'
         # @osm_rel_model = CoreDataConnector::ProjectModelRelationship.find(57)
       end
 
       def feature_collection
         collection = {
-          type: "FeatureCollection",
-          features: []
+          type: 'FeatureCollection',
+          features: [],
         }
 
         progressbar = Progressbar.new(@records.count, @type)
         @records.each do |record|
-          next unless record.is_a? CoreDataConnector::Place
+          next unless record.is_a?(CoreDataConnector::Place)
 
-          documenter = CoreDataConnector::OpenGeographies::Document.new record
+          documenter = CoreDataConnector::OpenGeographies::Document.new(record)
 
           properties = documenter.document
           geometry = doc.delete(:geometry)
           feature = {
-            type: "feature",
+            type: 'feature',
             properties:,
-            geometry:
+            geometry:,
           }
 
-          collection[:features].push feature
+          collection[:features].push(feature)
           progressbar.increment
         end
         progressbar.finish
@@ -36,11 +39,9 @@ module CoreDataConnector
       end
 
       def write_geojson(path = "./#{@type}.json")
-        File.write(path, JSON.dump({ type: "FeatureCollection", features: feature_collection }))
-        File.exist? path
+        File.write(path, JSON.dump({ type: 'FeatureCollection', features: feature_collection }))
+        File.exist?(path)
       end
-
-      private
 
       # def osm_class(record)
       #   osm_item = CoreDataConnector::Relationship.find_by(

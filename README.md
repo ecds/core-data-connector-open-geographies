@@ -45,6 +45,321 @@ To run the tests:
 bundle exec rspec spec/geojson.spec
 ```
 
+## v1 API — example documents
+
+Illustrative `search_data` output for the v1 (canonical/OG-compliant) indexer -
+i.e. what a Place or Map Layer document looks like once a project uses the
+exact relationship/UDF names from `canonical_template.json` and picks up the
+`og.promote` shortcuts. Field values below are illustrative (some UUIDs are
+made up), but the *shape* and the concrete numbers that could be pulled from
+real data (the church's coordinates, the map layer's bbox) are real, taken
+from production while building this out. A non-compliant project (e.g. the
+existing HRCGA churches data, which uses names like "Categories" instead of
+"Types") still indexes fully, just under its own raw relationship/UDF names
+instead of these promoted ones - see `PromotedRelationships` for the
+exact-match rule.
+
+### Place
+
+Fully fabricated - Atlanta, GA standing in for a real record - chosen so the
+`media` array could show all five `media_type` options
+(`image`/`video`/`audio`/`pano`/`model3d` per `canonical_template.json`'s
+Media UDF) plus a spread of real-looking `identifiers`, neither of which the
+actual HRCGA production data has examples of today.
+
+```json
+{
+  "uuid": "8f1a2b3c-4d5e-6f70-8192-a3b4c5d6e7f8",
+  "slug": "atlanta",
+  "slugs": ["atlanta", "atlanta-georgia"],
+  "project_id": "2",
+  "model_type": "place",
+  "model_id": "20",
+  "model_name": "Places",
+  "name": "Atlanta",
+  "visibility": "published",
+  "date_modified": "2026-06-01T12:00:00Z",
+  "identifiers": [
+    { "authority": "wikidata", "identifier": "https://www.wikidata.org/wiki/Q23556" },
+    { "authority": "geonames", "identifier": "https://www.geonames.org/4180439" },
+    { "authority": "viaf", "identifier": "https://viaf.org/viaf/142294851/" }
+  ],
+  "geo": { "point": { "lat": 33.748997, "lon": -84.387985 } },
+  "administrative_area": [
+    { "level": "ADM2", "name": "Fulton County", "geonames_id": "4219762", "geonames_url": "https://www.geonames.org/4219762" },
+    { "level": "ADM1", "name": "Georgia", "geonames_id": "4197000", "geonames_url": "https://www.geonames.org/4197000" },
+    { "level": "PCLI", "name": "United States", "geonames_id": "6252001", "geonames_url": "https://www.geonames.org/6252001" }
+  ],
+
+  "description": "The capital and most populous city of the U.S. state of Georgia, founded in 1837 as the terminus of the Western and Atlantic Railroad.",
+
+  "types": ["City", "State Capital"],
+
+  "contained_in_place": {
+    "uuid": "9d2f1e3a-6b7a-4b9d-8b3a-1a2c3d4e5f60",
+    "slug": "fulton-county",
+    "name": "Fulton County"
+  },
+
+  "media": [
+    {
+      "uuid": "fcd7b531-11b7-4a63-85f4-95a7e01ab8f3",
+      "slug": "atlanta-skyline-from-jackson-street-bridge",
+      "project_id": "2",
+      "model_type": "media",
+      "model_id": "22",
+      "model_name": "Media",
+      "name": "Atlanta Skyline from Jackson Street Bridge",
+      "visibility": "published",
+      "date_modified": "2025-12-12T22:41:05Z",
+      "identifiers": [],
+      "media_type": "image",
+      "caption": "The downtown Atlanta skyline at dusk, viewed from the Jackson Street Bridge.",
+      "alt_text": "City skyline with illuminated skyscrapers against a dusk sky.",
+      "preview": "https://iiif-cloud.ecds.io/public/resources/b0db0663-7dd9-4d2a-9d10-0234ba00ede4/preview",
+      "thumbnail": "https://iiif-cloud.ecds.io/public/resources/b0db0663-7dd9-4d2a-9d10-0234ba00ede4/thumbnail",
+      "content_url": "https://iiif-cloud.ecds.io/public/resources/b0db0663-7dd9-4d2a-9d10-0234ba00ede4/iiif",
+      "manifest_url": "https://iiif-cloud.ecds.io/public/resources/b0db0663-7dd9-4d2a-9d10-0234ba00ede4/manifest",
+      "creator": {
+        "uuid": "2b6f9c1d-4a3e-4f8b-9c2d-6e1a8b3c5d70",
+        "slug": "atlanta-history-center",
+        "project_id": "2",
+        "model_type": "organization",
+        "model_id": "23",
+        "model_name": "Organizations",
+        "name": "Atlanta History Center",
+        "visibility": "published",
+        "date_modified": "2025-01-01T00:00:00Z",
+        "identifiers": []
+      }
+    },
+    {
+      "uuid": "1c8e4a2f-6b3d-4e9c-8a1f-2b3c4d5e6f70",
+      "slug": "piedmont-park-centennial-documentary",
+      "project_id": "2",
+      "model_type": "media",
+      "model_id": "22",
+      "model_name": "Media",
+      "name": "Piedmont Park: A Centennial History",
+      "visibility": "published",
+      "date_modified": "2025-11-03T16:20:00Z",
+      "identifiers": [],
+      "media_type": "video",
+      "caption": "A short documentary on the centennial of Piedmont Park, produced for the Atlanta History Center.",
+      "duration": 184,
+      "embed_url": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    },
+    {
+      "uuid": "4d9f2a1c-7e5b-4c8d-9a3f-1b2c3d4e5f80",
+      "slug": "sweet-auburn-oral-history-1998",
+      "project_id": "2",
+      "model_type": "media",
+      "model_id": "22",
+      "model_name": "Media",
+      "name": "Sweet Auburn Oral History, 1998",
+      "visibility": "published",
+      "date_modified": "2025-08-15T10:05:00Z",
+      "identifiers": [],
+      "media_type": "audio",
+      "caption": "Oral history interview with a longtime Sweet Auburn resident, recorded 1998.",
+      "duration": 2745,
+      "content_url": "https://iiif-cloud.ecds.io/public/resources/c1a2b3d4-5e6f-4a7b-8c9d-0e1f2a3b4c50/audio"
+    },
+    {
+      "uuid": "7a3b5c9d-2e4f-4b1a-9c8d-3e4f5a6b7c80",
+      "slug": "centennial-olympic-park-360",
+      "project_id": "2",
+      "model_type": "media",
+      "model_id": "22",
+      "model_name": "Media",
+      "name": "Centennial Olympic Park, 360°",
+      "visibility": "published",
+      "date_modified": "2025-09-20T13:45:00Z",
+      "identifiers": [],
+      "media_type": "pano",
+      "caption": "A 360° panorama of the Fountain of Rings at Centennial Olympic Park.",
+      "embed_url": "https://my.matterport.com/show/?m=examplePanoId"
+    },
+    {
+      "uuid": "5e7f9a1b-3c2d-4e6f-8a9b-1c2d3e4f5a60",
+      "slug": "hurt-building-lobby-3d-scan",
+      "project_id": "2",
+      "model_type": "media",
+      "model_id": "22",
+      "model_name": "Media",
+      "name": "Hurt Building Lobby, 3D Scan",
+      "visibility": "published",
+      "date_modified": "2025-07-01T08:30:00Z",
+      "identifiers": [],
+      "media_type": "model3d",
+      "caption": "Photogrammetric 3D model of the Hurt Building's Beaux-Arts lobby.",
+      "embed_url": "https://sketchfab.com/models/exampleModelId/embed"
+    }
+  ],
+
+  "map_layers": [
+    {
+      "uuid": "3f2a9c7e-8b1d-4e5a-9c3f-7d2b4a6e8f10",
+      "slug": "hilliard-1943-topographic-survey",
+      "project_id": "5",
+      "model_type": "map_layer",
+      "model_id": "48",
+      "model_name": "Map Layers",
+      "name": "Hilliard, 1943",
+      "visibility": "published",
+      "date_modified": "2026-03-10T14:02:11Z",
+      "identifiers": [],
+      "bbox": {
+        "type": "envelope",
+        "coordinates": [[-82.0000001, 30.749996], [-81.87499909, 30.62500399]]
+      }
+    }
+  ],
+
+  "featured_media": {
+    "uuid": "fcd7b531-11b7-4a63-85f4-95a7e01ab8f3",
+    "slug": "atlanta-skyline-from-jackson-street-bridge",
+    "project_id": "2",
+    "model_type": "media",
+    "model_id": "22",
+    "model_name": "Media",
+    "name": "Atlanta Skyline from Jackson Street Bridge",
+    "visibility": "published",
+    "date_modified": "2025-12-12T22:41:05Z",
+    "identifiers": []
+  }
+}
+```
+
+Notes on what this demonstrates: `types` is a bare string array (taxonomy
+promotions are names only, for faceting); `contained_in_place` and
+`featured_media` are single objects; `media` and `map_layers` are arrays of
+depth-limited summaries. `identifiers` shows the `sameAs`-style shape built
+by `IDENTIFIER_URL_BUILDERS` - each authority's stored bare code (e.g. a
+GeoNames numeric ID) turned into its canonical public URL.
+
+`administrative_area` is deliberately a *different* thing from
+`contained_in_place`, even though this example has both pointing at the same
+real-world county. `contained_in_place` requires a curator to have actually
+built a County place record and related it - a real local record with a
+uuid/slug a client can link to. `administrative_area` needs no curator effort
+at all: `V1::Place#extras` reverse-geocodes the place's own centroid against
+GeoNames (`extendedFindNearbyJSON`, walking the full admin chain rather than
+a fixed level so it isn't U.S.-specific) and caches the result in
+`GeonamesHierarchy`, keyed on `place_id`, refetched only when the place's
+geometry actually moves. Its entries are just facet-able names/IDs, not
+local records - no uuid/slug, since there's nothing in the corpus to link to.
+A project that never builds county records still gets basic geographic
+faceting; one that does gets both.
+
+The `media` array shows both branches of "exactly one of content urls or
+embed URL must be present" from the canonical template's Media model: the
+image is uploaded/IIIF-backed (`preview`/`thumbnail`/`content_url`/
+`manifest_url`, from `V1::MediaContent#extras`), while the video, pano, and
+3D model are externally hosted (`embed_url` only, from *UDF promotion*, not
+`extras` - "Embed URL" is just a regular UDF on the Media project model that
+happens to promote to a structural field, same mechanism as Map Layers'
+`date`/`bearing`). `media_type`/`caption`/`alt_text`/`duration` are UDF
+promotions too. The nested `media[0]` also shows one more level of expansion
+(its own `creator`) - and that creator is *just* the flat envelope, with no
+further relationships, because depth capping stops recursion there.
+
+### Map Layer
+
+```json
+{
+  "uuid": "3f2a9c7e-8b1d-4e5a-9c3f-7d2b4a6e8f10",
+  "slug": "hilliard-1943-topographic-survey",
+  "slugs": ["hilliard-1943-topographic-survey"],
+  "project_id": "5",
+  "model_type": "map_layer",
+  "model_id": "48",
+  "model_name": "Map Layers",
+  "name": "Hilliard, 1943",
+  "visibility": "published",
+  "date_modified": "2026-03-10T14:02:11Z",
+  "identifiers": [],
+
+  "bbox": {
+    "type": "envelope",
+    "coordinates": [[-82.0000001, 30.749996], [-81.87499909, 30.62500399]]
+  },
+  "date": "1943",
+  "bearing": 0,
+  "source": {
+    "type": "wms",
+    "urls": ["https://maps.gastateparks.org/geoserver/wms"]
+  },
+  "description": "USGS 15-minute topographic quadrangle covering the Hilliard area, surveyed in 1943.",
+
+  "preview": {
+    "uuid": "a1c4e7f2-5b9d-4e3a-8c6f-1d2b3a4e5f60",
+    "slug": "hilliard-1943-preview",
+    "project_id": "5",
+    "model_type": "media",
+    "model_id": "49",
+    "model_name": "Media",
+    "name": "Hilliard 1943 preview",
+    "visibility": "published",
+    "date_modified": "2026-03-10T14:00:00Z",
+    "identifiers": [],
+    "thumbnail": "https://iiif-cloud.ecds.io/public/resources/.../thumbnail"
+  },
+  "publisher": {
+    "uuid": "6e2d8b41-3c5a-4f7e-9b1d-2a4c6e8f0a10",
+    "slug": "us-geological-survey",
+    "project_id": "5",
+    "model_type": "organization",
+    "model_id": "50",
+    "model_name": "Organizations",
+    "name": "U.S. Geological Survey",
+    "visibility": "published",
+    "date_modified": "2020-01-01T00:00:00Z",
+    "identifiers": []
+  },
+
+  "places": [
+    {
+      "uuid": "e6c220f2-db9d-4072-8585-65c934225a1e",
+      "slug": "evergreen-congregational-church-and-school",
+      "project_id": "2",
+      "model_type": "place",
+      "model_id": "20",
+      "model_name": "Places",
+      "name": "Evergreen Congregational Church and School",
+      "visibility": "published",
+      "date_modified": "2026-04-21T20:42:35Z",
+      "identifiers": [],
+      "geo": { "point": { "lat": 30.727751, "lon": -84.13654799999999 } }
+    }
+  ]
+}
+```
+
+The `bbox` coordinates here are real - pulled from an actual production Place
+geometry (`ST_XMin/XMax/YMin/YMax` over a real topographic-quad record) via
+`V1::MapLayer#extras`, not invented. `date`/`bearing`/`source` come from
+scalar UDF promotion (`"Source Type"` + `"Source URLs"` merge into one
+`source: {type:, urls:}` object via the dotted `og.promote` path). `places`
+is the *inverse* of a Place's `map_layers` relationship - it needs no
+map-layer-specific code, since `related_to` already walks
+`allow_inverse: true` relationships generically.
+
+**Building these examples surfaced two mapping bugs, now fixed**: the nested
+`places` object in both `es_mapping.json` and `es_mapping_map_layers.json`
+was typed as `location: geo_point`, but the code actually produces
+`geo: {point: {...}}` (matching `V1::Place#extras`) - fixed to match. The
+nested `map_layers` object's `bbox` was typed `double`; it's actually a
+geo_shape envelope object - fixed too.
+
+**Not yet reconciled**: the nested `media` mapping property (in
+`es_mapping.json`) expects `thumbnail_url`/`content_url`/`embed_url`/
+`media_type`, but `V1::MediaContent#extras` actually produces
+`preview`/`thumbnail`/`content_url`/`manifest_url` - some names match, some
+don't, and `media_type`/`embed_url` are never populated by any current code
+path. Left as-is pending a decision on which naming wins (the draft mapping's
+or the already-implemented extras) rather than picking one silently.
+
 ## Contributing
 
 Contribution directions go here.

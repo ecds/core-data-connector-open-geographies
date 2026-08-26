@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module OpenGeographies
   class Osm < ::CoreDataConnector::Authority::Base
     include CoreDataConnector::Http::Requestable
 
-    BASE_URL = "https://nominatim.openstreetmap.org"
-    HEADERS = { 'Referer': ENV["HOSTNAME"] }
+    BASE_URL = 'https://nominatim.openstreetmap.org'
+    HEADERS = { 'Referer': ENV['HOSTNAME'] }
 
     def find(id)
       options = {
@@ -11,9 +13,9 @@ module OpenGeographies
         headers: HEADERS,
         params: {
           osm_ids: id,
-          format: "json",
-          polygon_geojson: 1
-        }
+          format: 'json',
+          polygon_geojson: 1,
+        },
       }
       send_request("#{BASE_URL}/lookup.php", options) do |response|
         JSON.parse(response, symbolize_names: true)
@@ -22,8 +24,8 @@ module OpenGeographies
 
     def search(query, _ = {})
       params = {
-        q: query.gsub(" ", "+"),
-        format: "json"
+        q: query.gsub(' ', '+'),
+        format: 'json',
       }
       send_request("#{BASE_URL}/search", method: :get, params:, headers: HEADERS) do |body|
         JSON.parse(body)
@@ -31,16 +33,16 @@ module OpenGeographies
     end
 
     def geojson_feature(geometries)
-      coordinates = geometries.map { |geom| [ geom[:lon], geom[:lat] ] }
-      type = coordinates.first == coordinates.last ? "Polygon" : "LineString"
-      coordinates = type == "Polygon" ? [ coordinates ] : coordinates
+      coordinates = geometries.map { |geom| [geom[:lon], geom[:lat]] }
+      type = coordinates.first == coordinates.last ? 'Polygon' : 'LineString'
+      coordinates = type == 'Polygon' ? [coordinates] : coordinates
       {
-        type: "Feature",
+        type: 'Feature',
         properties: {},
         geometry: {
           coordinates:,
-          type:
-        }
+          type:,
+        },
       }
     end
 
@@ -60,11 +62,11 @@ module OpenGeographies
     end
 
     def relation(osm_data)
-      relations = osm_data[:elements].filter { |e| e[:type] == "relation" }
+      relations = osm_data[:elements].filter { |e| e[:type] == 'relation' }
       return if relations.empty?
 
       features = []
-      ways = relations.map { |r| r[:members].filter { |member| member[:type] == "way" } }.flatten
+      ways = relations.map { |r| r[:members].filter { |member| member[:type] == 'way' } }.flatten
       ways.map { |m| m[:geometry] }.map { |g| g }.each do |geometries|
         features.push(geojson_features(geometries))
       end
@@ -72,13 +74,13 @@ module OpenGeographies
       features
     end
 
-    def geojson(id, type: "way")
+    def geojson(id, type: 'way')
       puts type
       osm_data = find(id, type:)
-      features = type == "way" ? way(osm_data) : relation(osm_data)
+      features = type == 'way' ? way(osm_data) : relation(osm_data)
       {
-        type: "FeatureCollection",
-        features:
+        type: 'FeatureCollection',
+        features:,
       }.to_json
     end
   end

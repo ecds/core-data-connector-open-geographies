@@ -13,8 +13,8 @@ module Ecds
         api_key: ENV['ELASTICSEARCH_API_KEY'],
         retry_on_failure: true,
         transport_options: {
-          request: { timeout: 20 }
-        }
+          request: { timeout: 20 },
+        },
       )
     end
   end

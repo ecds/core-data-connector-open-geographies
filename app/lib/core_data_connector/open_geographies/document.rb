@@ -24,8 +24,9 @@ module CoreDataConnector
       private
 
       def part_of_rel_model
-        CoreDataConnector::ProjectModelRelationship.where(
+        CoreDataConnector::ProjectModelRelationship.find(
           related_model: @record.project_model,
+          inverse_name: 'Part of',
         )
       end
 

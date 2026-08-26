@@ -11,5 +11,7 @@ CoreDataConnector::OpenGeographies::Engine.routes.draw do
   namespace :v1 do
     get ':project/places', to: 'places#index'
     get ':project/places/:slug', to: 'places#show'
+    get ':project/map_layers', to: 'map_layers#index'
+    get ':project/map_layers/:slug', to: 'map_layers#show'
   end
 end

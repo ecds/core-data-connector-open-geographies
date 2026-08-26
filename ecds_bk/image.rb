@@ -14,9 +14,9 @@ module Ecds
     def initialize(download_url:)
       begin
         response = HTTParty.get(download_url, follow_redirects: false)
-        uri = URI response.headers[:location]
+        uri = URI(response.headers[:location])
       rescue Net::OpenTimeout, Net::ReadTimeout, Errno::ETIMEDOUT
-        sleep 5
+        sleep(5)
         retry
       end
       @key = uri.path.include?('iiif') ? uri.path.split('/')[3] : uri.path.split('/').last
@@ -32,7 +32,7 @@ module Ecds
       {
         thumbnail_url: "#{base_url}/square/!250,250/0/default.jpg",
         full_url: "#{base_url}/full/max/0/default.jpg",
-        info: "#{base_url}/info.json"
+        info: "#{base_url}/info.json",
       }
     end
 

@@ -1,14 +1,16 @@
-require "rails_helper"
+# frozen_string_literal: true
 
-RSpec.describe CoreDataConnector::OpenGeographies::Geojson do
+require 'rails_helper'
+
+RSpec.describe(CoreDataConnector::OpenGeographies::Geojson) do
   it 'does something' do
     # allow(Rails.env).to receive(:test?).and_return(true)
-    puts "^^^^"
+    puts '^^^^'
     puts FactoryBot.factories.count
-    puts "^^^^"
+    puts '^^^^'
     project = create(:project)
     puts project.name
-    project_model = CoreDataConnector::ProjectModel.create(name: project.name, project:, model_class: "CoreDataConnector::Place")
+    project_model = CoreDataConnector::ProjectModel.create(name: project.name, project:, model_class: 'CoreDataConnector::Place')
     place_name = build(:place_name)
     place = build(:place, project_model:)
     place.place_names << place_name

@@ -80,6 +80,15 @@
       "geojson": { "type": "object", "enabled": false },
       "bbox": { "type": "double" },
 
+      "administrative_area": {
+        "properties": {
+          "level": { "type": "keyword" },
+          "name": { "type": "keyword" },
+          "geonames_id": { "type": "keyword" },
+          "geonames_url": { "type": "keyword", "index": false }
+        }
+      },
+
       "types": { "type": "keyword" },
       "contained_in_place": {
         "properties": {
@@ -208,9 +217,7 @@
           "uuid": { "type": "keyword" },
           "slug": { "type": "keyword" },
           "name": { "type": "text", "analyzer": "og_text", "fields": { "keyword": { "type": "keyword", "ignore_above": 256 } } },
-          "type": { "type": "keyword" },
-          "location": { "type": "geo_point" },
-          "thumbnail_url": { "type": "keyword", "index": false }
+          "geo": { "properties": { "point": { "type": "geo_point" } } }
         }
       },
       "map_layers": {
@@ -219,14 +226,13 @@
           "slug": { "type": "keyword" },
           "name": { "type": "text", "analyzer": "og_text" },
           "date": { "type": "date" },
-          "bbox": { "type": "double" },
+          "bbox": { "type": "geo_shape" },
           "source": {
             "properties": {
               "type": { "type": "keyword" },
               "urls": { "type": "keyword", "index": false }
             }
-          },
-          "thumbnail_url": { "type": "keyword", "index": false }
+          }
         }
       },
       "stops": {

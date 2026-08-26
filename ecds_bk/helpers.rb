@@ -31,9 +31,9 @@ module Ecds
     end
 
     def self.feature_type(geometry)
-      return :point if geometry.class.to_s.include? 'Point'
-      return :polygon if geometry.class.to_s.include? 'Polygon'
-      return :collection if geometry.class.to_s.include? 'Collection'
+      return :point if geometry.class.to_s.include?('Point')
+      return :polygon if geometry.class.to_s.include?('Polygon')
+      return :collection if geometry.class.to_s.include?('Collection')
 
       nil
     end
@@ -41,7 +41,7 @@ module Ecds
     def self.feature_collection_template
       {
         type: 'FeatureCollection',
-        features: []
+        features: [],
       }
     end
 
@@ -49,7 +49,7 @@ module Ecds
       {
         type: 'Feature',
         properties:,
-        geometry:
+        geometry:,
       }
     end
 
@@ -69,23 +69,23 @@ module Ecds
     end
 
     def self.collection_center_point(geometry)
-      point = geometry.filter { |feature| feature.class.to_s.include? 'Point' }
+      point = geometry.filter { |feature| feature.class.to_s.include?('Point') }
       return @factory.point(point.first.x, point.first.y) unless point.empty?
 
-      polygon = geometry.filter { |feature| feature.class.to_s.include? 'Polygon' }
+      polygon = geometry.filter { |feature| feature.class.to_s.include?('Polygon') }
       return polygon_center_point(polygon.first) unless polygon.empty?
 
       nil
     end
 
-
     def self.collection_center(geometry)
-      point = geometry.filter { |feature| feature.class.to_s.include? 'Point' }
-      polygon = geometry.filter { |feature| feature.class.to_s.include? 'Polygon' }
-      line = geometry.filter { |feature| feature.class.to_s.include? 'Line' }
+      point = geometry.filter { |feature| feature.class.to_s.include?('Point') }
+      polygon = geometry.filter { |feature| feature.class.to_s.include?('Polygon') }
+      line = geometry.filter { |feature| feature.class.to_s.include?('Line') }
       return { lat: point.first.y, lon: point.first.x } unless point.empty?
       return polygon_center(polygon.first) unless polygon.empty?
       return line_center(line.first) unless line.empty?
+
       nil
     end
 
@@ -113,7 +113,6 @@ module Ecds
       end
     end
 
-    # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
     def self.geojson(record, properties)
       return if record.place_geometry.nil?
 
@@ -147,7 +146,7 @@ module Ecds
 
     def self.check_for_geojson(record, document, model_mappings)
       geojson_field = model_mappings.select { |_key, value| value[:type] == 'geojson' }
-      return nil if geojson_field.empty?
+      return if geojson_field.empty?
 
       property_fields = geojson_field.values.first[:property_fields].map(&:to_sym)
       properties = {}
@@ -168,7 +167,6 @@ module Ecds
         # Keep trying to extend the current line
         changed = true
         while changed && !remaining.empty?
-          changed = false
           last_point = current_line.last
 
           # Find a segment that starts where we ended
@@ -202,7 +200,7 @@ module Ecds
       # Extract all coordinate arrays from MultiLineString geometries
       all_coords = []
       features.each do |feature|
-        next unless feature[:geometry][:type].include? 'Line'
+        next unless feature[:geometry][:type].include?('Line')
 
         # Extract the first (and typically only) LineString from each MultiLineString
         feature[:geometry][:coordinates].each do |linestring|
@@ -217,8 +215,8 @@ module Ecds
           properties: features.first[:properties],
           geometry: {
             type: 'LineString',
-            coordinates: combined_lines.first
-          }
+            coordinates: combined_lines.first,
+          },
         }
       else
         # Multiple lines (gaps found)
@@ -227,8 +225,8 @@ module Ecds
           properties: features.first[:properties],
           geometry: {
             type: 'MultiLineString',
-            coordinates: combined_lines
-          }
+            coordinates: combined_lines,
+          },
         }
       end
     end

@@ -38,6 +38,7 @@ module CoreDataConnector
             description: place.user_defined_fields[:description][:value],
             address: place.user_defined_fields[:address][:value],
             media: stop_media(stop[:photographs]),
+            splash: splash(stop),
           }
         end
       end
@@ -69,6 +70,21 @@ module CoreDataConnector
             },
           }
         end
+      end
+
+      def splash(place)
+        if place[:featured] && place[:featured][:photographs]
+          return {
+            title: place[:featured][:photographs][:name],
+            caption: '',
+            url: place[:featured][:photographs][:preview],
+          }
+        end
+        {
+          title: place[:photographs].first[:name],
+          caption: '',
+          url: place[:photographs].first[:preview],
+        }
       end
 
       def bounds

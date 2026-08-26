@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
-  factory :place_model, class: "CoreDataConnector::ProjectModel" do
+  factory :place_model, class: 'CoreDataConnector::ProjectModel' do
     project factory: :project
-    model_class { "CoreDataConnector::Place" }
+    model_class { 'CoreDataConnector::Place' }
     name { Faker::Name.unique.name }
 
     # transient do
@@ -17,8 +19,8 @@ FactoryBot.define do
     # end
   end
 
-  factory :taxonomy_model, class: "CoreDataConnector::ProjectModel" do
+  factory :taxonomy_model, class: 'CoreDataConnector::ProjectModel' do
     project factory: :project
-    model_class { "CoreDataConnector::Taxonomy" }
+    model_class { 'CoreDataConnector::Taxonomy' }
   end
 end
