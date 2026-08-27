@@ -73,6 +73,7 @@ actual HRCGA production data has examples of today.
   "slug": "atlanta",
   "slugs": ["atlanta", "atlanta-georgia"],
   "project_id": "2",
+  "project": "historic-rural-churches-of-georgia",
   "model_type": "place",
   "model_id": "20",
   "model_name": "Places",
@@ -106,6 +107,7 @@ actual HRCGA production data has examples of today.
       "uuid": "fcd7b531-11b7-4a63-85f4-95a7e01ab8f3",
       "slug": "atlanta-skyline-from-jackson-street-bridge",
       "project_id": "2",
+      "project": "historic-rural-churches-of-georgia",
       "model_type": "media",
       "model_id": "22",
       "model_name": "Media",
@@ -124,6 +126,7 @@ actual HRCGA production data has examples of today.
         "uuid": "2b6f9c1d-4a3e-4f8b-9c2d-6e1a8b3c5d70",
         "slug": "atlanta-history-center",
         "project_id": "2",
+        "project": "historic-rural-churches-of-georgia",
         "model_type": "organization",
         "model_id": "23",
         "model_name": "Organizations",
@@ -137,6 +140,7 @@ actual HRCGA production data has examples of today.
       "uuid": "1c8e4a2f-6b3d-4e9c-8a1f-2b3c4d5e6f70",
       "slug": "piedmont-park-centennial-documentary",
       "project_id": "2",
+      "project": "historic-rural-churches-of-georgia",
       "model_type": "media",
       "model_id": "22",
       "model_name": "Media",
@@ -153,6 +157,7 @@ actual HRCGA production data has examples of today.
       "uuid": "4d9f2a1c-7e5b-4c8d-9a3f-1b2c3d4e5f80",
       "slug": "sweet-auburn-oral-history-1998",
       "project_id": "2",
+      "project": "historic-rural-churches-of-georgia",
       "model_type": "media",
       "model_id": "22",
       "model_name": "Media",
@@ -169,6 +174,7 @@ actual HRCGA production data has examples of today.
       "uuid": "7a3b5c9d-2e4f-4b1a-9c8d-3e4f5a6b7c80",
       "slug": "centennial-olympic-park-360",
       "project_id": "2",
+      "project": "historic-rural-churches-of-georgia",
       "model_type": "media",
       "model_id": "22",
       "model_name": "Media",
@@ -184,6 +190,7 @@ actual HRCGA production data has examples of today.
       "uuid": "5e7f9a1b-3c2d-4e6f-8a9b-1c2d3e4f5a60",
       "slug": "hurt-building-lobby-3d-scan",
       "project_id": "2",
+      "project": "historic-rural-churches-of-georgia",
       "model_type": "media",
       "model_id": "22",
       "model_name": "Media",
@@ -202,6 +209,7 @@ actual HRCGA production data has examples of today.
       "uuid": "3f2a9c7e-8b1d-4e5a-9c3f-7d2b4a6e8f10",
       "slug": "hilliard-1943-topographic-survey",
       "project_id": "5",
+      "project": "sample-atlas",
       "model_type": "map_layer",
       "model_id": "48",
       "model_name": "Map Layers",
@@ -220,6 +228,7 @@ actual HRCGA production data has examples of today.
     "uuid": "fcd7b531-11b7-4a63-85f4-95a7e01ab8f3",
     "slug": "atlanta-skyline-from-jackson-street-bridge",
     "project_id": "2",
+    "project": "historic-rural-churches-of-georgia",
     "model_type": "media",
     "model_id": "22",
     "model_name": "Media",
@@ -252,6 +261,18 @@ local records - no uuid/slug, since there's nothing in the corpus to link to.
 A project that never builds county records still gets basic geographic
 faceting; one that does gets both.
 
+`project` (alongside `project_id`) is what makes `contained_in_place`
+actually followable rather than just descriptive. v1's routes key on the
+project's parameterized name, not its numeric id (`GET
+/v1/:project/places/:slug`) - a record's own top-level document doesn't need
+this (the client already knows what project it asked for), but a *nested*
+summary might belong to a completely different project than the record
+containing it. That's exactly the shape a shared, `discoverable` reference
+project (e.g. one atlas-wide "Administrative Districts" project that every
+atlas's `Contained In` relationship points into, instead of every atlas
+hand-building its own counties) would produce - without `project`, a client
+would have a county's `project_id` and no way to turn it into a URL at all.
+
 The `media` array shows both branches of "exactly one of content urls or
 embed URL must be present" from the canonical template's Media model: the
 image is uploaded/IIIF-backed (`preview`/`thumbnail`/`content_url`/
@@ -272,6 +293,7 @@ further relationships, because depth capping stops recursion there.
   "slug": "hilliard-1943-topographic-survey",
   "slugs": ["hilliard-1943-topographic-survey"],
   "project_id": "5",
+  "project": "sample-atlas",
   "model_type": "map_layer",
   "model_id": "48",
   "model_name": "Map Layers",
@@ -296,6 +318,7 @@ further relationships, because depth capping stops recursion there.
     "uuid": "a1c4e7f2-5b9d-4e3a-8c6f-1d2b3a4e5f60",
     "slug": "hilliard-1943-preview",
     "project_id": "5",
+    "project": "sample-atlas",
     "model_type": "media",
     "model_id": "49",
     "model_name": "Media",
@@ -309,6 +332,7 @@ further relationships, because depth capping stops recursion there.
     "uuid": "6e2d8b41-3c5a-4f7e-9b1d-2a4c6e8f0a10",
     "slug": "us-geological-survey",
     "project_id": "5",
+    "project": "sample-atlas",
     "model_type": "organization",
     "model_id": "50",
     "model_name": "Organizations",
@@ -323,6 +347,7 @@ further relationships, because depth capping stops recursion there.
       "uuid": "e6c220f2-db9d-4072-8585-65c934225a1e",
       "slug": "evergreen-congregational-church-and-school",
       "project_id": "2",
+      "project": "historic-rural-churches-of-georgia",
       "model_type": "place",
       "model_id": "20",
       "model_name": "Places",

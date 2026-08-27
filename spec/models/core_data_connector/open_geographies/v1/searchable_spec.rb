@@ -1,0 +1,208 @@
+# frozen_string_literal: true
+
+require 'rails_helper'
+
+RSpec.describe(CoreDataConnector::OpenGeographies::V1::Searchable) do
+  let(:project) { create(:project) }
+  let(:place_model) { create(:place_model, project:) }
+  let(:place) { create(:place, project_model: place_model, name: 'Evergreen Church') }
+  let(:v1_place) { CoreDataConnector::OpenGeographies::V1::Place.find(place.id) }
+
+  describe '#base_search_data' do
+    it 'carries the fixed envelope, including model_id (not just model_type/model_name)' do
+      data = v1_place.base_search_data
+
+      expect(data).to(include(
+        uuid: place.uuid,
+        slug: 'evergreen-church',
+        model_type: 'place',
+        model_id: place_model.id.to_s,
+        model_name: place_model.name,
+        name: 'Evergreen Church',
+        visibility: 'published',
+      ))
+    end
+
+    it 'carries the project as a parameterized slug, not just its numeric id - needed to resolve a v1 URL for a record nested from a different project' do
+      other_project = create(:project, name: 'Administrative Districts')
+      other_place_model = create(:place_model, project: other_project)
+      other_place = create(:place, project_model: other_place_model, name: 'Grady County')
+      v1_other_place = CoreDataConnector::OpenGeographies::V1::Place.find(other_place.id)
+
+      data = v1_other_place.base_search_data
+      expect(data[:project]).to(eq('administrative-districts'))
+      expect(data[:project_id]).to(eq(other_project.id.to_s))
+    end
+  end
+
+  describe '#user_defined_fields' do
+    it 'indexes a non-promoted UDF as {label:, value:} under its parameterized name' do
+      udf = create(:user_defined_field, defineable: place_model, column_name: 'Legacy ID', data_type: 'Number')
+      place.update!(user_defined: { udf.uuid => 42 })
+
+      fields = v1_place.user_defined_fields
+      expect(fields[:legacy_id]).to(eq({ label: 'Legacy ID', value: 42 }))
+    end
+
+    it 'additionally promotes a UDF whose column_name exact-matches a canonical name to a bare value' do
+      udf = create(:user_defined_field, defineable: place_model, column_name: 'Description', data_type: 'RichText')
+      place.update!(user_defined: { udf.uuid => 'A historic church.' })
+
+      fields = v1_place.user_defined_fields
+      expect(fields[:description]).to(eq('A historic church.'))
+    end
+
+    it 'merges dotted promote paths from different UDFs into one nested object (Map Layers Source Type/Source URLs)' do
+      layer_model = create(:place_model, project:)
+      create(:project_model_role, project_model_record: layer_model, role: 'map_layer')
+      type_udf = create(:user_defined_field, defineable: layer_model, column_name: 'Source Type', data_type: 'Select')
+      urls_udf = create(:user_defined_field, defineable: layer_model, column_name: 'Source URLs', data_type: 'String')
+      layer_place = create(:place, project_model: layer_model, user_defined: { type_udf.uuid => 'wms', urls_udf.uuid => ['https://example.com/wms'] })
+      v1_map_layer = CoreDataConnector::OpenGeographies::V1::MapLayer.find(layer_place.id)
+
+      expect(v1_map_layer.user_defined_fields[:source]).to(eq({ type: 'wms', urls: ['https://example.com/wms'] }))
+    end
+  end
+
+  describe '#related' do
+    it 'indexes a non-promoted relationship under its own raw parameterized key, as a depth-limited summary' do
+      denomination_model = create(:taxonomy_model, project:)
+      rel = create(:project_model_relationship, primary_model: place_model, related_model: denomination_model, name: 'Denomination', multiple: false)
+      term = create(:taxonomy, project_model: denomination_model, name: 'Congregational')
+      create(:relationship, project_model_relationship: rel, primary_record: place, related_record: term)
+
+      expect(v1_place.related[:denomination]).to(include(name: 'Congregational'))
+    end
+
+    it 'promotes a Types relationship pointing at a Taxonomy to a bare array of names (raw and promoted keys coincide)' do
+      types_model = create(:taxonomy_model, project:)
+      rel = create(:project_model_relationship, primary_model: place_model, related_model: types_model, name: 'Types', multiple: true)
+      church = create(:taxonomy, project_model: types_model, name: 'Church')
+      school = create(:taxonomy, project_model: types_model, name: 'School')
+      create(:relationship, project_model_relationship: rel, primary_record: place, related_record: church)
+      create(:relationship, project_model_relationship: rel, primary_record: place, related_record: school)
+
+      expect(v1_place.related[:types]).to(eq(['Church', 'School']))
+    end
+
+    it 'promotes Contained In to a real object under a key distinct from its own raw key' do
+      county_model = create(:place_model, project:)
+      county = create(:place, project_model: county_model, name: 'Grady County')
+      rel = create(:project_model_relationship, primary_model: place_model, related_model: county_model, name: 'Contained In', multiple: false)
+      create(:relationship, project_model_relationship: rel, primary_record: place, related_record: county)
+
+      data = v1_place.related
+      expect(data[:contained_in]).to(include(name: 'Grady County'))
+      expect(data[:contained_in_place]).to(include(name: 'Grady County'))
+    end
+
+    it 'expands one level of a related record\'s own relationships, then stops (depth capping)' do
+      media_model = create(:place_model, project:, model_class: 'CoreDataConnector::MediaContent')
+      publisher_model = create(:place_model, project:, model_class: 'CoreDataConnector::Organization')
+      media_rel = create(:project_model_relationship, primary_model: place_model, related_model: media_model, name: 'Media', multiple: true)
+      publisher_rel = create(:project_model_relationship, primary_model: media_model, related_model: publisher_model, name: 'Publisher', multiple: false)
+
+      media = create(:media_content, project_model: media_model, name: 'A Photo')
+      publisher = create(:organization, project_model: publisher_model, name: 'Archive')
+      create(:relationship, project_model_relationship: media_rel, primary_record: place, related_record: media)
+      create(:relationship, project_model_relationship: publisher_rel, primary_record: media, related_record: publisher)
+
+      media_summary = v1_place.related[:media].first
+      expect(media_summary[:name]).to(eq('A Photo'))
+      expect(media_summary[:publisher]).to(include(name: 'Archive')) # one level of the media's own relationships
+      expect(media_summary[:publisher]).not_to(have_key(:media)) # but no further recursion from there
+    end
+
+    describe 'key collisions (Core Data enforces no name uniqueness)' do
+      it 'suffixes a raw key collision instead of silently dropping one relationship\'s data' do
+        taxonomy_model = create(:taxonomy_model, project:)
+        rel_a = create(:project_model_relationship, primary_model: place_model, related_model: taxonomy_model, name: 'Denomination', multiple: false)
+        rel_b = create(:project_model_relationship, primary_model: place_model, related_model: taxonomy_model, name: 'Denomination', multiple: false)
+        term_a = create(:taxonomy, project_model: taxonomy_model, name: 'First')
+        term_b = create(:taxonomy, project_model: taxonomy_model, name: 'Second')
+        create(:relationship, project_model_relationship: rel_a, primary_record: place, related_record: term_a)
+        create(:relationship, project_model_relationship: rel_b, primary_record: place, related_record: term_b)
+
+        data = v1_place.related
+        expect(data[:denomination]).to(include(name: 'First'))
+        expect(data[:denomination_2]).to(include(name: 'Second'))
+      end
+
+      it 'never lets a later relationship\'s promoted value overwrite an earlier relationship\'s raw slot' do
+        # Two relationships both literally named "Types": the first is a plain
+        # (non-taxonomy) relationship that happens to raw-key to :types; the
+        # second is the real canonical Types relationship, whose raw key
+        # collides with the first and gets bumped to :types_2 - its promoted
+        # value must follow the bump, not clobber the first relationship's data.
+        place_related_model = create(:place_model, project:)
+        types_model = create(:taxonomy_model, project:)
+        first_rel = create(:project_model_relationship, primary_model: place_model, related_model: place_related_model, name: 'Types', multiple: false)
+        second_rel = create(:project_model_relationship, primary_model: place_model, related_model: types_model, name: 'Types', multiple: true)
+
+        other_place = create(:place, project_model: place_related_model, name: 'Not A Taxonomy')
+        term = create(:taxonomy, project_model: types_model, name: 'Church')
+        create(:relationship, project_model_relationship: first_rel, primary_record: place, related_record: other_place)
+        create(:relationship, project_model_relationship: second_rel, primary_record: place, related_record: term)
+
+        data = v1_place.related
+        expect(data[:types]).to(include(name: 'Not A Taxonomy')) # first relationship's raw value, untouched
+        expect(data.values).to(include(['Church'])) # second relationship's promoted value landed *somewhere* safely
+      end
+    end
+  end
+
+  describe '#related_to' do
+    it 'surfaces the inverse relationship under inverse_name when allow_inverse is true' do
+      county_model = create(:place_model, project:)
+      county = create(:place, project_model: county_model, name: 'Grady County')
+      rel = create(:project_model_relationship, primary_model: county_model, related_model: place_model, name: 'Places', multiple: true, allow_inverse: true, inverse_name: 'Contains')
+      create(:relationship, project_model_relationship: rel, primary_record: county, related_record: place)
+
+      expect(v1_place.related_to[:contains]).to(include(name: 'Grady County'))
+    end
+  end
+
+  describe '#featured' do
+    # NOTE: the key here is *not* `featured_media` despite this method's own
+    # docstring saying "e.g. Place's featured_media" - that comment turned
+    # out to be aspirational, never actually verified against real
+    # behavior. The real key is just the relationship's own name,
+    # parameterized and singularized, with no "featured_" prefix at all -
+    # ported faithfully from v0 (CoreDataConnector::OpenGeographies::Searchable#featured
+    # does the identical `slug.singularize`, no prefix). For a relationship
+    # named "Media" specifically, ActiveSupport's inflector singularizes
+    # "media" to "medium" (the singular of "medium/media" in English), which
+    # reads oddly but matches both v0 and v1 today - flagged, not changed
+    # here, since it's a pre-existing v0 behavior this test should describe
+    # accurately, not silently redesign.
+    it 'promotes the related record whose Featured UDF is checked to a singular key' do
+      media_model = create(:place_model, project:, model_class: 'CoreDataConnector::MediaContent')
+      rel = create(:project_model_relationship, primary_model: place_model, related_model: media_model, name: 'Media', multiple: true)
+      featured_udf = create(:user_defined_field, defineable: rel, column_name: 'Featured', data_type: 'Boolean', order: 0)
+
+      unfeatured = create(:media_content, project_model: media_model, name: 'Unfeatured')
+      featured = create(:media_content, project_model: media_model, name: 'Featured Photo')
+      create(:relationship, project_model_relationship: rel, primary_record: place, related_record: unfeatured, user_defined: { featured_udf.uuid => false })
+      create(:relationship, project_model_relationship: rel, primary_record: place, related_record: featured, user_defined: { featured_udf.uuid => true })
+
+      expect(v1_place.featured[:medium]).to(include(name: 'Featured Photo'))
+    end
+  end
+
+  describe '#search_data' do
+    it 'assembles envelope, UDFs, and relationships into one hash, protecting envelope keys from being overwritten' do
+      # A relationship literally named "Name" would raw-key to :name, the same
+      # key base_search_data uses for the place's own name - base_search_data
+      # is seeded first and reserved, so the relationship's data must be
+      # suffixed instead of silently clobbering the place's real name.
+      other_model = create(:place_model, project:)
+      rel = create(:project_model_relationship, primary_model: place_model, related_model: other_model, name: 'Name', multiple: false)
+      other = create(:place, project_model: other_model, name: 'Should Not Win')
+      create(:relationship, project_model_relationship: rel, primary_record: place, related_record: other)
+
+      data = v1_place.search_data
+      expect(data[:name]).to(eq('Evergreen Church'))
+      expect(data[:name_2]).to(include(name: 'Should Not Win'))
+    end
+  end
+end

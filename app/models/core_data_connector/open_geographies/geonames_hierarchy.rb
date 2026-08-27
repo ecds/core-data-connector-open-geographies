@@ -52,6 +52,16 @@ module CoreDataConnector
 
         # nil on any failure (network, timeout, non-2xx, bad JSON) so callers
         # can distinguish "GeoNames had nothing here" ([]) from "couldn't ask" (nil).
+        #
+        # extendedFindNearbyJSON answers in one of two shapes, and which one
+        # you get isn't a corner case - checked against 15 real HRCGA church
+        # locations and every single one came back as `address`, zero as
+        # `geonames`. The `geonames` array (parse_geonames_shape) is what
+        # shows up for less-precise points; `address` (parse_address_shape)
+        # is GeoNames' integrated US Census street-level reverse-geocoder,
+        # which kicks in whenever a point resolves close enough to a mapped
+        # street address - true for essentially any real building location,
+        # not an edge case at all.
         def fetch(lat:, lng:)
           username = ENV.fetch('GEONAMES_USERNAME')
           uri = URI(ENDPOINT)
@@ -63,12 +73,26 @@ module CoreDataConnector
           return unless response.is_a?(Net::HTTPSuccess)
 
           data = JSON.parse(response.body)
-          features = data['geonames'] || []
           # GeoNames error responses (bad username, rate limit, ...) come back
-          # as 200 OK with a `status` key instead of `geonames` - guard against
-          # silently caching an empty hierarchy for what's actually a failure.
+          # as 200 OK with a `status` key instead of either real shape - guard
+          # against silently caching an empty hierarchy for what's actually a failure.
           return if data['status']
 
+          if data['geonames']
+            parse_geonames_shape(data['geonames'])
+          elsif data['address']
+            parse_address_shape(data['address'])
+          else
+            []
+          end
+        rescue StandardError => e
+          Rails.logger.warn("[OpenGeographies] GeoNames lookup failed for #{lat},#{lng}: #{e.message}")
+          nil
+        end
+
+        private
+
+        def parse_geonames_shape(features)
           features
             .select { |feature| feature['fcl'] == ADMIN_FEATURE_CLASS }
             .map do |feature|
@@ -79,14 +103,37 @@ module CoreDataConnector
                 geonames_url: "https://www.geonames.org/#{feature["geonameId"]}",
               }
             end
-        rescue StandardError => e
-          Rails.logger.warn("[OpenGeographies] GeoNames lookup failed for #{lat},#{lng}: #{e.message}")
-          nil
+        end
+
+        # No geonameId comes back at this level of detail, so geonames_id/
+        # geonames_url are nil here - an honest reflection of what GeoNames
+        # actually gave us, not a fabricated link. Levels are labeled with
+        # the same fcode vocabulary as parse_geonames_shape (ADM2/ADM1/PCLI)
+        # so callers see one consistent scheme regardless of which shape
+        # answered. countryCode ("US"), not a spelled-out country name -
+        # this shape doesn't give one, and guessing a name from the code
+        # would only work reliably for a handful of countries.
+        def parse_address_shape(address)
+          [
+            address['adminName2'].presence && { level: 'ADM2', name: address['adminName2'], geonames_id: nil, geonames_url: nil },
+            address['adminName1'].presence && { level: 'ADM1', name: address['adminName1'], geonames_id: nil, geonames_url: nil },
+            address['countryCode'].presence && { level: 'PCLI', name: address['countryCode'], geonames_id: nil, geonames_url: nil },
+          ].compact
         end
       end
 
       def stale?(current_lat, current_lng)
         lat.to_f.round(6) != current_lat.to_f.round(6) || lng.to_f.round(6) != current_lng.to_f.round(6)
+      end
+
+      # jsonb round-trips through Postgres with string keys, not the symbol
+      # keys .fetch builds - without this override, a cache hit silently
+      # returns { "name" => ... } while a fresh fetch returns { name: ... },
+      # so callers doing hierarchy.first[:name] get nil half the time
+      # depending on whether the cache was warm. Symbolizing here means
+      # every caller gets the same shape regardless of cache state.
+      def hierarchy
+        super&.map(&:symbolize_keys)
       end
     end
   end

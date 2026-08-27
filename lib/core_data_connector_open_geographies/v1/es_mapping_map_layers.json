@@ -49,6 +49,7 @@
       "uuid": { "type": "keyword" },
       "slug": { "type": "keyword" },
       "project_id": { "type": "keyword" },
+      "project": { "type": "keyword" },
       "model_type": { "type": "keyword" },
       "model_id": { "type": "keyword" },
       "model_name": { "type": "keyword" },
@@ -83,7 +84,7 @@
         "properties": {
           "uuid": { "type": "keyword" },
           "slug": { "type": "keyword" },
-          "thumbnail_url": { "type": "keyword", "index": false }
+          "thumbnail": { "type": "keyword", "index": false }
         }
       },
       "publisher": {

@@ -22,5 +22,6 @@ FactoryBot.define do
   factory :taxonomy_model, class: 'CoreDataConnector::ProjectModel' do
     project factory: :project
     model_class { 'CoreDataConnector::Taxonomy' }
+    name { Faker::Name.unique.name }
   end
 end

@@ -9,11 +9,17 @@ module CoreDataConnector
       # Without this, `rails db:migrate` in the host app never sees
       # db/migrate here at all - this engine had no migrations of its own
       # until ProjectModelRole, so nothing surfaced the gap before now.
+      #
+      # Guards against double-appending by checking the actual path, not by
+      # comparing app.root to the engine's root - a root-path check breaks
+      # for spec/dummy specifically, since it's nested *inside* this engine's
+      # own repo, so app.root.to_s.match?(root.to_s) is true there for the
+      # same reason it's true for any real host app that happens to check
+      # out this gem locally - the string match can't tell "is the same app"
+      # apart from "is a subdirectory of it".
       initializer :append_migrations do |app|
-        unless app.root.to_s.match?(root.to_s)
-          config.paths['db/migrate'].expanded.each do |expanded_path|
-            app.config.paths['db/migrate'] << expanded_path
-          end
+        config.paths['db/migrate'].expanded.each do |expanded_path|
+          app.config.paths['db/migrate'] << expanded_path unless app.config.paths['db/migrate'].expanded.include?(expanded_path)
         end
       end
     end

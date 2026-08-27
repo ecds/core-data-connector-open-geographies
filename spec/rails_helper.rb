@@ -27,7 +27,10 @@ require 'rspec/rails'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Rails.root.glob('spec/support/**/*.rb').sort_by(&:to_s).each { |f| require f }
+# Not Rails.root.glob('spec/support/**/*.rb') (what this line was before) -
+# Rails.root here is spec/dummy (the dummy app this file boots), not this
+# engine's own spec/ directory, so that glob silently matched nothing.
+Dir[File.join(__dir__, 'support', '**', '*.rb')].sort.each { |f| require f }
 
 # Ensures that the test database schema matches the current schema file.
 # If there are pending migrations it will invoke `db:test:prepare` to
@@ -57,7 +60,15 @@ RSpec.configure do |config|
 
   config.after(:suite) do
     DatabaseCleaner.clean_with(:truncation)
-    Searchkick::Index.new(CoreDataConnector::OpenGeographies::Place.searchkick_index.name).delete
+
+    # v1's index names, not a class reference (CoreDataConnector::OpenGeographies::Place.searchkick_index.name,
+    # the old v0 stand-in this used to read) - checked with exists? first since
+    # most spec runs never actually reindex anything and would otherwise error
+    # trying to delete an index that was never created.
+    ['open_geographies_v1', 'open_geographies_v1_map_layers'].each do |index_name|
+      index = Searchkick::Index.new(index_name)
+      index.delete if index.exists?
+    end
   end
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

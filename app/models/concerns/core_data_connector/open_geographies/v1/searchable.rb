@@ -78,15 +78,23 @@ module CoreDataConnector
         # Not marked `private`: cross-instance calls (related/summarize invoking
         # these on *other* records' instances) need them callable with an
         # explicit receiver, matching v0's Searchable for the same reason.
+        #
+        # base_search_data + extras are seeded first and never suffixed - both
+        # are developer-controlled (this file, or a model's own #extras
+        # override), not curator-entered, so they're structurally guaranteed
+        # not to collide with each other. Everything after that is
+        # curator-controlled (relationship names, UDF column names) and goes
+        # through assign_unique! against the accumulating hash, since Core
+        # Data enforces no uniqueness on those names at all - see
+        # assign_unique! for why that matters.
         def search_data
-          {
-            **user_defined_fields,
-            **extras,
-            **related(DEFAULT_DEPTH),
-            **related_to(DEFAULT_DEPTH),
-            **featured,
-            **base_search_data,
-          }
+          data = { **base_search_data, **extras }
+
+          [user_defined_fields, related(DEFAULT_DEPTH), related_to(DEFAULT_DEPTH), featured].each do |additions|
+            additions.each { |key, value| assign_unique!(data, key, value) }
+          end
+
+          data
         end
 
         def base_search_data
@@ -95,6 +103,17 @@ module CoreDataConnector
             slug:,
             slugs:,
             project_id: project_model.project_id.to_s,
+            # The parameterized project name, matching what v1's routes
+            # actually key on (GET /v1/:project/places/:slug resolves
+            # :project via Project#name.parameterize - there's no dedicated
+            # slug column on Project). project_id alone can't build a URL:
+            # it's fine for a record's own top-level document (the client
+            # already knows what project it asked for), but a *nested*
+            # summary - Contained In pointing at a record in a different,
+            # shared project (see the Administrative Districts project) -
+            # would otherwise carry a project_id with no way to turn it into
+            # a fetchable link at all.
+            project: project_model.project.name.parameterize,
             model_type: PromotedRelationships.model_type_for(self),
             model_id: project_model.id.to_s,
             model_name: project_model.name,
@@ -150,8 +169,13 @@ module CoreDataConnector
             next if user_defined_field.nil?
 
             label = user_defined_field.column_name
-            attributes[label.parameterize.underscore.to_sym] = { label:, value: }
+            assign_unique!(attributes, label.parameterize.underscore.to_sym, { label:, value: })
 
+            # Not collision-guarded: promoted paths are developer-controlled
+            # (they come from our own canonical template, not curator input),
+            # and a dotted path is *meant* to write into the same top-level
+            # key as a sibling UDF's dotted path (source.type + source.urls
+            # both target :source) - that's the intended merge, not a clash.
             promoted_path = promoted[label]
             merge_promoted_udf!(attributes, promoted_path, value) if promoted_path
           end
@@ -190,17 +214,15 @@ module CoreDataConnector
               next if records.empty?
 
               items = records.map { |relation| related_class(relation.related_record_type).find(relation.related_record_id) }
-
-              related_records[raw_key] = items.map { |item| summarize(item, depth) }
-              related_records[promoted_key] = promoted_value(items, rel, depth) if promoted_key
+              written_key = assign_unique!(related_records, raw_key, items.map { |item| summarize(item, depth) })
+              assign_promoted!(related_records, promoted_key, raw_key, written_key, promoted_value(items, rel, depth)) if promoted_key
             else
               relation = ::CoreDataConnector::Relationship.find_by(project_model_relationship: rel, primary_record: self)
               next if relation.nil?
 
               item = related_class(relation.related_record_type).find(relation.related_record_id)
-
-              related_records[raw_key] = summarize(item, depth)
-              related_records[promoted_key] = promoted_value(item, rel, depth) if promoted_key
+              written_key = assign_unique!(related_records, raw_key, summarize(item, depth))
+              assign_promoted!(related_records, promoted_key, raw_key, written_key, promoted_value(item, rel, depth)) if promoted_key
             end
           end
 
@@ -209,11 +231,19 @@ module CoreDataConnector
 
         # The inverse direction - relationships where this record is the
         # *target* - surfaced only when the relationship explicitly allows it
-        # (allow_inverse), same gate v0 uses. No promotion pass here: the
-        # canonical template only defines promoted names for the forward
-        # direction today (e.g. "Contained In" -> contained_in_place, but no
-        # promoted name for its "Contains" inverse). If that changes, this
-        # needs the same promoted-lookup treatment `related` has.
+        # (allow_inverse). No promotion pass here: the canonical template
+        # only defines promoted names for the forward direction today (e.g.
+        # "Contained In" -> contained_in_place, but no promoted name for its
+        # "Contains" inverse). If that changes, this needs the same
+        # promoted-lookup treatment `related` has.
+        #
+        # Branches on rel.inverse_multiple, not rel.multiple - the forward
+        # and inverse directions have independent cardinality (Core Data
+        # gives them separate columns for exactly this: a County has_many
+        # Places is multiple=true, but each Place belongs to exactly one
+        # County, inverse_multiple=false). v0's equivalent branches on
+        # rel.multiple for both directions, which is wrong whenever the two
+        # differ - not carried forward here.
         def related_to(depth = DEFAULT_DEPTH)
           related_records = {}
 
@@ -224,21 +254,21 @@ module CoreDataConnector
 
             key = rel.inverse_name.parameterize.underscore.to_sym
 
-            if rel.multiple
+            if rel.inverse_multiple
               records = ::CoreDataConnector::Relationship.where(project_model_relationship: rel, related_record: self)
               next if records.empty?
 
-              related_records[key] = records.map do |relation|
+              value = records.map do |relation|
                 summarize(related_class(relation.primary_record_type).find(relation.primary_record_id), depth)
               end
             else
               relation = ::CoreDataConnector::Relationship.find_by(project_model_relationship: rel, related_record: self)
               next if relation.nil?
 
-              related_records[key] = summarize(
-                related_class(relation.primary_record_type).find(relation.primary_record_id), depth
-              )
+              value = summarize(related_class(relation.primary_record_type).find(relation.primary_record_id), depth)
             end
+
+            assign_unique!(related_records, key, value)
           end
 
           related_records
@@ -269,7 +299,7 @@ module CoreDataConnector
 
             item = related_class(featured_rel.related_record_type).find(featured_rel.related_record_id)
             key = project_model_relationship.name.parameterize.underscore.singularize.to_sym
-            featured_recs[key] = summarize(item, 0)
+            assign_unique!(featured_recs, key, summarize(item, 0))
           end
 
           featured_recs
@@ -320,6 +350,46 @@ module CoreDataConnector
 
         def taxonomy_relationship?(rel)
           rel.related_model.model_class == 'CoreDataConnector::Taxonomy'
+        end
+
+        # Writes `value` at `key`, appending an incrementing numeric suffix
+        # (_2, _3, ...) if `key` is already taken. Core Data enforces no
+        # uniqueness on ProjectModelRelationship#name or UserDefinedField
+        # #column_name - only `presence` is validated (checked against the
+        # gem source directly) - so two different relationships, or two
+        # different UDFs, or a relationship and a UDF, genuinely can
+        # parameterize to the identical key. A plain hash-key overwrite would
+        # drop one value with no trace; suffixing keeps both and makes the
+        # collision visible in the response instead of silently losing data.
+        # Returns the key actually used, since callers sometimes need to
+        # know whether their own write landed cleanly.
+        def assign_unique!(hash, key, value)
+          candidate = key
+          n = 2
+          while hash.key?(candidate)
+            candidate = :"#{key}_#{n}"
+            n += 1
+          end
+          hash[candidate] = value
+          candidate
+        end
+
+        # Promoted-key write for `related`. When `promoted_key` is literally
+        # the same string as this relationship's own raw key *and* that raw
+        # write actually landed there unsuffixed (`written_key == raw_key`),
+        # the promoted (cleaner) shape intentionally replaces it - a curator
+        # used the exact canonical name, so raw and promoted are the same
+        # relationship, not a collision. If the raw write got bumped to
+        # `_2` because an *earlier* relationship already held that key, this
+        # relationship's promoted value must not fall back to overwriting
+        # that earlier relationship's slot - it goes through assign_unique!
+        # like any other value instead.
+        def assign_promoted!(hash, promoted_key, raw_key, written_key, value)
+          if promoted_key == raw_key && written_key == raw_key
+            hash[promoted_key] = value
+          else
+            assign_unique!(hash, promoted_key, value)
+          end
         end
 
         # Writes `value` into `attributes` at a dotted path, creating
