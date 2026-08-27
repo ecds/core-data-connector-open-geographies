@@ -52,6 +52,21 @@ RSpec.describe(CoreDataConnector::OpenGeographies::V1::Searchable) do
       expect(fields[:description]).to(eq('A historic church.'))
     end
 
+    # Regression: canonical_template.json is what PromotedRelationships reads
+    # to decide what's promoted, and es_mapping.json (address: {type: text})
+    # is a completely separate file - reconciling one against a teammate's
+    # updated draft without the other left `Address` mapped as bare text but
+    # never promoted, so it stayed as the raw {label:, value:} object and
+    # blew up on real ES insert ("Can't get text on a START_OBJECT") for any
+    # real Place with an Address UDF, e.g. real HRCGA church records.
+    it 'promotes a Places "Address" UDF to a bare value, matching es_mapping.json\'s address: {type: text}' do
+      udf = create(:user_defined_field, defineable: place_model, column_name: 'Address', data_type: 'String')
+      place.update!(user_defined: { udf.uuid => '497 Meridian Rd, Thomasville, GA 31792, United States' })
+
+      fields = v1_place.user_defined_fields
+      expect(fields[:address]).to(eq('497 Meridian Rd, Thomasville, GA 31792, United States'))
+    end
+
     it 'merges dotted promote paths from different UDFs into one nested object (Map Layers Source Type/Source URLs)' do
       layer_model = create(:place_model, project:)
       create(:project_model_role, project_model_record: layer_model, role: 'map_layer')

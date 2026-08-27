@@ -50,11 +50,23 @@ module CoreDataConnector
         # so it's always visible in the model file which index a class
         # writes to.
         class_methods do
+          # Not deep_paging: true - it only ever mattered for its side effect
+          # of raising Searchkick's default result size to 1_000_000_000
+          # (searchkick/query.rb), since neither controller does real
+          # cursor-based deep pagination (search_after) with it. That default
+          # only works when the index's own max_result_window was *also* set
+          # to match, which Searchkick only does automatically when the index
+          # is created through Searchkick itself (.reindex/.create_index) -
+          # an index created any other way keeps Elasticsearch's real default
+          # (10,000), and a query then asking for a billion 500s outright.
+          # Every atlas today is a few hundred records at most; Searchkick's
+          # plain default (size: 10_000, no special index setting required)
+          # covers that with room to spare, and doesn't depend on every
+          # future index always being created exactly one specific way.
           def searchable_index(name, mapping: Searchable::MAPPING)
             searchkick(
               index_name: -> { name },
               callbacks: false,
-              deep_paging: true,
               mappings: mapping[:mappings],
               settings: mapping[:settings],
             )
