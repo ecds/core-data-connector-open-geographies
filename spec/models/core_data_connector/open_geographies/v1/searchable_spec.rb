@@ -111,6 +111,29 @@ RSpec.describe(CoreDataConnector::OpenGeographies::V1::Searchable) do
       expect(data[:contained_in_place]).to(include(name: 'Grady County'))
     end
 
+    # Regression: summarize() - used for every nested record (works[],
+    # media[], contained_in_place, ...) - never called user_defined_fields
+    # at all until now, at any depth. A nested Work's own "Link" UDF
+    # promotes to `url` correctly at the top level (verified against real
+    # HRCGA data), but every nested summary silently dropped it, raw or
+    # promoted, forever - caught while wiring up the WordPress template,
+    # which needs works[].url for its sidebar links.
+    it 'includes a nested record\'s own UDFs (raw and promoted), not just its relationships' do
+      works_model = create(:place_model, project:, model_class: 'CoreDataConnector::Work')
+      rel = create(:project_model_relationship, primary_model: place_model, related_model: works_model, name: 'Works', multiple: true)
+      link_udf = create(:user_defined_field, defineable: works_model, column_name: 'Link', data_type: 'String')
+      legacy_udf = create(:user_defined_field, defineable: works_model, column_name: 'Legacy Note', data_type: 'String')
+      work = create(:work, project_model: works_model, user_defined: {
+        link_udf.uuid => 'https://example.com/plan-a-trip',
+        legacy_udf.uuid => 'internal note',
+      })
+      create(:relationship, project_model_relationship: rel, primary_record: place, related_record: work)
+
+      work_summary = v1_place.related[:works].first
+      expect(work_summary[:url]).to(eq('https://example.com/plan-a-trip')) # promoted (canonical Works UDF)
+      expect(work_summary[:legacy_note]).to(eq({ label: 'Legacy Note', value: 'internal note' })) # raw, non-promoted
+    end
+
     it 'expands one level of a related record\'s own relationships, then stops (depth capping)' do
       media_model = create(:place_model, project:, model_class: 'CoreDataConnector::MediaContent')
       publisher_model = create(:place_model, project:, model_class: 'CoreDataConnector::Organization')

@@ -332,15 +332,32 @@ module CoreDataConnector
 
         private
 
-        # Depth-limited summary of a related record: at depth 0, just the flat
-        # envelope plus its own extras, no further relationship expansion
-        # (this is what actually stops the recursion, unlike v0's equivalent).
-        # Above 0, one more layer of that record's own relationships.
+        # Depth-limited summary of a related record: at depth 0, the flat
+        # envelope plus its own extras and UDFs (raw and promoted - a UDF is
+        # a scalar property of the record itself, not a further relationship
+        # hop, so it's included regardless of depth, same as extras), no
+        # further relationship expansion (this is what actually stops the
+        # recursion, unlike v0's equivalent). Above 0, one more layer of that
+        # record's own relationships too.
+        #
+        # user_defined_fields wasn't included here at all until this was
+        # caught while wiring up the HRCGA WordPress template: a nested
+        # Work's own "Link" UDF promotes to `url` correctly at the top level
+        # (verified against real data), but every nested summary - works[],
+        # media[], contained_in_place, anything summarize touches - silently
+        # dropped every UDF, raw or promoted, forever, regardless of depth.
+        # Goes through assign_unique! same as search_data, since a record's
+        # own UDFs/relationships can collide with its own base_search_data
+        # keys exactly the same way they can at the top level.
         def summarize(record, depth)
           base = { **record.base_search_data, **record.extras }
+          record.user_defined_fields.each { |key, value| assign_unique!(base, key, value) }
           return base if depth <= 0
 
-          { **base, **record.related(depth - 1), **record.related_to(depth - 1) }
+          [record.related(depth - 1), record.related_to(depth - 1)].each do |additions|
+            additions.each { |key, value| assign_unique!(base, key, value) }
+          end
+          base
         end
 
         # Bare name(s) for a promoted relationship pointing at a Taxonomy
