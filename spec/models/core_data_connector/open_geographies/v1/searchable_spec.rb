@@ -80,13 +80,37 @@ RSpec.describe(CoreDataConnector::OpenGeographies::V1::Searchable) do
   end
 
   describe '#related' do
-    it 'indexes a non-promoted relationship under its own raw parameterized key, as a depth-limited summary' do
+    it 'indexes a non-promoted, non-taxonomy relationship under its own raw parameterized key, as a depth-limited summary' do
+      publisher_model = create(:place_model, project:, model_class: 'CoreDataConnector::Organization')
+      rel = create(:project_model_relationship, primary_model: place_model, related_model: publisher_model, name: 'Steward', multiple: false)
+      steward = create(:organization, project_model: publisher_model, name: 'Friends of the Church')
+      create(:relationship, project_model_relationship: rel, primary_record: place, related_record: steward)
+
+      expect(v1_place.related[:steward]).to(include(name: 'Friends of the Church'))
+    end
+
+    # Regression: this used to be the one case the old code got wrong - a
+    # non-canonically-named taxonomy relationship (nothing in
+    # PromotedRelationships covers "Denomination") always got the full
+    # depth-limited summary shape, since the bare-name shortcut only ever
+    # ran inside the *promoted* write path. That's fine for `types` (it only
+    # ever looked bare because its promoted write happens to land on the
+    # same key and overwrite the raw write - see assign_promoted!), but for
+    # a relationship with no promoted_key at all, nothing ever overwrote it.
+    # A depth-limited summary of a Taxonomy term at depth > 0 expands the
+    # term's own related_to - every *other* record sharing that term - so in
+    # production, a single HRCGA church's `denomination` field carried all
+    # 148 other churches of the same denomination, each with a full
+    # description, ballooning that one Place document.
+    it 'indexes a non-promoted relationship pointing at a Taxonomy as a bare name, with a _facet companion key' do
       denomination_model = create(:taxonomy_model, project:)
       rel = create(:project_model_relationship, primary_model: place_model, related_model: denomination_model, name: 'Denomination', multiple: false)
       term = create(:taxonomy, project_model: denomination_model, name: 'Congregational')
       create(:relationship, project_model_relationship: rel, primary_record: place, related_record: term)
 
-      expect(v1_place.related[:denomination]).to(include(name: 'Congregational'))
+      data = v1_place.related
+      expect(data[:denomination]).to(eq('Congregational'))
+      expect(data[:denomination_facet]).to(eq('Congregational'))
     end
 
     it 'promotes a Types relationship pointing at a Taxonomy to a bare array of names (raw and promoted keys coincide)' do
@@ -151,6 +175,35 @@ RSpec.describe(CoreDataConnector::OpenGeographies::V1::Searchable) do
       expect(media_summary[:publisher]).not_to(have_key(:media)) # but no further recursion from there
     end
 
+    # Regression: found immediately after the denomination fix above, in the
+    # exact same production document - each of a church's own `works[]`
+    # entries re-embedded that *same church* under a `church:` key, because a
+    # Work's inverse relationship (walked while expanding the work's own
+    # related_to at depth 0) resolves straight back to the Place that owns
+    # it. The denomination case was a taxonomy term reflecting outward to its
+    # *other* members; this is the more direct case of a child pointing
+    # straight back to its own parent - both are the same underlying gap
+    # (nothing tracked which records were already being serialized higher up
+    # the call stack), just reached via different relationship shapes.
+    it 'does not re-embed the record itself when a related record\'s inverse relationship points back to it' do
+      works_model = create(:place_model, project:, model_class: 'CoreDataConnector::Work')
+      works_rel = create(
+        :project_model_relationship,
+        primary_model: place_model,
+        related_model: works_model,
+        name: 'Works',
+        multiple: true,
+        allow_inverse: true,
+        inverse_name: 'Church',
+      )
+      work = create(:work, project_model: works_model, name: 'Cemetery')
+      create(:relationship, project_model_relationship: works_rel, primary_record: place, related_record: work)
+
+      work_summary = v1_place.related[:works].first
+      expect(work_summary[:name]).to(eq('Cemetery'))
+      expect(work_summary).not_to(have_key(:church))
+    end
+
     describe 'key collisions (Core Data enforces no name uniqueness)' do
       it 'suffixes a raw key collision instead of silently dropping one relationship\'s data' do
         taxonomy_model = create(:taxonomy_model, project:)
@@ -162,8 +215,12 @@ RSpec.describe(CoreDataConnector::OpenGeographies::V1::Searchable) do
         create(:relationship, project_model_relationship: rel_b, primary_record: place, related_record: term_b)
 
         data = v1_place.related
-        expect(data[:denomination]).to(include(name: 'First'))
-        expect(data[:denomination_2]).to(include(name: 'Second'))
+        expect(data[:denomination]).to(eq('First'))
+        expect(data[:denomination_2]).to(eq('Second'))
+        # The _facet companion (see #related) collides and suffixes the same
+        # way the raw key does - it goes through the same assign_unique!.
+        expect(data[:denomination_facet]).to(eq('First'))
+        expect(data[:denomination_facet_2]).to(eq('Second'))
       end
 
       it 'never lets a later relationship\'s promoted value overwrite an earlier relationship\'s raw slot' do

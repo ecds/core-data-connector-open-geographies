@@ -202,16 +202,46 @@ module CoreDataConnector
         end
 
         # Walks every relationship *from* this record. Everything is indexed
-        # under its own name-derived key regardless of promotion status;
-        # promoted relationships (exact name match against
-        # PromotedRelationships.for(self)) *additionally* get written under
-        # their well-known canonical key, in one of two shapes: a bare array
-        # of names for relationships pointing at a Taxonomy (types, work_type
-        # - these exist purely for faceted filtering, not navigation, so a
-        # plain string is enough), or a depth-limited summary object for
-        # everything else (contained_in_place, media, creator, ... - these
-        # need uuid/slug so a client can link to the record itself).
-        def related(depth = DEFAULT_DEPTH)
+        # under its own name-derived key regardless of promotion status, as
+        # whichever shape #relationship_value decides: a bare array of names
+        # for a relationship pointing at a Taxonomy (types, denomination,
+        # whatever a curator calls it - these exist purely for faceted
+        # filtering, not navigation, so a plain string is enough, and that
+        # applies to *any* taxonomy relationship, not just canonically-named
+        # ones - see the regression this fixed below), or a depth-limited
+        # summary object for everything else (contained_in_place, media,
+        # creator, ... - these need uuid/slug so a client can link to the
+        # record itself). Promoted relationships (exact name match against
+        # PromotedRelationships.for(self)) *additionally* get the identical
+        # value written under their well-known canonical key.
+        #
+        # Regression: a non-canonically-named taxonomy relationship (e.g.
+        # HRCGA's "Denomination", never in PromotedRelationships since only
+        # "Types" is canonical) used to always get the full depth-limited
+        # summary shape here, never the bare-name shortcut - that shortcut
+        # only ever ran inside the *promoted* write, so "Types" only ended up
+        # bare because its promoted write happens to land on the same key and
+        # overwrites the raw write (see assign_promoted!). A summary at
+        # depth > 0 expands the taxonomy term's own related_to, i.e. every
+        # *other* record sharing that term - caught in production where a
+        # single church's `denomination` field carried all 148 other churches
+        # of the same denomination, each with a full description, ballooning
+        # that one Place document. Computing the value once via
+        # #relationship_value up front (used for both the raw and promoted
+        # writes) fixes this and removes the duplicate computation.
+        #
+        # `visited` (record_identity(self) by default - see #record_identity)
+        # is the trail of records already being serialized higher up the
+        # current call stack, threaded through summarize/related/related_to
+        # together. Caught in production immediately after the denomination
+        # fix above: a Place's own `works[]` entries each re-embedded that
+        # *same Place* (a work's related_to at depth 0 walks straight back to
+        # the Church it belongs to) - not just wasted size, an actual cycle,
+        # since DEFAULT_DEPTH's whole job is bounding one, and skipping any
+        # record already in `visited` is what actually does that rather than
+        # just capping how many *extra* hops away from the cycle a document
+        # can grow.
+        def related(depth = DEFAULT_DEPTH, visited = [record_identity(self)])
           related_records = {}
           promoted = PromotedRelationships.for(self)
 
@@ -226,15 +256,37 @@ module CoreDataConnector
               next if records.empty?
 
               items = records.map { |relation| related_class(relation.related_record_type).find(relation.related_record_id) }
-              written_key = assign_unique!(related_records, raw_key, items.map { |item| summarize(item, depth) })
-              assign_promoted!(related_records, promoted_key, raw_key, written_key, promoted_value(items, rel, depth)) if promoted_key
+              items = items.reject { |item| visited.include?(record_identity(item)) }
+              next if items.empty?
+
+              value = relationship_value(items, rel, depth, visited)
             else
               relation = ::CoreDataConnector::Relationship.find_by(project_model_relationship: rel, primary_record: self)
               next if relation.nil?
 
               item = related_class(relation.related_record_type).find(relation.related_record_id)
-              written_key = assign_unique!(related_records, raw_key, summarize(item, depth))
-              assign_promoted!(related_records, promoted_key, raw_key, written_key, promoted_value(item, rel, depth)) if promoted_key
+              next if visited.include?(record_identity(item))
+
+              value = relationship_value(item, rel, depth, visited)
+            end
+
+            written_key = assign_unique!(related_records, raw_key, value)
+            assign_promoted!(related_records, promoted_key, raw_key, written_key, value) if promoted_key
+
+            # A bespoke taxonomy relationship with no canonical promoted_key
+            # (so nothing in es_mapping.json explicitly keyword-maps it the
+            # way `types`/`work_type` are) would otherwise fall through the
+            # strings_as_text dynamic template as analyzed text once it's a
+            # bare string/array - searchable via `q`, but useless for a terms
+            # aggregation. facets_as_keyword's `*_facet` dynamic template
+            # already exists in the mapping for exactly this; only UDFs
+            # documented using it before now. Skipped for promoted taxonomy
+            # relationships since those already land on an explicitly-mapped
+            # keyword field - coupled to es_mapping.json staying in sync with
+            # PromotedRelationships, the same risk already flagged on the
+            # Address UDF promotion (see user_defined_fields).
+            if promoted_key.nil? && taxonomy_relationship?(rel)
+              assign_unique!(related_records, :"#{raw_key}_facet", value)
             end
           end
 
@@ -256,7 +308,14 @@ module CoreDataConnector
         # County, inverse_multiple=false). v0's equivalent branches on
         # rel.multiple for both directions, which is wrong whenever the two
         # differ - not carried forward here.
-        def related_to(depth = DEFAULT_DEPTH)
+        #
+        # `visited` - see #related's comment - is what stops this from
+        # walking straight back to a record already being serialized higher
+        # up the call stack (a work's inverse relationship resolves the exact
+        # Place it belongs to, which is *why* this direction is the one that
+        # actually produces a cycle - `related`'s forward direction can't, on
+        # its own, since it's the same relationship row read the other way).
+        def related_to(depth = DEFAULT_DEPTH, visited = [record_identity(self)])
           related_records = {}
 
           relations = ::CoreDataConnector::ProjectModelRelationship.where(related_model: project_model)
@@ -270,14 +329,19 @@ module CoreDataConnector
               records = ::CoreDataConnector::Relationship.where(project_model_relationship: rel, related_record: self)
               next if records.empty?
 
-              value = records.map do |relation|
-                summarize(related_class(relation.primary_record_type).find(relation.primary_record_id), depth)
-              end
+              items = records.map { |relation| related_class(relation.primary_record_type).find(relation.primary_record_id) }
+              items = items.reject { |item| visited.include?(record_identity(item)) }
+              next if items.empty?
+
+              value = items.map { |item| summarize(item, depth, visited) }
             else
               relation = ::CoreDataConnector::Relationship.find_by(project_model_relationship: rel, related_record: self)
               next if relation.nil?
 
-              value = summarize(related_class(relation.primary_record_type).find(relation.primary_record_id), depth)
+              item = related_class(relation.primary_record_type).find(relation.primary_record_id)
+              next if visited.include?(record_identity(item))
+
+              value = summarize(item, depth, visited)
             end
 
             assign_unique!(related_records, key, value)
@@ -349,21 +413,33 @@ module CoreDataConnector
         # Goes through assign_unique! same as search_data, since a record's
         # own UDFs/relationships can collide with its own base_search_data
         # keys exactly the same way they can at the top level.
-        def summarize(record, depth)
+        #
+        # `visited` defaults to just `record` itself - the entry point for a
+        # summary reached via #related/#related_to below, or the very first
+        # call from #search_data at the top of the whole chain. Extended with
+        # `record` again (a no-op when it's already the last entry, from that
+        # top-of-chain call) before recursing, so descendants know every
+        # ancestor already being serialized, not just their immediate parent -
+        # see #related's comment for why this exists.
+        def summarize(record, depth, visited = [record_identity(record)])
           base = { **record.base_search_data, **record.extras }
           record.user_defined_fields.each { |key, value| assign_unique!(base, key, value) }
           return base if depth <= 0
 
-          [record.related(depth - 1), record.related_to(depth - 1)].each do |additions|
+          child_visited = visited | [record_identity(record)]
+          [record.related(depth - 1, child_visited), record.related_to(depth - 1, child_visited)].each do |additions|
             additions.each { |key, value| assign_unique!(base, key, value) }
           end
           base
         end
 
-        # Bare name(s) for a promoted relationship pointing at a Taxonomy
-        # (facet-only, no navigation needed); a depth-limited summary
+        # The value #related writes for any relationship - raw key, and
+        # promoted key too when there is one, they're always identical now.
+        # Bare name(s) for a relationship pointing at a Taxonomy (facet-only,
+        # no navigation needed - true whether or not it's canonically named,
+        # see #related's regression note), or a depth-limited summary
         # otherwise (needs uuid/slug so a client can link to it).
-        def promoted_value(items_or_item, rel, depth)
+        def relationship_value(items_or_item, rel, depth, visited)
           if taxonomy_relationship?(rel)
             if items_or_item.is_a?(Array)
               items_or_item.map(&:name)
@@ -371,14 +447,27 @@ module CoreDataConnector
               items_or_item.name
             end
           elsif items_or_item.is_a?(Array)
-            items_or_item.map { |item| summarize(item, depth) }
+            items_or_item.map { |item| summarize(item, depth, visited) }
           else
-            summarize(items_or_item, depth)
+            summarize(items_or_item, depth, visited)
           end
         end
 
         def taxonomy_relationship?(rel)
           rel.related_model.model_class == 'CoreDataConnector::Taxonomy'
+        end
+
+        # Identity tuple for cycle detection (see #related/#related_to's
+        # `visited` param) - class + id, not the record itself, so `visited`
+        # can use plain array #include?/| rather than needing a custom
+        # equality. record.class is always the V1-namespaced subclass here
+        # (self, from whichever V1::<Model>.find(...) started this chain, and
+        # every related/related_to resolution via #related_class, which
+        # always constructs that same namespace) - safe to compare directly
+        # without also normalizing away a v0/v1 class mismatch that can't
+        # happen in practice.
+        def record_identity(record)
+          [record.class.name, record.id]
         end
 
         # Writes `value` at `key`, appending an incrementing numeric suffix

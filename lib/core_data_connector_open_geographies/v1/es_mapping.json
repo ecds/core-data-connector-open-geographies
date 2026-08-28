@@ -5,6 +5,8 @@
 
   "mappings_comment": "The `analyzed` multi-field on name/names/description/short_description/address exists only for Searchkick's own query DSL: a `q` full-text search goes through Searchkick's `.search(term, fields: [...])`, and its query builder always targets `<field>.analyzed` for a plain (non-exact, non-phrase) field, never the bare field itself - see searchkick/query.rb#set_fields. A raw ES client can and should still just query the bare field directly (its own analyzer is already og_text); `.analyzed` duplicates that only so Searchkick's generated query has something to hit. (Also not `$comment` inside mappings.properties itself, for the same reason `settings_comment` above isn't `$comment` inside settings - every key under `properties` is a field name, and Elasticsearch rejects a field definition that isn't a mapping object.)",
 
+  "slugs_comment": "Every `slug` here has a `slugs` sibling on purpose - base_search_data/summarize (Searchable) always emit both together (slugs is the alternate-URL array; slug is just slugs.first, in effect), but until this fix only `slug` had an explicit property here. `slugs` fell through to the strings_as_text dynamic template (match_mapping_type: string -> analyzed text), so a `where: { slugs: 'some-slug' }` term filter - the exact thing PlacesController#show uses to look a record up by slug - silently matched nothing for a value that's really there, on every record at every nesting level, not just Places. Found live: a real Place's own `.search(where: { slugs: '...' })` returned no hit even though `.base_search_data` computed the right value.",
+
   "settings": {
     "analysis": {
       "analyzer": {
@@ -62,6 +64,7 @@
     "properties": {
       "uuid": { "type": "keyword" },
       "slug": { "type": "keyword" },
+      "slugs": { "type": "keyword" },
       "project_id": { "type": "keyword" },
       "project": { "type": "keyword" },
       "model_type": { "type": "keyword" },
@@ -124,7 +127,8 @@
         "properties": {
           "uuid": { "type": "keyword" },
           "name": { "type": "keyword" },
-          "slug": { "type": "keyword" }
+          "slug": { "type": "keyword" },
+          "slugs": { "type": "keyword" }
         }
       },
       "address": {
@@ -172,6 +176,7 @@
         "properties": {
           "uuid": { "type": "keyword" },
           "slug": { "type": "keyword" },
+          "slugs": { "type": "keyword" },
           "name": { "type": "text", "analyzer": "og_text", "fields": { "keyword": { "type": "keyword", "ignore_above": 256 } } }
         }
       },
@@ -179,6 +184,7 @@
         "properties": {
           "uuid": { "type": "keyword" },
           "slug": { "type": "keyword" },
+          "slugs": { "type": "keyword" },
           "name": { "type": "text", "analyzer": "og_text", "fields": { "keyword": { "type": "keyword", "ignore_above": 256 } } }
         }
       },
@@ -187,7 +193,8 @@
         "properties": {
           "uuid": { "type": "keyword" },
           "name": { "type": "keyword" },
-          "slug": { "type": "keyword" }
+          "slug": { "type": "keyword" },
+          "slugs": { "type": "keyword" }
         }
       },
 
@@ -195,6 +202,7 @@
         "properties": {
           "uuid": { "type": "keyword" },
           "slug": { "type": "keyword" },
+          "slugs": { "type": "keyword" },
           "name": { "type": "text", "analyzer": "og_text" },
           "media_type": { "type": "keyword" },
           "thumbnail": { "type": "keyword", "index": false },
@@ -206,6 +214,7 @@
         "properties": {
           "uuid": { "type": "keyword" },
           "slug": { "type": "keyword" },
+          "slugs": { "type": "keyword" },
           "name": { "type": "text", "analyzer": "og_text" },
           "media_type": { "type": "keyword" },
           "thumbnail": { "type": "keyword", "index": false },
@@ -218,6 +227,7 @@
         "properties": {
           "uuid": { "type": "keyword" },
           "slug": { "type": "keyword" },
+          "slugs": { "type": "keyword" },
           "name": { "type": "text", "analyzer": "og_text" },
           "url": { "type": "keyword", "index": false },
           "work_type": { "type": "keyword" }
@@ -227,6 +237,7 @@
         "properties": {
           "uuid": { "type": "keyword" },
           "slug": { "type": "keyword" },
+          "slugs": { "type": "keyword" },
           "name": { "type": "text", "analyzer": "og_text", "fields": { "keyword": { "type": "keyword", "ignore_above": 256 } } }
         }
       },
@@ -234,6 +245,7 @@
         "properties": {
           "uuid": { "type": "keyword" },
           "slug": { "type": "keyword" },
+          "slugs": { "type": "keyword" },
           "name": { "type": "text", "analyzer": "og_text", "fields": { "keyword": { "type": "keyword", "ignore_above": 256 } } },
           "geo": { "properties": { "point": { "type": "geo_point" } } }
         }
@@ -242,6 +254,7 @@
         "properties": {
           "uuid": { "type": "keyword" },
           "slug": { "type": "keyword" },
+          "slugs": { "type": "keyword" },
           "name": { "type": "text", "analyzer": "og_text" },
           "date": { "type": "date" },
           "bbox": { "type": "geo_shape" },
@@ -258,6 +271,7 @@
           "position": { "type": "integer" },
           "uuid": { "type": "keyword" },
           "slug": { "type": "keyword" },
+          "slugs": { "type": "keyword" },
           "name": { "type": "text", "analyzer": "og_text" },
           "location": { "type": "geo_point" }
         }
