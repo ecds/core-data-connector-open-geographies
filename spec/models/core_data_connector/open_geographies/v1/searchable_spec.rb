@@ -175,6 +175,29 @@ RSpec.describe(CoreDataConnector::OpenGeographies::V1::Searchable) do
       expect(media_summary[:publisher]).not_to(have_key(:media)) # but no further recursion from there
     end
 
+    # Regression: this engine dropped a multiple relationship's own curator-
+    # set order entirely - v0's equivalent (Searchable#related, unversioned)
+    # already threads Relationship#order through via related_search_data,
+    # but v1's rewrite lost it. Doesn't show up as broken data so much as
+    # missing data: Tours exists specifically to be an *ordered* list of
+    # stops ("Ordered stops via the relationship's order" - Tours' own
+    # canonical_template.json doc-comment), so an unordered `stops[]` quietly
+    # defeats the one thing that makes it a Tour rather than a plain set.
+    # Exercised here on Media (any multiple relationship, not just Stops) to
+    # show it's the generic engine's fix, not a Tour-specific special case.
+    it 'threads each multiple relationship item\'s own Relationship#order into its summary' do
+      media_model = create(:place_model, project:, model_class: 'CoreDataConnector::MediaContent')
+      rel = create(:project_model_relationship, primary_model: place_model, related_model: media_model, name: 'Media', multiple: true)
+      first = create(:media_content, project_model: media_model, name: 'First')
+      second = create(:media_content, project_model: media_model, name: 'Second')
+      create(:relationship, project_model_relationship: rel, primary_record: place, related_record: second, order: 2)
+      create(:relationship, project_model_relationship: rel, primary_record: place, related_record: first, order: 1)
+
+      by_name = v1_place.related[:media].index_by { |item| item[:name] }
+      expect(by_name['First'][:order]).to(eq(1))
+      expect(by_name['Second'][:order]).to(eq(2))
+    end
+
     # Regression: found immediately after the denomination fix above, in the
     # exact same production document - each of a church's own `works[]`
     # entries re-embedded that *same church* under a `church:` key, because a

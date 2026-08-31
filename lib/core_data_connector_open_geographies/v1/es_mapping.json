@@ -7,6 +7,8 @@
 
   "slugs_comment": "Every `slug` here has a `slugs` sibling on purpose - base_search_data/summarize (Searchable) always emit both together (slugs is the alternate-URL array; slug is just slugs.first, in effect), but until this fix only `slug` had an explicit property here. `slugs` fell through to the strings_as_text dynamic template (match_mapping_type: string -> analyzed text), so a `where: { slugs: 'some-slug' }` term filter - the exact thing PlacesController#show uses to look a record up by slug - silently matched nothing for a value that's really there, on every record at every nesting level, not just Places. Found live: a real Place's own `.search(where: { slugs: '...' })` returned no hit even though `.base_search_data` computed the right value.",
 
+  "stops_comment": "stops (below) was declared with `position`/`location` before this fix - fields the generic Searchable engine never actually wrote (no per-model override backs the Tours/Instance class; it's promoted purely through the same #related mechanism as everything else). Renamed to what's really produced: `order` (the Relationship join row's own order column, threaded through generically now - see #with_relationship_order in searchable.rb) and `geo.point` (the same geo_point shape every other Place-derived summary carries, from #extras, not a Tour-specific `location` field). This is the same class of drift already fixed once for `slugs` above - a declared shape nothing actually produces isn't a mapping conflict ES rejects outright (dynamic mapping just silently adds whatever fields the real document does have alongside the declared-but-unpopulated ones), so it doesn't surface as an error, only as a client-facing gap: `order`/`geo` would just be silently missing from every stop.",
+
   "settings": {
     "analysis": {
       "analyzer": {
@@ -268,12 +270,12 @@
       },
       "stops": {
         "properties": {
-          "position": { "type": "integer" },
+          "order": { "type": "integer" },
           "uuid": { "type": "keyword" },
           "slug": { "type": "keyword" },
           "slugs": { "type": "keyword" },
           "name": { "type": "text", "analyzer": "og_text" },
-          "location": { "type": "geo_point" }
+          "geo": { "properties": { "point": { "type": "geo_point" } } }
         }
       }
     }

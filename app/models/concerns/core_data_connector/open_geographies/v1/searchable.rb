@@ -255,11 +255,15 @@ module CoreDataConnector
               records = ::CoreDataConnector::Relationship.where(project_model_relationship: rel, primary_record: self)
               next if records.empty?
 
-              items = records.map { |relation| related_class(relation.related_record_type).find(relation.related_record_id) }
-              items = items.reject { |item| visited.include?(record_identity(item)) }
-              next if items.empty?
+              pairs = records.filter_map do |relation|
+                item = related_class(relation.related_record_type).find(relation.related_record_id)
+                [relation, item] unless visited.include?(record_identity(item))
+              end
+              next if pairs.empty?
 
+              items = pairs.map(&:last)
               value = relationship_value(items, rel, depth, visited)
+              value = with_relationship_order(value, pairs) unless taxonomy_relationship?(rel)
             else
               relation = ::CoreDataConnector::Relationship.find_by(project_model_relationship: rel, primary_record: self)
               next if relation.nil?
@@ -455,6 +459,23 @@ module CoreDataConnector
 
         def taxonomy_relationship?(rel)
           rel.related_model.model_class == 'CoreDataConnector::Taxonomy'
+        end
+
+        # Merges each Relationship join row's own `order` column into its
+        # resolved item's summary - dropped entirely by this engine until
+        # now. v0's equivalent (Searchable#related, unversioned) already
+        # threads this through via related_search_data(order); Tours is the
+        # relationship this actually matters for ("Ordered stops via the
+        # relationship's order" - canonical_template.json's own Tours
+        # doc-comment), but it applies uniformly to any multiple
+        # relationship here, same as everything else in this file - Media/
+        # Works/People/Places arrays now carry their own curator-set order
+        # too, for free. `value` is an array of per-item summary hashes at
+        # this point (never called for a taxonomy relationship - see
+        # #related - whose value is a bare array of name strings instead,
+        # nothing to merge an :order key onto).
+        def with_relationship_order(value, pairs)
+          value.each_with_index.map { |summary, i| summary.merge(order: pairs[i].first.order) }
         end
 
         # Identity tuple for cycle detection (see #related/#related_to's
