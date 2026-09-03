@@ -185,17 +185,40 @@ RSpec.describe(CoreDataConnector::OpenGeographies::V1::Searchable) do
     # defeats the one thing that makes it a Tour rather than a plain set.
     # Exercised here on Media (any multiple relationship, not just Stops) to
     # show it's the generic engine's fix, not a Tour-specific special case.
-    it 'threads each multiple relationship item\'s own Relationship#order into its summary' do
+    it 'threads each multiple relationship item\'s own Relationship#order into its summary, and returns items pre-sorted by it' do
       media_model = create(:place_model, project:, model_class: 'CoreDataConnector::MediaContent')
       rel = create(:project_model_relationship, primary_model: place_model, related_model: media_model, name: 'Media', multiple: true)
       first = create(:media_content, project_model: media_model, name: 'First')
       second = create(:media_content, project_model: media_model, name: 'Second')
+      # Created out of order on purpose - creation order must not be what
+      # determines the array's order.
       create(:relationship, project_model_relationship: rel, primary_record: place, related_record: second, order: 2)
       create(:relationship, project_model_relationship: rel, primary_record: place, related_record: first, order: 1)
 
-      by_name = v1_place.related[:media].index_by { |item| item[:name] }
-      expect(by_name['First'][:order]).to(eq(1))
-      expect(by_name['Second'][:order]).to(eq(2))
+      media = v1_place.related[:media]
+      expect(media.map { |item| item[:name] }).to(eq(['First', 'Second']))
+      expect(media.map { |item| item[:order] }).to(eq([1, 2]))
+    end
+
+    # "Optional" means a client shouldn't expect the key to exist at all for
+    # a relationship nobody ever curator-ordered (the overwhelming common
+    # case today - order wasn't a first-class concept before this), not
+    # that it exists and might be `null`. Also covers the mixed case:
+    # Postgres' NULLS LAST default (the `.order(:order)` query in #related)
+    # means an unordered item still lands after every ordered one, so the
+    # array stays meaningfully sorted even when only some items have order.
+    it 'omits the order key entirely for a relationship with no curator-set order, rather than writing order: null' do
+      media_model = create(:place_model, project:, model_class: 'CoreDataConnector::MediaContent')
+      rel = create(:project_model_relationship, primary_model: place_model, related_model: media_model, name: 'Media', multiple: true)
+      ordered = create(:media_content, project_model: media_model, name: 'Ordered')
+      unordered = create(:media_content, project_model: media_model, name: 'Unordered')
+      create(:relationship, project_model_relationship: rel, primary_record: place, related_record: unordered)
+      create(:relationship, project_model_relationship: rel, primary_record: place, related_record: ordered, order: 1)
+
+      media = v1_place.related[:media]
+      expect(media.map { |item| item[:name] }).to(eq(['Ordered', 'Unordered']))
+      expect(media.find { |item| item[:name] == 'Ordered' }).to(have_key(:order))
+      expect(media.find { |item| item[:name] == 'Unordered' }).not_to(have_key(:order))
     end
 
     # Regression: found immediately after the denomination fix above, in the

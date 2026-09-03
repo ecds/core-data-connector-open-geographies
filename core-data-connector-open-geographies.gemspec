@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency('elasticsearch', '~> 8')
   spec.add_dependency('rails', '>= 8.0.2')
+  spec.add_dependency('rgeo-geojson', '~> 2.2')
   spec.add_dependency('searchkick', '~> 5.4.0')
   spec.add_development_dependency('core_data_connector')
   spec.add_development_dependency('fuzzy_dates')

@@ -40,7 +40,10 @@ RSpec.describe('CoreDataConnector::OpenGeographies::V1::Tours', type: :request) 
     expect(response_json[:name]).to(eq('Sample Tour'))
     expect(response_json[:model_type]).to(eq('tour'))
 
-    stops = response_json[:stops].sort_by { |s| s[:order] }
+    # No client-side sort here on purpose - stops[] must already come back
+    # in order (#related's `.order(:order)` query), not just carry an
+    # `order` value a client is expected to re-sort by itself.
+    stops = response_json[:stops]
     expect(stops.map { |s| s[:name] }).to(eq(['First Stop', 'Second Stop']))
     expect(stops.map { |s| s[:order] }).to(eq([1, 2]))
     expect(stops[0][:geo][:point]).to(be_present)

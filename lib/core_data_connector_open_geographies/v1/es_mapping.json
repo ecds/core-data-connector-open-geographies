@@ -9,6 +9,8 @@
 
   "stops_comment": "stops (below) was declared with `position`/`location` before this fix - fields the generic Searchable engine never actually wrote (no per-model override backs the Tours/Instance class; it's promoted purely through the same #related mechanism as everything else). Renamed to what's really produced: `order` (the Relationship join row's own order column, threaded through generically now - see #with_relationship_order in searchable.rb) and `geo.point` (the same geo_point shape every other Place-derived summary carries, from #extras, not a Tour-specific `location` field). This is the same class of drift already fixed once for `slugs` above - a declared shape nothing actually produces isn't a mapping conflict ES rejects outright (dynamic mapping just silently adds whatever fields the real document does have alongside the declared-but-unpopulated ones), so it doesn't surface as an error, only as a client-facing gap: `order`/`geo` would just be silently missing from every stop.",
 
+  "order_comment": "`order` (media/works/people/places/map_layers/stops, below) is genuinely optional, not just nullable - it's the Relationship join row's own order column, and most relationships across every atlas were never curator-ordered (nothing before this made ordering a first-class expectation, so the column defaults to nil for most existing rows). #with_relationship_order (searchable.rb) omits the key entirely rather than writing `order: null` when there's no real value - a client should check for the key's presence, not assume it and get null. Items ARE already returned pre-sorted by it (#related's own `.order(:order)` query, Postgres' NULLS LAST default putting unordered items after ordered ones) - `order` on each item is there so a client that filters/merges/re-sorts client-side can still recover the intended order afterward, not so the client has to sort it itself in the common case.",
+
   "settings": {
     "analysis": {
       "analyzer": {
@@ -214,6 +216,7 @@
       },
       "media": {
         "properties": {
+          "order": { "type": "integer" },
           "uuid": { "type": "keyword" },
           "slug": { "type": "keyword" },
           "slugs": { "type": "keyword" },
@@ -227,6 +230,7 @@
       },
       "works": {
         "properties": {
+          "order": { "type": "integer" },
           "uuid": { "type": "keyword" },
           "slug": { "type": "keyword" },
           "slugs": { "type": "keyword" },
@@ -237,6 +241,7 @@
       },
       "people": {
         "properties": {
+          "order": { "type": "integer" },
           "uuid": { "type": "keyword" },
           "slug": { "type": "keyword" },
           "slugs": { "type": "keyword" },
@@ -245,6 +250,7 @@
       },
       "places": {
         "properties": {
+          "order": { "type": "integer" },
           "uuid": { "type": "keyword" },
           "slug": { "type": "keyword" },
           "slugs": { "type": "keyword" },
@@ -254,6 +260,7 @@
       },
       "map_layers": {
         "properties": {
+          "order": { "type": "integer" },
           "uuid": { "type": "keyword" },
           "slug": { "type": "keyword" },
           "slugs": { "type": "keyword" },

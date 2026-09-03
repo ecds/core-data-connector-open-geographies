@@ -252,7 +252,7 @@ module CoreDataConnector
             raw_key = rel.name.parameterize.underscore.to_sym
 
             if rel.multiple
-              records = ::CoreDataConnector::Relationship.where(project_model_relationship: rel, primary_record: self)
+              records = ::CoreDataConnector::Relationship.where(project_model_relationship: rel, primary_record: self).order(:order)
               next if records.empty?
 
               pairs = records.filter_map do |relation|
@@ -474,8 +474,24 @@ module CoreDataConnector
         # this point (never called for a taxonomy relationship - see
         # #related - whose value is a bare array of name strings instead,
         # nothing to merge an :order key onto).
+        #
+        # `order` is genuinely optional, not just nullable: most existing
+        # relationships across every atlas were never curator-ordered (the
+        # column defaults to nil, and nothing before this made ordering a
+        # first-class expectation), so most items simply won't have one.
+        # Omitted entirely rather than written as `order: null` - "optional"
+        # means a client shouldn't expect the key to exist at all, not that
+        # it exists and might be empty. #related's own `.order(:order)`
+        # query already sorts items with a real value before any that
+        # don't (Postgres' NULLS LAST default for ASC), so an array with no
+        # order key anywhere is exactly as meaningful as one with no
+        # ordering info to give - arbitrary, DB-default order, same as
+        # today.
         def with_relationship_order(value, pairs)
-          value.each_with_index.map { |summary, i| summary.merge(order: pairs[i].first.order) }
+          value.each_with_index.map do |summary, i|
+            order = pairs[i].first.order
+            order.nil? ? summary : summary.merge(order:)
+          end
         end
 
         # Identity tuple for cycle detection (see #related/#related_to's
