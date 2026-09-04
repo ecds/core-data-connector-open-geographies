@@ -30,6 +30,17 @@ module CoreDataConnector
         )
         MAPPING = JSON.parse(File.read(MAPPING_PATH), symbolize_names: true).freeze
 
+        # JSON-LD-style compliance marker: OG is meant as
+        # an interoperability protocol, not just this engine's internal
+        # response shape - a third party serializing OG-compliant records
+        # outside of ever calling this API has no request/URL to infer a
+        # version from, so the version has to travel inside the record
+        # itself. Not yet a real, dereferenceable JSON-LD context document
+        # (no term-to-URI mappings hosted at this URL today) - just a stable
+        # version identifier every compliant record carries, reserved ahead
+        # of the real spec document existing.
+        CONTEXT_URL = 'https://opengeographies.org/api/v1/context.json'
+
         # How many levels deep a related record's own relationships get
         # expanded when nested inside this record's document (a Place's
         # media[] entries include their own creator/publisher, but *those*
@@ -111,6 +122,7 @@ module CoreDataConnector
 
         def base_search_data
           {
+            '@context': CONTEXT_URL,
             uuid:,
             slug:,
             slugs:,

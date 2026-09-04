@@ -26,15 +26,6 @@ module CoreDataConnector
 
           render(json: {}, status: :not_found)
         end
-
-        private
-
-        # Same resolution as V1::PlacesController#project_id - see there for
-        # why this isn't a fuzzy text match against a stored `project` field
-        # the way v0 does it.
-        def project_id
-          @project_id ||= ::CoreDataConnector::Project.all.find { |p| p.name.parameterize == params[:project] }&.id
-        end
       end
     end
   end

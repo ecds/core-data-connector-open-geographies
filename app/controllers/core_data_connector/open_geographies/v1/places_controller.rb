@@ -116,19 +116,6 @@ module CoreDataConnector
             agg['buckets'].map { |bucket| { value: bucket['key'], count: bucket['doc_count'] } }
           end
         end
-
-        # Resolves the URL's parameterized project slug (e.g.
-        # "historic-rural-churches-of-georgia") to a real Project id, the same
-        # way v0 identifies a project - via a parameterized match on Project#name,
-        # since CoreDataConnector::Project has no dedicated slug column. v0 does
-        # this match as a full-text ES query against a stored `project` field;
-        # v1 resolves it once here instead and filters the shared index on the
-        # real project_id foreign key, which is the actual tenant-scoping
-        # mechanism the canonical schema calls for ("every query is filtered
-        # server-side on project_id") rather than a fuzzy text match.
-        def project_id
-          @project_id ||= ::CoreDataConnector::Project.all.find { |p| p.name.parameterize == params[:project] }&.id
-        end
       end
     end
   end

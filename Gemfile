@@ -5,6 +5,16 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in core-data-connector-ecds.gemspec.
 gemspec
 
+# The gemspec's own '>= 8.0.2' floor let Bundler resolve 8.1.1, which has a
+# real incompatibility with activerecord-postgis-adapter 11.1.1's
+# lookup_cast_type override (NoMethodError: undefined method 'lookup' for
+# nil, on any add_column with a default - found live, vendoring
+# CoreDataConnector's own migrations). core-data-cloud pins '~> 8.1.3' with
+# the same postgis-adapter version and doesn't hit this - matching that
+# pin here instead of chasing a workaround for what's really just a
+# resolved-version gap.
+gem 'rails', '~> 8.1.3'
+
 gem 'puma'
 
 gem 'propshaft'
@@ -21,8 +31,15 @@ gem 'user_defined_fields', git: 'https://github.com/performant-software/user-def
 # Fuzzy dates
 gem 'fuzzy_dates', git: 'https://github.com/performant-software/fuzzy-dates.git', tag: 'v0.1.2'
 
-# Core data
-gem 'core_data_connector', git: 'https://github.com/performant-software/core-data-connector.git', tag: 'v0.1.103'
+# Vendored CoreDataConnector (spec/dummy/app/models/core_data_connector,
+# synced from core-data-cloud via bin/sync_core_data_connector) needs these
+# two directly - declaring them only via add_development_dependency in the
+# gemspec, like every other dependency below, doesn't get them into
+# Bundler.require(*Rails.groups)'s :default group, so Auditable's
+# has_paper_trail call and Authority::*'s typhoeus requests silently never
+# loaded until these explicit lines were added.
+gem 'paper_trail', '>= 16.0'
+gem 'typhoeus', '~> 1.6'
 
 # Elasticsearch
 gem 'elasticsearch', '~> 8.0'
@@ -34,6 +51,10 @@ gem 'aws-sdk'
 gem 'concurrent-ruby', '1.3.4'
 gem 'rgeo', '~> 3.0'
 gem 'rgeo-geojson', '~> 2.2'
+# spec/dummy/config/database.yml has always requested adapter: postgis, but
+# this gem was never added - a pre-existing gap that only surfaces on a real
+# db:drop/db:create cycle. Pinned to match core-data-cloud's own version.
+gem 'activerecord-postgis-adapter', '~> 11.1'
 
 group :development, :test do
   gem 'csv', '~> 3.3.5'

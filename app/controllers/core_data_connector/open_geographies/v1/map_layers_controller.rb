@@ -46,10 +46,6 @@ module CoreDataConnector
           min_lon, min_lat, max_lon, max_lat = params[:bbox].split(',').map(&:to_f)
           [[min_lon, max_lat], [max_lon, min_lat]]
         end
-
-        def project_id
-          @project_id ||= ::CoreDataConnector::Project.all.find { |p| p.name.parameterize == params[:project] }&.id
-        end
       end
     end
   end

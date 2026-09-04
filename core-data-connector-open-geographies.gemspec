@@ -28,10 +28,19 @@ Gem::Specification.new do |spec|
   spec.add_dependency('rails', '>= 8.0.2')
   spec.add_dependency('rgeo-geojson', '~> 2.2')
   spec.add_dependency('searchkick', '~> 5.4.0')
-  spec.add_development_dependency('core_data_connector')
   spec.add_development_dependency('fuzzy_dates')
   spec.add_development_dependency('resource_api')
   spec.add_development_dependency('rspec-rails', '~> 8.0')
   spec.add_development_dependency('triple_eye_effable')
   spec.add_development_dependency('user_defined_fields')
+  # CoreDataConnector itself is no longer a gem dependency - the dummy app
+  # (spec/dummy) vendors it directly from a core-data-cloud checkout via
+  # bin/sync_core_data_connector, since core-data-cloud's own copy diverged
+  # from the last-published standalone gem tag. These two are what that
+  # vendored code actually requires (confirmed via its own require/include
+  # statements, not guessed): Auditable (used by most vendored models) needs
+  # PaperTrail; Authority::* (constructed dynamically off WebIdentifier) needs
+  # Http::Requestable's typhoeus dependency.
+  spec.add_development_dependency('paper_trail', '>= 16.0')
+  spec.add_development_dependency('typhoeus', '~> 1.6')
 end

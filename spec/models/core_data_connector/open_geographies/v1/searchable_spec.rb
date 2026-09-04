@@ -3,6 +3,19 @@
 require 'rails_helper'
 
 RSpec.describe(CoreDataConnector::OpenGeographies::V1::Searchable) do
+  # This file tests #search_data's Ruby-hash output directly (see every
+  # example below), never real Elasticsearch - unlike places_spec.rb/
+  # place_indexing_spec.rb, which explicitly reindex and query a real
+  # index. Some scenarios here deliberately construct data that's malformed
+  # relative to es_mapping.json on purpose (e.g. the raw-key/canonical-name
+  # collision spec below, where a non-taxonomy relationship raw-keys to
+  # :types) - Reindexable's now-automatic on-save reindexing would otherwise
+  # try to actually write that into the real index and fail with a mapping
+  # conflict having nothing to do with what this file is testing.
+  around do |example|
+    CoreDataConnector::OpenGeographies::V1::Reindexable.disable { example.run }
+  end
+
   let(:project) { create(:project) }
   let(:place_model) { create(:place_model, project:) }
   let(:place) { create(:place, project_model: place_model, name: 'Evergreen Church') }

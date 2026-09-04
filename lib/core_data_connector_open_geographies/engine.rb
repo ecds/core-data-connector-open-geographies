@@ -22,6 +22,13 @@ module CoreDataConnector
           app.config.paths['db/migrate'] << expanded_path unless app.config.paths['db/migrate'].expanded.include?(expanded_path)
         end
       end
+
+      # Reapplies on every boot and every Zeitwerk reload in development -
+      # see Decorators' own header comment for why re-running this is safe
+      # and necessary.
+      config.to_prepare do
+        ::CoreDataConnector::OpenGeographies::V1::Decorators.apply!
+      end
     end
   end
 end
